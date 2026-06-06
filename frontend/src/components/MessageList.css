@@ -1,0 +1,53 @@
+.message-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.message {
+  display: flex;
+  max-width: 80%;
+}
+
+.message .bubble {
+  padding: 10px 14px;
+  border-radius: 12px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+/* 用户：靠右，蓝底 */
+.message.user {
+  align-self: flex-end;
+}
+
+.message.user .bubble {
+  background: #2563eb;
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+/* 助手：靠左，灰底 */
+.message.assistant {
+  align-self: flex-start;
+}
+
+.message.assistant .bubble {
+  background: #e5e7eb;
+  color: #1f2937;
+  border-bottom-left-radius: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .message.user .bubble {
+    background: #3b82f6;
+  }
+
+  .message.assistant .bubble {
+    background: #374151;
+    color: #e5e7eb;
+  }
+}
