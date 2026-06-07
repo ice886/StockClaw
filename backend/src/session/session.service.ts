@@ -3,6 +3,8 @@ import { readdir, readFile, writeFile, unlink, mkdir } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join, resolve } from 'path';
 import { SessionRecord } from './session.interface';
+import { deepseek } from '@ai-sdk/deepseek';
+import { generateText } from 'ai';
 
 const DATA_DIR = resolve('data/sessions');
 
@@ -84,5 +86,13 @@ export class SessionService {
     } catch {
       return false;
     }
+  }
+
+  async generateTitle(firstMessage: string): Promise<string> {
+    const result = await generateText({
+      model: deepseek('deepseek-chat'),
+      prompt: `用不超过10个字概括以下内容，只返回标题，不要说明:\n\n${firstMessage}`,
+    });
+    return result.text.trim();
   }
 }

@@ -4,3 +4,12 @@
   flex: 1;
   min-height: 0;
 }
+
+.chat-placeholder {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  font-size: 16px;
+}

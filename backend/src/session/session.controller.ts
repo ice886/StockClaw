@@ -45,4 +45,10 @@ export class SessionController {
   deleteSession(@Param('id') id: string) {
     return this.session.deleteSession(id);
   }
+
+  @Post('sessions/generate-title')
+  async generateTitle(@Body() dto: { message: string }) {
+    const title = await this.session.generateTitle(dto.message);
+    return { title };
+  }
 }
