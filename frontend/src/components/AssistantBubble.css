@@ -1,0 +1,79 @@
+.assistant-markdown h1,
+.assistant-markdown h2,
+.assistant-markdown h3 {
+  margin: 12px 0 6px;
+  font-weight: 600;
+}
+
+.assistant-markdown h1 { font-size: 1.4em; }
+.assistant-markdown h2 { font-size: 1.2em; }
+.assistant-markdown h3 { font-size: 1.05em; }
+
+.assistant-markdown p {
+  margin: 4px 0;
+}
+
+.assistant-markdown ul,
+.assistant-markdown ol {
+  margin: 4px 0;
+  padding-left: 20px;
+}
+
+.assistant-markdown li {
+  margin: 2px 0;
+}
+
+.assistant-markdown blockquote {
+  margin: 8px 0;
+  padding: 4px 12px;
+  border-left: 3px solid var(--border);
+  color: var(--text);
+}
+
+.assistant-markdown .inline-code {
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 0.88em;
+  background: var(--code-bg);
+}
+
+.assistant-markdown pre {
+  margin: 8px 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.assistant-markdown pre > div {
+  border-radius: 8px !important;
+}
+
+.assistant-markdown code {
+  font-size: 0.88em;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  margin: 8px 0;
+}
+
+.assistant-markdown table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.assistant-markdown th,
+.assistant-markdown td {
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+.assistant-markdown th {
+  background: var(--code-bg);
+  font-weight: 600;
+}
+
+.assistant-markdown a {
+  color: #2563eb;
+  text-decoration: underline;
+}

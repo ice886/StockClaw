@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import type { Message } from '../types/chat';
+import { AssistantBubble } from './AssistantBubble';
 import './MessageBubble.css';
 
 interface Props {
@@ -67,7 +68,11 @@ export function MessageBubble({ message, index, onEdit }: Props) {
       ) : (
         <div className="message-body">
           <div className="bubble">
-            <div className="bubble-content">{message.content}</div>
+            {isUser ? (
+              <div className="bubble-content">{message.content}</div>
+            ) : (
+              <AssistantBubble content={message.content} />
+            )}
           </div>
           <div className="bubble-actions">
             <button className="action-btn" onClick={handleCopy}>
