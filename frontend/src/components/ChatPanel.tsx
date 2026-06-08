@@ -16,6 +16,7 @@ export function ChatPanel({ sessionId, onSessionUpdate }: Props) {
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState('新对话');
   const titled = useRef(false);
+  const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
     if (!sessionId) return;
@@ -28,18 +29,25 @@ export function ChatPanel({ sessionId, onSessionUpdate }: Props) {
       .catch(() => setMessages([]));
   }, [sessionId]);
 
+  const handleCancel = () => {
+    abortRef.current?.abort();
+    setLoading(false);
+  };
+
   const handleSend = async (content: string) => {
     const userMsg: Message = { role: 'user', content };
     const newMessages = [...messages, userMsg];
     setMessages(newMessages);
     setLoading(true);
 
+    const controller = new AbortController();
+    abortRef.current = controller;
+
     try {
-      const res = await sendMessage(newMessages);
+      const res = await sendMessage(newMessages, controller.signal);
       const final: Message[] = [...newMessages, { role: 'assistant' as const, content: res.content }];
       setMessages(final);
 
-      // 首次对话完成后，自动生成标题
       let newTitle = title;
       if (!titled.current) {
         titled.current = true;
@@ -54,19 +62,46 @@ export function ChatPanel({ sessionId, onSessionUpdate }: Props) {
 
       await updateSession(sessionId!, { title: newTitle, messages: final });
       if (newTitle !== '新对话') onSessionUpdate();
-    } catch {
+    } catch (err) {
+      if (err instanceof DOMException && err.name === 'AbortError') return;
       setMessages([...newMessages, { role: 'assistant' as const, content: '请求失败' }]);
     } finally {
-      setLoading(false);
+      abortRef.current = null;
     }
+    setLoading(false);
+  };
+
+  const handleEdit = async (index: number, newContent: string) => {
+    const trimmed = messages.slice(0, index);
+    const editedMsg: Message = { ...messages[index], content: newContent };
+    const newMessages = [...trimmed, editedMsg];
+
+    setMessages(newMessages);
+    setLoading(true);
+
+    const controller = new AbortController();
+    abortRef.current = controller;
+
+    try {
+      const res = await sendMessage(newMessages, controller.signal);
+      const final: Message[] = [...newMessages, { role: 'assistant' as const, content: res.content }];
+      setMessages(final);
+      await updateSession(sessionId!, { title, messages: final });
+    } catch (err) {
+      if (err instanceof DOMException && err.name === 'AbortError') return;
+      setMessages([...newMessages, { role: 'assistant' as const, content: '请求失败' }]);
+    } finally {
+      abortRef.current = null;
+    }
+    setLoading(false);
   };
 
   return (
     <div className="chat-panel">
       {sessionId ? (
         <>
-          <MessageList messages={messages} loading={loading} />
-          <ChatInput onSend={handleSend} disabled={loading} />
+          <MessageList messages={messages} loading={loading} onEdit={handleEdit} />
+          <ChatInput onSend={handleSend} onCancel={handleCancel} disabled={loading} />
         </>
       ) : (
         <div className="chat-placeholder">

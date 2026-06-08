@@ -1,13 +1,15 @@
 import { useEffect, useRef } from 'react';
 import type { Message } from '../types/chat';
+import { MessageBubble } from './MessageBubble';
 import './MessageList.css';
 
 interface Props {
   messages: Message[];
   loading: boolean;
+  onEdit: (index: number, newContent: string) => void;
 }
 
-export function MessageList({ messages, loading }: Props) {
+export function MessageList({ messages, loading, onEdit }: Props) {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -17,9 +19,7 @@ export function MessageList({ messages, loading }: Props) {
   return (
     <div className="message-list">
       {messages.map((m, i) => (
-        <div key={i} className={`message ${m.role}`}>
-          <div className="bubble">{m.content}</div>
-        </div>
+        <MessageBubble key={i} message={m} index={i} onEdit={onEdit} />
       ))}
       {loading && (
         <div className="message assistant">

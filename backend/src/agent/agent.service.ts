@@ -28,7 +28,10 @@ Rules:
 
 @Injectable()
 export class AgentService {
-  async run(messages: { role: string; content: string }[]): Promise<string> {
+  async run(
+    messages: { role: string; content: string }[],
+    signal?: AbortSignal,
+  ): Promise<string> {
     const result = await generateText({
       model: deepseek('deepseek-chat'),
       system: SYSTEM_PROMPT,
@@ -73,6 +76,7 @@ export class AgentService {
         }),
       },
       stopWhen: stepCountIs(10),
+      abortSignal: signal,
     });
 
     return result.text;

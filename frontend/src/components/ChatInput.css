@@ -41,3 +41,11 @@
 .chat-input button:not(:disabled):hover {
   background: #1d4ed8;
 }
+
+.chat-input .cancel-btn {
+  background: #6b7280;
+}
+
+.chat-input .cancel-btn:hover {
+  background: #4b5563;
+}
