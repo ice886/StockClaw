@@ -1,9 +1,11 @@
 import { sendMessage } from '../api/agent';
 import { fetchSession, updateSession, generateTitle } from '../api/session';
+import { fetchSkills, type SkillInfo } from '../api/skill';
 import type { Message } from '../types/chat';
 import { useState, useEffect, useRef } from 'react';
 import { ChatInput } from './ChatInput';
 import { MessageList } from './MessageList';
+import { SkillSelector } from './SkillSelector';
 import './ChatPanel.css';
 
 interface Props {
@@ -15,6 +17,8 @@ export function ChatPanel({ sessionId, onSessionUpdate }: Props) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState('新对话');
+  const [skills, setSkills] = useState<SkillInfo[]>([]);
+  const [activeSkill, setActiveSkill] = useState('general-chat');
   const titled = useRef(false);
   const abortRef = useRef<AbortController | null>(null);
 
@@ -28,6 +32,10 @@ export function ChatPanel({ sessionId, onSessionUpdate }: Props) {
       })
       .catch(() => setMessages([]));
   }, [sessionId]);
+
+  useEffect(() => {
+    fetchSkills().then(setSkills).catch(() => {});
+  }, []);
 
   const handleCancel = () => {
     abortRef.current?.abort();
@@ -44,8 +52,11 @@ export function ChatPanel({ sessionId, onSessionUpdate }: Props) {
     abortRef.current = controller;
 
     try {
-      const res = await sendMessage(newMessages, controller.signal);
-      const final: Message[] = [...newMessages, { role: 'assistant' as const, content: res.content }];
+      const res = await sendMessage(newMessages, controller.signal, activeSkill);
+      const final: Message[] = [
+        ...newMessages,
+        { role: 'assistant' as const, content: res.content },
+      ];
       setMessages(final);
 
       let newTitle = title;
@@ -64,7 +75,10 @@ export function ChatPanel({ sessionId, onSessionUpdate }: Props) {
       if (newTitle !== '新对话') onSessionUpdate();
     } catch (err) {
       if (err instanceof DOMException && err.name === 'AbortError') return;
-      setMessages([...newMessages, { role: 'assistant' as const, content: '请求失败' }]);
+      setMessages([
+        ...newMessages,
+        { role: 'assistant' as const, content: '请求失败' },
+      ]);
     } finally {
       abortRef.current = null;
     }
@@ -83,13 +97,19 @@ export function ChatPanel({ sessionId, onSessionUpdate }: Props) {
     abortRef.current = controller;
 
     try {
-      const res = await sendMessage(newMessages, controller.signal);
-      const final: Message[] = [...newMessages, { role: 'assistant' as const, content: res.content }];
+      const res = await sendMessage(newMessages, controller.signal, activeSkill);
+      const final: Message[] = [
+        ...newMessages,
+        { role: 'assistant' as const, content: res.content },
+      ];
       setMessages(final);
       await updateSession(sessionId!, { title, messages: final });
     } catch (err) {
       if (err instanceof DOMException && err.name === 'AbortError') return;
-      setMessages([...newMessages, { role: 'assistant' as const, content: '请求失败' }]);
+      setMessages([
+        ...newMessages,
+        { role: 'assistant' as const, content: '请求失败' },
+      ]);
     } finally {
       abortRef.current = null;
     }
@@ -100,6 +120,11 @@ export function ChatPanel({ sessionId, onSessionUpdate }: Props) {
     <div className="chat-panel">
       {sessionId ? (
         <>
+          <SkillSelector
+            skills={skills}
+            activeSkill={activeSkill}
+            onSelect={setActiveSkill}
+          />
           <MessageList messages={messages} loading={loading} onEdit={handleEdit} />
           <ChatInput onSend={handleSend} onCancel={handleCancel} disabled={loading} />
         </>

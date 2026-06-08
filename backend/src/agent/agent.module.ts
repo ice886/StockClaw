@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
+import { SkillModule } from '../skills/skill.module';
 import { AgentController } from './agent.controller';
 import { AgentService } from './agent.service';
 
 @Module({
+  imports: [SkillModule],
   controllers: [AgentController],
   providers: [AgentService],
   exports: [AgentService],

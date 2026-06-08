@@ -1,9 +1,11 @@
 import { Body, Controller, Post, Req } from '@nestjs/common';
 import type { Request } from 'express';
 import { AgentService } from './agent.service';
+import { SkillRegistry } from '../skills/skill.registry';
 
 interface ChatRequestDto {
   messages: { role: 'user' | 'assistant'; content: string }[];
+  skillName?: string;
 }
 
 interface ChatResponseDto {
@@ -13,7 +15,10 @@ interface ChatResponseDto {
 
 @Controller('api')
 export class AgentController {
-  constructor(private readonly agent: AgentService) {}
+  constructor(
+    private readonly agent: AgentService,
+    private readonly skills: SkillRegistry,
+  ) {}
 
   @Post('chat')
   async chat(
@@ -22,7 +27,17 @@ export class AgentController {
   ): Promise<ChatResponseDto> {
     const signal = new AbortController();
     req.on('close', () => signal.abort());
-    const content = await this.agent.run(dto.messages, signal.signal);
+
+    const skill = this.skills.get(dto.skillName ?? 'general-chat')!;
+
+    const content = await this.agent.run({
+      system: skill.systemPrompt,
+      messages: dto.messages,
+      tools: skill.toolNames,
+      maxSteps: skill.maxSteps,
+      abortSignal: signal.signal,
+    });
+
     return { role: 'assistant', content };
   }
 }
