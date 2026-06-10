@@ -22,6 +22,14 @@ export class SkillRegistry {
     return this.skills.get(name);
   }
 
+  /** 解析 systemPrompt：支持静态字符串或动态函数 */
+  resolvePrompt(name: string): string {
+    const skill = this.skills.get(name);
+    if (!skill) return '';
+    const { systemPrompt } = skill;
+    return typeof systemPrompt === 'function' ? systemPrompt() : systemPrompt;
+  }
+
   list(): SkillConfig[] {
     return [...this.skills.values()];
   }

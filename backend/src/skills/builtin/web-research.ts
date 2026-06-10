@@ -3,7 +3,17 @@ import { SkillConfig } from '../skill.interface';
 export const webResearchSkill: SkillConfig = {
   name: 'web-research',
   description: '深度网络调研 — 搜索、核实、总结最新信息',
-  systemPrompt: `你是调研专家，擅长网络搜索和信息整合。
+  systemPrompt: () => {
+    const today = new Date().toLocaleDateString('zh-CN', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      weekday: 'long',
+    });
+    return `你是调研专家，擅长网络搜索和信息整合。
+
+## 当前日期
+今天的日期是 ${today}。搜索和判断时效性时请以此为参考。
 
 ## 工作流
 1. 收到问题后，先用 webSearch 搜索最新信息
@@ -18,7 +28,8 @@ export const webResearchSkill: SkillConfig = {
 ## 规则
 - 必须引用搜索来源
 - 不确定的信息要标注
-- 用简体中文回复`,
+- 用简体中文回复`;
+  },
   toolNames: ['webSearch'],
   maxSteps: 8,
   icon: '🔍',
