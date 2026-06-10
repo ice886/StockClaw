@@ -35,6 +35,7 @@
 }
 
 .action-btn {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,16 +53,22 @@
 }
 
 .action-btn .icon {
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1;
 }
 
 .action-btn .label {
-  display: none;
+  position: absolute;
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 11px;
+  visibility: hidden;
 }
 
 .action-btn:hover .label {
-  display: block;
+  visibility: visible;
 }
 
 /* 编辑模式 */

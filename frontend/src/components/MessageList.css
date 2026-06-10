@@ -1,16 +1,19 @@
 .message-list {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   text-align: left;
+  min-width: 0;
 }
 
 .message {
   display: flex;
   max-width: 80%;
+  min-width: 0;
 }
 
 .message .bubble {
@@ -42,6 +45,54 @@
   border-bottom-left-radius: 4px;
 }
 
+/* ─── 状态指示器 ─── */
+.status-indicator {
+  display: flex;
+  align-items: center;
+  min-height: 32px;
+}
+
+/* 工具标签 */
+.tool-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+  border-radius: 14px;
+  background: #dbeafe;
+  color: #1e40af;
+  font-size: 13px;
+  transition: opacity 0.2s;
+}
+
+/* 呼吸圆点容器 */
+.breathing-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 4px;
+}
+
+/* 单个圆点 */
+.breathing-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #9ca3af;
+  animation: breathe 1.4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.3;
+  }
+  40% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   .message.user .bubble {
     background: #3b82f6;
@@ -50,5 +101,14 @@
   .message.assistant .bubble {
     background: #374151;
     color: #e5e7eb;
+  }
+
+  .tool-badge {
+    background: #1e3a5f;
+    color: #93c5fd;
+  }
+
+  .breathing-dot {
+    background: #6b7280;
   }
 }

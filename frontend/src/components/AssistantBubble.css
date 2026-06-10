@@ -40,11 +40,13 @@
 .assistant-markdown pre {
   margin: 8px 0;
   border-radius: 8px;
-  overflow: hidden;
+  overflow-x: auto;
+  max-width: 100%;
 }
 
 .assistant-markdown pre > div {
   border-radius: 8px !important;
+  margin: 0 !important;
 }
 
 .assistant-markdown code {
