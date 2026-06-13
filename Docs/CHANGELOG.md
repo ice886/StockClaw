@@ -1,5 +1,39 @@
 # 开发日志
 
+## 2026-06-12
+
+### Phase A — 名人事件监控后端（celebrity monitor pipeline）
+
+**新模块：`monitor/`**
+
+- **CrawlerService**：封装 Exa `webSearch`，每位名人执行 3 条差异化查询（公告/合作、股票关联、关键词），结果按 URL 去重
+- **EventExtractorService**：将原始搜索结果喂给 DeepSeek，提取结构化 `CelebrityEvent[]`（title、summary、sourceType、importance），JSON 输出含容错解析（strip code fence + regex fallback）
+- **StockAnalyzerService**：对 high/medium 事件调用 DeepSeek，输出 `StockSignal[]`（ticker、direction、magnitude、confidence 0-100、reasoning、timeHorizon）
+- **MonitorService**：串联抓取→提取→分析全流程，报告持久化为 `data/reports/<id>.json`，配置持久化为 `data/monitor-config.json`
+- **MonitorScheduler**：`@Cron('0 */4 * * *')` 定时触发，调用 `FeishuService` 推送；支持手动触发
+- **MonitorController**：7 个端点（status / config / run / reports / reports/:id / reports/:id/resend），`POST /run` 返回 SSE 实时进度流
+
+**新模块：`feishu/`**
+
+- **FeishuService**：构建飞书 interactive card，高影响事件时 header 标红，卡片含事件详情、股票信号方向/置信度星级、注脚免责声明
+- **FeishuModule**：独立模块，导出 `FeishuService` 供 `MonitorModule` 使用
+
+**新 Skill：**
+
+- `celebrity-monitor`：动态注入当前日期，事件提取专用 prompt，含重要性判断标准和过滤规则
+- `stock-analysis`：动态注入当前日期，量化分析框架，置信度分级标准
+
+**配置：**
+
+- `src/config/celebrities.config.ts`：5 位初始监控名人（黄仁勋/苏姿丰/奥特曼/马斯克/扎克伯格）及各自主要/关联股票映射
+- `.env` 新增 `FEISHU_WEBHOOK_URL`、`MONITOR_INTERVAL_HOURS`、`MONITOR_ENABLED`
+- `app.module.ts`：引入 `MonitorModule`，`ConfigModule` 改为 `isGlobal: true`
+- 安装依赖：`@nestjs/schedule`、`axios`
+
+## 2026-06-10
+
+暂停，在想harness engineering怎么做
+
 ## 2026-06-09
 
 ### Phase 6 — 流式输出

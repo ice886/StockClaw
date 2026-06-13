@@ -1,0 +1,76 @@
+{
+  "enabled": false,
+  "intervalHours": 6,
+  "feishuWebhookUrl": "https://open.feishu.cn/open-apis/bot/v2/hook/028dcddc-4789-4266-9e67-19551413ce23",
+  "celebrities": [
+    {
+      "id": "elon-musk",
+      "name": "Elon Musk",
+      "nameZh": "马斯克",
+      "aliases": [
+        "Musk"
+      ],
+      "primaryTicker": "TSLA",
+      "relatedTickers": [
+        "NVDA",
+        "GOOGL"
+      ],
+      "searchKeywords": [
+        "Tesla",
+        "xAI",
+        "Grok",
+        "SpaceX",
+        "Starlink"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "jensen-huang",
+      "name": "Jensen Huang",
+      "nameZh": "黄仁勋",
+      "aliases": [
+        "Jensen",
+        "Huang Renxun"
+      ],
+      "primaryTicker": "NVDA",
+      "relatedTickers": [
+        "TSM",
+        "MRVL",
+        "AVGO",
+        "AMD",
+        "000660.KS",
+        "005930.KS"
+      ],
+      "searchKeywords": [
+        "NVIDIA",
+        "GTC",
+        "Blackwell",
+        "NVLink"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "sam-altman",
+      "name": "Sam Altman",
+      "nameZh": "萨姆·奥特曼",
+      "aliases": [
+        "Altman"
+      ],
+      "primaryTicker": "MSFT",
+      "relatedTickers": [
+        "NVDA",
+        "GOOGL",
+        "META",
+        "AMZN"
+      ],
+      "searchKeywords": [
+        "OpenAI",
+        "ChatGPT",
+        "GPT",
+        "AGI"
+      ],
+      "enabled": true
+    }
+  ],
+  "lastRunAt": "2026-06-13T04:04:50.628Z"
+}

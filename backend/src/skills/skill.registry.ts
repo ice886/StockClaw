@@ -3,6 +3,8 @@ import { SkillConfig } from './skill.interface';
 import { generalChatSkill } from './builtin/general-chat';
 import { fileOpsSkill } from './builtin/file-ops';
 import { webResearchSkill } from './builtin/web-research';
+import { celebrityMonitorSkill } from './builtin/celebrity-monitor';
+import { stockAnalysisSkill } from './builtin/stock-analysis';
 
 @Injectable()
 export class SkillRegistry {
@@ -12,6 +14,8 @@ export class SkillRegistry {
     this.register(generalChatSkill);
     this.register(fileOpsSkill);
     this.register(webResearchSkill);
+    this.register(celebrityMonitorSkill);
+    this.register(stockAnalysisSkill);
   }
 
   register(skill: SkillConfig): void {

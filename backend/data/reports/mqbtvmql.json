@@ -1,0 +1,121 @@
+{
+  "id": "mqbtvmql",
+  "generatedAt": "2026-06-13T04:01:03.453Z",
+  "intervalHours": 6,
+  "events": [
+    {
+      "id": "elon-musk-1781323260069-0",
+      "celebrityId": "elon-musk",
+      "celebrityName": "马斯克",
+      "title": "SpaceX历史性IPO，募资750亿美元",
+      "summary": "SpaceX以每股135美元发行5.555亿股，在纳斯达克上市，募资750亿美元，创史上最大IPO。",
+      "sourceUrl": "https://www.teslarati.com/spacex-ipo-day-june-12-2026/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-12T08:00:22.000Z",
+      "fetchedAt": "2026-06-13T04:01:00.069Z",
+      "importance": "high"
+    },
+    {
+      "id": "elon-musk-1781323260069-1",
+      "celebrityId": "elon-musk",
+      "celebrityName": "马斯克",
+      "title": "马斯克暗示深化与英伟达合作",
+      "summary": "SpaceX IPO后，马斯克表示期待将英伟达合作关系提升至“Next Level”，可能涉及AI芯片或数据中心合作。",
+      "sourceUrl": "https://www.latestly.com/socially/technology/el...-partnership-to-next-level-7471228.html",
+      "sourceType": "news",
+      "publishedAt": "2026-06-13T03:10:56.000Z",
+      "fetchedAt": "2026-06-13T04:01:00.069Z",
+      "importance": "medium"
+    },
+    {
+      "id": "elon-musk-1781323260069-2",
+      "celebrityId": "elon-musk",
+      "celebrityName": "马斯克",
+      "title": "谷歌与SpaceX达成300亿美元计算交易",
+      "summary": "谷歌将每月支付9.2亿美元租用SpaceX Colossus数据中心用于AI训练，总合约价值300亿美元，重塑AI基础设施格局。",
+      "sourceUrl": "https://www.technewshub.com/post/google-strikes-30-billion-compute-deal-with-spacex-to-use-its-colossus-data-center-for-ai-training",
+      "sourceType": "news",
+      "publishedAt": "2026-06-12T08:59:06.000Z",
+      "fetchedAt": "2026-06-13T04:01:00.069Z",
+      "importance": "high"
+    },
+    {
+      "id": "elon-musk-1781323260069-3",
+      "celebrityId": "elon-musk",
+      "celebrityName": "马斯克",
+      "title": "马斯克启动Terafab自研AI芯片项目",
+      "summary": "马斯克宣布在德州奥斯汀建设Terafab制造设施，旨在生产AI、机器人和数据中心用芯片，目标产能1太瓦。",
+      "sourceUrl": "https://www.pakistantv.com/article/musk-launches-terafab-project-to-make-own-ai-chips",
+      "sourceType": "news",
+      "publishedAt": "2026-06-12T05:27:49.000Z",
+      "fetchedAt": "2026-06-13T04:01:00.069Z",
+      "importance": "high"
+    },
+    {
+      "id": "elon-musk-1781323260069-4",
+      "celebrityId": "elon-musk",
+      "celebrityName": "马斯克",
+      "title": "马斯克在ASML会议上讨论Terafab",
+      "summary": "马斯克在ASML会议上阐述Terafab愿景，预计将刺激EUV光刻机订单，显示其半导体制造雄心。",
+      "sourceUrl": "https://www.trendforce.com/news/2026/06/12/news-tesla-elon-musk-discusses-terafab-at-asml-conference-project-expected-to-spur-euv-tool-orders/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-12T16:47:09.000Z",
+      "fetchedAt": "2026-06-13T04:01:00.069Z",
+      "importance": "medium"
+    },
+    {
+      "id": "elon-musk-1781323260069-5",
+      "celebrityId": "elon-musk",
+      "celebrityName": "马斯克",
+      "title": "前xAI工程师起诉马斯克公司",
+      "summary": "一名前xAI工程师因AI安全举报被解雇，提起诉讼，涉及马斯克旗下公司。",
+      "sourceUrl": "https://theaiinsider.tech/2026/06/12/former-xai-engineer-sues-elon-musks-companies-over-ai-safety-whistleblower-dismissal/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-12T14:12:19.000Z",
+      "fetchedAt": "2026-06-13T04:01:00.069Z",
+      "importance": "medium"
+    },
+    {
+      "id": "elon-musk-1781323260069-6",
+      "celebrityId": "elon-musk",
+      "celebrityName": "马斯克",
+      "title": "SpaceX总裁暗示与特斯拉合并可能",
+      "summary": "SpaceX总裁Shotwell表示与特斯拉合并“可能让马斯克的生活更轻松”，引发市场对合并的猜测。",
+      "sourceUrl": "https://thenextweb.com/news/spacex-tesla-merger-ipo",
+      "sourceType": "news",
+      "publishedAt": "2026-06-12T12:12:51.000Z",
+      "fetchedAt": "2026-06-13T04:01:00.069Z",
+      "importance": "high"
+    }
+  ],
+  "signals": [
+    {
+      "ticker": "NVDA",
+      "direction": "bearish",
+      "magnitude": "moderate",
+      "confidence": 70,
+      "reasoning": "SpaceX自研AI芯片(Terafab)和谷歌租用第三方数据中心，削弱NVDA芯片需求预期",
+      "timeHorizon": "1-3days",
+      "relatedEventId": "elon-musk-1781323260069-3"
+    },
+    {
+      "ticker": "GOOGL",
+      "direction": "neutral",
+      "magnitude": "moderate",
+      "confidence": 60,
+      "reasoning": "300亿美元计算交易增加AI能力，但成本高昂且未直接使用自研芯片，市场反应复杂",
+      "timeHorizon": "1-3days",
+      "relatedEventId": "elon-musk-1781323260069-2"
+    },
+    {
+      "ticker": "TSLA",
+      "direction": "bullish",
+      "magnitude": "strong",
+      "confidence": 80,
+      "reasoning": "SpaceX IPO成功和潜在合并预期提升马斯克生态估值，直接利好TSLA市场情绪",
+      "timeHorizon": "1week",
+      "relatedEventId": "elon-musk-1781323260069-0"
+    }
+  ],
+  "feishuSent": true
+}
