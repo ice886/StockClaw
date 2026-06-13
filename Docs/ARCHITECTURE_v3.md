@@ -1,4 +1,4 @@
-# StackClaw Architecture v3
+# StockClaw Architecture v3
 
 ## 核心原则：渐进披露
 
@@ -539,7 +539,7 @@ ChatPanel.tsx：
 ## 文件全景图
 
 ```
-StackClaw/
+StockClaw/
 ├── ARCHITECTURE.md              ← 本文档
 ├── design.md
 │

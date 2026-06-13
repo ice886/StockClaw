@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-StackClaw is an AI agent chatbot with a NestJS backend and React + Vite frontend (monorepo, no shared root package.json).
+StockClaw is an AI agent chatbot with a NestJS backend and React + Vite frontend (monorepo, no shared root package.json).
 
 ## Commands
 

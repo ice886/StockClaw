@@ -1,4 +1,4 @@
-# StackClaw Agent 系统 — 架构升级方案
+# StockClaw Agent 系统 — 架构升级方案
 
 ## 当前状态
 

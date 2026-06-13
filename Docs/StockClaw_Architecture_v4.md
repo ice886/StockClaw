@@ -1,4 +1,4 @@
-# StackClaw — 名人事件监控 & 股票预测系统 完整方案
+# StockClaw — 名人事件监控 & 股票预测系统 完整方案
 
 > 目标：自动监控黄仁勋等科技名人的公开动态，结合 AI 分析对相关股票的潜在影响，定时通过飞书推送报告。
 
@@ -10,7 +10,7 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    StackClaw Monitor                         │
+│                    StockClaw Monitor                         │
 │                                                             │
 │  监控层          分析层              推送层                   │
 │  ─────────       ─────────           ─────────               │
@@ -38,7 +38,7 @@
 ### 报告格式（飞书消息）
 
 ```
-📡 StackClaw 市场情报 · 2024-01-15 09:00
+📡 StockClaw 市场情报 · 2024-01-15 09:00
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🔥 高影响事件（过去4小时）
@@ -75,7 +75,7 @@
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
-│                         StackClaw v2                             │
+│                         StockClaw v2                             │
 │                                                                  │
 │  Frontend (React)              Backend (NestJS)                  │
 │  ─────────────────             ───────────────────               │
@@ -411,7 +411,7 @@ export class FeishuService {
     return {
       config: { wide_screen_mode: true },
       header: {
-        title: { tag: 'plain_text', content: `📡 StackClaw 市场情报 · ${formatDate(report.generatedAt)}` },
+        title: { tag: 'plain_text', content: `📡 StockClaw 市场情报 · ${formatDate(report.generatedAt)}` },
         template: 'blue',
       },
       elements: [
@@ -468,7 +468,7 @@ App.tsx (现有布局)
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│  📡 StackClaw Monitor          [▶ 立即运行]  [⚙ 设置]   │
+│  📡 StockClaw Monitor          [▶ 立即运行]  [⚙ 设置]   │
 │  状态: ● 运行中  间隔: 4h  下次: 2h 15m 后               │
 ├──────────────┬──────────────────────────────────────────┤
 │  今日事件  12 │  信号看板                                 │
