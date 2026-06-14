@@ -23,6 +23,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 6px;
 }
 
 .event-card__celebrity {
@@ -31,9 +32,15 @@
   color: var(--accent);
 }
 
+.event-card__new {
+  font-size: 11px;
+  margin-left: 4px;
+}
+
 .event-card__time {
   font-size: 11px;
   color: var(--text);
+  margin-left: auto;
 }
 
 .event-card__title {

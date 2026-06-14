@@ -195,6 +195,36 @@
   gap: 20px;
 }
 
+/* Split layout: signal board left, event stream right */
+.latest-report--split {
+  flex-direction: row;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.latest-report__signals {
+  flex: 0 0 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: sticky;
+  top: 0;
+}
+
+.latest-report__events {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.latest-report__section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .monitor-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -205,4 +235,9 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.monitor-empty--sm {
+  height: 80px;
+  font-size: 12px;
 }

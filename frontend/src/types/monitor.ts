@@ -53,6 +53,7 @@ export interface MonitorConfig {
   intervalHours: number;
   feishuWebhookUrl: string;
   celebrities: Celebrity[];
+  signalThreshold: number;
   lastRunAt?: string;
   nextRunAt?: string;
 }

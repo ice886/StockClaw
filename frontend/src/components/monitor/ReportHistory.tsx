@@ -5,6 +5,8 @@ import { StockSignalCard } from './StockSignalCard';
 import { EventCard } from './EventCard';
 import './ReportHistory.css';
 
+const PAGE_SIZE = 10;
+
 interface Props {
   reports: MonitorReportSummary[];
   onRefresh: () => void;
@@ -25,6 +27,10 @@ export function ReportHistory({ reports, onRefresh }: Props) {
   const [expanded, setExpanded] = useState<string | null>(null);
   const [detail, setDetail] = useState<MonitorReport | null>(null);
   const [resending, setResending] = useState<string | null>(null);
+  const [page, setPage] = useState(0);
+
+  const totalPages = Math.ceil(reports.length / PAGE_SIZE);
+  const pageReports = reports.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
 
   const handleExpand = async (id: string) => {
     if (expanded === id) {
@@ -58,7 +64,7 @@ export function ReportHistory({ reports, onRefresh }: Props) {
 
   return (
     <div className="report-history">
-      {reports.map((r) => (
+      {pageReports.map((r) => (
         <div key={r.id} className="report-row">
           <div
             className="report-row__summary"
@@ -113,6 +119,27 @@ export function ReportHistory({ reports, onRefresh }: Props) {
           )}
         </div>
       ))}
+      {totalPages > 1 && (
+        <div className="report-history__pagination">
+          <button
+            className="report-action-btn"
+            disabled={page === 0}
+            onClick={() => setPage((p) => p - 1)}
+          >
+            ← 上页
+          </button>
+          <span className="report-history__page-info">
+            {page + 1} / {totalPages}
+          </span>
+          <button
+            className="report-action-btn"
+            disabled={page >= totalPages - 1}
+            onClick={() => setPage((p) => p + 1)}
+          >
+            下页 →
+          </button>
+        </div>
+      )}
     </div>
   );
 }

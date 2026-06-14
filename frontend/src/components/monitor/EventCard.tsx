@@ -3,6 +3,7 @@ import './EventCard.css';
 
 interface Props {
   event: CelebrityEvent;
+  isNew?: boolean;
 }
 
 const importanceLabel: Record<CelebrityEvent['importance'], string> = {
@@ -25,11 +26,12 @@ function timeAgo(iso: string): string {
   return `${Math.floor(h / 24)}天前`;
 }
 
-export function EventCard({ event }: Props) {
+export function EventCard({ event, isNew }: Props) {
   return (
     <div className={`event-card event-card--${event.importance}`}>
       <div className="event-card__meta">
         <span className="event-card__celebrity">{event.celebrityName}</span>
+        {isNew && <span className="event-card__new">🆕</span>}
         <span className="event-card__time">{timeAgo(event.publishedAt)}</span>
       </div>
       <div className="event-card__title">{event.title}</div>
