@@ -1,7 +1,7 @@
 {
   "enabled": false,
   "intervalHours": 6,
-  "feishuWebhookUrl": "https://open.feishu.cn/open-apis/bot/v2/hook/e3b73727-9c2f-42d5-ab06-dc6a87c144ad",
+  "feishuWebhookUrl": "https://open.feishu.cn/open-apis/bot/v2/hook/4301d128-8659-4f8e-875a-d0311af7c578",
   "celebrities": [
     {
       "id": "elon-musk",
@@ -116,5 +116,5 @@
       "enabled": true
     }
   ],
-  "lastRunAt": "2026-06-13T12:07:07.844Z"
+  "lastRunAt": "2026-06-14T05:31:40.348Z"
 }

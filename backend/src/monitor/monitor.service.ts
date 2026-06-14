@@ -2,10 +2,12 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as fs from 'fs';
 import * as path from 'path';
+import pLimit from 'p-limit';
 import { DEFAULT_CELEBRITIES } from '../config/celebrities.config';
 import { CrawlerService } from './crawler.service';
 import { EventExtractorService } from './event-extractor.service';
 import { StockAnalyzerService } from './stock-analyzer.service';
+import { EventDeduplicatorService } from './event-deduplicator.service';
 import {
   CelebrityEvent,
   MonitorConfig,
@@ -24,6 +26,7 @@ export class MonitorService {
     private crawler: CrawlerService,
     private extractor: EventExtractorService,
     private analyzer: StockAnalyzerService,
+    private deduplicator: EventDeduplicatorService,
   ) {
     this.configPath = path.resolve(
       process.cwd(),
@@ -68,46 +71,75 @@ export class MonitorService {
     const config = this.getConfig();
     const enabledCelebrities = config.celebrities.filter((c) => c.enabled);
     const intervalHours = config.intervalHours;
+    const signalThreshold = config.signalThreshold ?? 65;
 
     this.logger.log(
       `Starting monitor cycle: ${enabledCelebrities.length} celebrities, ${intervalHours}h window`,
     );
     onProgress?.(`开始扫描 ${enabledCelebrities.length} 位名人...`);
 
-    const allEvents: CelebrityEvent[] = [];
-    const allSignals: StockSignal[] = [];
+    // Fetch previous report events for incremental dedup
+    const previousEvents = this.getLatestReportEvents();
 
-    for (const celebrity of enabledCelebrities) {
-      onProgress?.(`正在抓取 ${celebrity.nameZh} 的动态...`);
-      this.logger.log(`Crawling: ${celebrity.name}`);
+    const limit = pLimit(3);
 
-      const rawResults = await this.crawler.fetchRawEvents(celebrity);
-      this.logger.log(`  Found ${rawResults.length} raw results`);
+    const results = await Promise.all(
+      enabledCelebrities.map((celebrity) =>
+        limit(async () => {
+          onProgress?.(`正在抓取 ${celebrity.nameZh} 的动态...`);
+          this.logger.log(`Crawling: ${celebrity.name}`);
 
-      onProgress?.(
-        `正在提取 ${celebrity.nameZh} 的事件（${rawResults.length} 条原始数据）...`,
-      );
-      const events = await this.extractor.extract(celebrity, rawResults);
-      this.logger.log(`  Extracted ${events.length} events`);
-      allEvents.push(...events);
+          const rawResults = await this.crawler.fetchRawEvents(celebrity);
+          this.logger.log(`  Found ${rawResults.length} raw results`);
 
-      const highMed = events.filter(
-        (e) => e.importance === 'high' || e.importance === 'medium',
-      );
-      if (highMed.length > 0) {
-        onProgress?.(`正在分析 ${celebrity.nameZh} 相关股票影响...`);
-        const signals = await this.analyzer.analyze(celebrity, events);
-        this.logger.log(`  Generated ${signals.length} signals`);
-        allSignals.push(...signals);
-      }
-    }
+          onProgress?.(
+            `正在提取 ${celebrity.nameZh} 的事件（${rawResults.length} 条原始数据）...`,
+          );
+          const events = await this.extractor.extract(celebrity, rawResults);
+          this.logger.log(`  Extracted ${events.length} events`);
+
+          const highMed = events.filter(
+            (e) => e.importance === 'high' || e.importance === 'medium',
+          );
+          let signals: StockSignal[] = [];
+          if (highMed.length > 0) {
+            onProgress?.(`正在分析 ${celebrity.nameZh} 相关股票影响...`);
+            signals = await this.analyzer.analyze(celebrity, events);
+            this.logger.log(`  Generated ${signals.length} signals`);
+          }
+
+          return { events, signals };
+        }),
+      ),
+    );
+
+    const allRawEvents: CelebrityEvent[] = results.flatMap((r) => r.events);
+    const allSignals: StockSignal[] = results.flatMap((r) => r.signals);
+
+    // Deduplicate against previous report (incremental push)
+    const { newEvents, mergedCount, filteredCount } =
+      this.deduplicator.deduplicate(allRawEvents, previousEvents);
+
+    this.logger.log(
+      `Dedup: ${allRawEvents.length} raw → ${newEvents.length} new (merged: ${mergedCount}, filtered: ${filteredCount})`,
+    );
+    onProgress?.(
+      `去重完成：${newEvents.length} 条新事件（过滤重复 ${filteredCount} 条，合并 ${mergedCount} 条）`,
+    );
+
+    // Filter signals by threshold and only for new events
+    const newEventIds = new Set(newEvents.map((e) => e.id));
+    const filteredSignals = allSignals.filter(
+      (s) =>
+        s.confidence >= signalThreshold && newEventIds.has(s.relatedEventId),
+    );
 
     const report: MonitorReport = {
       id: Date.now().toString(36),
       generatedAt: new Date().toISOString(),
       intervalHours,
-      events: allEvents,
-      signals: allSignals,
+      events: newEvents,
+      signals: filteredSignals,
       feishuSent: false,
     };
 
@@ -115,10 +147,10 @@ export class MonitorService {
     this.saveConfig({ lastRunAt: report.generatedAt });
 
     onProgress?.(
-      `扫描完成：${allEvents.length} 条事件，${allSignals.length} 个股票信号`,
+      `扫描完成：${newEvents.length} 条新事件，${filteredSignals.length} 个股票信号`,
     );
     this.logger.log(
-      `Cycle complete: ${allEvents.length} events, ${allSignals.length} signals`,
+      `Cycle complete: ${newEvents.length} events, ${filteredSignals.length} signals`,
     );
 
     return report;
@@ -178,6 +210,23 @@ export class MonitorService {
 
   // ─── Private ──────────────────────────────────────────────────────────
 
+  private getLatestReportEvents(): CelebrityEvent[] {
+    const files = fs
+      .readdirSync(this.reportsDir)
+      .filter((f) => f.endsWith('.json'))
+      .sort()
+      .reverse();
+    if (files.length === 0) return [];
+    try {
+      const data = JSON.parse(
+        fs.readFileSync(path.join(this.reportsDir, files[0]), 'utf-8'),
+      ) as MonitorReport;
+      return data.events ?? [];
+    } catch {
+      return [];
+    }
+  }
+
   private saveReport(report: MonitorReport): void {
     const filePath = path.join(this.reportsDir, `${report.id}.json`);
     fs.writeFileSync(filePath, JSON.stringify(report, null, 2), 'utf-8');
@@ -191,6 +240,7 @@ export class MonitorService {
       ),
       feishuWebhookUrl: this.configService.get('FEISHU_WEBHOOK_URL') ?? '',
       celebrities: DEFAULT_CELEBRITIES,
+      signalThreshold: 65,
     };
   }
 

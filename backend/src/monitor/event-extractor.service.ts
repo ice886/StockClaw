@@ -1,20 +1,25 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { generateText } from 'ai';
 import { deepseek } from '@ai-sdk/deepseek';
+import { z } from 'zod';
 import { Celebrity } from '../config/celebrities.config';
 import {
   CelebrityEvent,
   RawSearchResult,
 } from './interfaces/monitor.interfaces';
 
-interface ExtractedEvent {
-  title?: string;
-  summary?: string;
-  sourceUrl?: string;
-  sourceType?: string;
-  publishedAt?: string;
-  importance?: string;
-}
+const ExtractedEventSchema = z.object({
+  title: z.string().default(''),
+  summary: z.string().default(''),
+  sourceUrl: z.string().default(''),
+  sourceType: z
+    .enum(['news', 'social', 'official', 'unknown'])
+    .catch('unknown'),
+  publishedAt: z.string().default(''),
+  importance: z.enum(['high', 'medium', 'low']).catch('low'),
+});
+
+const ExtractedEventsSchema = z.array(ExtractedEventSchema);
 
 @Injectable()
 export class EventExtractorService {
@@ -43,9 +48,31 @@ export class EventExtractorService {
 从原始新闻/社交媒体内容中提取与 ${celebrity.nameZh}（${celebrity.name}）相关的重要事件。
 
 重要性判断标准：
-- high：官方合作公告、供应链访问、重大投资、财务数据、监管事件、产品发布
+- high：官方合作公告、供应链协议、重大投资、财务数据、监管事件、产品发布
 - medium：非官方访问曝光、产品暗示、行业发言、合作谈判
 - low：普通演讲采访（无新信息）、社交互动、转发评论
+
+Few-shot 评级示例（必须参照对齐）：
+
+示例1（high）：
+  输入：Jensen Huang confirmed NVDA will supply H200 to Samsung for HBM4 co-development
+  输出：importance=high，原因：官方合作公告 + 直接涉及供应链协议
+
+示例2（medium）：
+  输入：Lisa Su hinted at next-gen EPYC roadmap during an investor briefing
+  输出：importance=medium，原因：非官方产品暗示，未正式发布
+
+示例3（low）：
+  输入：Jensen Huang gave keynote at CES 2025, discussed AI trends
+  输出：importance=low，原因：会议演讲，无新信息披露
+
+示例4（high）：
+  输入：SEC filing shows Elon Musk sold $3.5B in Tesla shares
+  输出：importance=high，原因：监管文件 + 直接涉及财务数据
+
+示例5（low）：
+  输入：Mark Zuckerberg shared a photo on Instagram showing his new surfboard
+  输出：importance=low，原因：社交互动，无商业价值信息
 
 过滤规则：
 - 排除纯广告软文和无实质内容的报道
@@ -76,26 +103,21 @@ export class EventExtractorService {
       const json: unknown = this.parseJson(result.text);
       if (!Array.isArray(json)) return [];
 
+      const parsed = ExtractedEventsSchema.safeParse(json);
+      const items = parsed.success ? parsed.data : [];
+
       const now = new Date().toISOString();
-      return json.map((item: ExtractedEvent, idx: number) => ({
+      return items.map((item, idx) => ({
         id: `${celebrity.id}-${Date.now()}-${idx}`,
         celebrityId: celebrity.id,
         celebrityName: celebrity.nameZh,
-        title: item.title ?? '',
-        summary: item.summary ?? '',
-        sourceUrl: item.sourceUrl ?? '',
-        sourceType: (['news', 'social', 'official'] as const).includes(
-            item.sourceType as 'news',
-          )
-          ? (item.sourceType as 'news' | 'social' | 'official')
-          : 'unknown',
-        publishedAt: item.publishedAt ?? '',
+        title: item.title,
+        summary: item.summary,
+        sourceUrl: item.sourceUrl,
+        sourceType: item.sourceType,
+        publishedAt: item.publishedAt,
         fetchedAt: now,
-        importance: (['high', 'medium', 'low'] as const).includes(
-            item.importance as 'high',
-          )
-          ? (item.importance as 'high' | 'medium' | 'low')
-          : 'low',
+        importance: item.importance,
       }));
     } catch (err) {
       this.logger.error(
@@ -106,12 +128,10 @@ export class EventExtractorService {
   }
 
   private parseJson(text: string): unknown {
-    // Strip markdown code fences if present
     const cleaned = text.replace(/```(?:json)?\n?/g, '').trim();
     try {
       return JSON.parse(cleaned);
     } catch {
-      // Try to extract JSON array from text
       const match = cleaned.match(/\[[\s\S]*\]/);
       if (match) return JSON.parse(match[0]);
       return [];

@@ -1,0 +1,334 @@
+{
+  "id": "mqd88uth",
+  "generatedAt": "2026-06-14T03:31:01.253Z",
+  "intervalHours": 6,
+  "events": [
+    {
+      "id": "elon-musk-1781407827830-0",
+      "celebrityId": "elon-musk",
+      "celebrityName": "马斯克",
+      "title": "Spacex IPO上市首日暴涨",
+      "summary": "SpaceX在纳斯达克上市，首日股价从IPO价涨至收盘约161美元，涨幅约20%，成为全球市值第六大公司，马斯克个人财富突破1万亿美元。",
+      "sourceUrl": "https://www.etnownews.com/market-overview/markets/ipo/spacex-closes-first-trading-day-at-161-after-blockbuster-ipo-elon-musks-space-firm-becomes-worlds-6th-most-valuable-company-article-154595496",
+      "sourceType": "news",
+      "publishedAt": "2026-06-13T10:03:29.000Z",
+      "fetchedAt": "2026-06-14T03:30:27.830Z",
+      "importance": "high"
+    },
+    {
+      "id": "elon-musk-1781407827830-1",
+      "celebrityId": "elon-musk",
+      "celebrityName": "马斯克",
+      "title": "Spacex President暗示可能与特斯拉合并",
+      "summary": "SpaceX总裁在Nasdaq上市首日暗示，未来可能与特斯拉合并，引起市场广泛关注。",
+      "sourceUrl": "https://techstory.in/spacex-president-floats-tesla-merger-as-stock-debuts-on-nasdaq/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-13T17:06:11.000Z",
+      "fetchedAt": "2026-06-14T03:30:27.830Z",
+      "importance": "medium"
+    },
+    {
+      "id": "elon-musk-1781407827830-2",
+      "celebrityId": "elon-musk",
+      "celebrityName": "马斯克",
+      "title": "SpaceX旗下xAI部门计划投资28亿美元用于AI算力竞赛。",
+      "summary": "SpaceX的xAI部门拟投资超28亿美元，以在人工智能领域建设中抢占优势。",
+      "sourceUrl": "https://tradersunion.com/news/companies/show/2351119-spacex-xai-ai-power/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-13T15:25:28.000Z",
+      "fetchedAt": "2026-06-14T03:30:27.830Z",
+      "importance": "high"
+    },
+    {
+      "id": "elon-musk-1781407827830-3",
+      "celebrityId": "elon-musk",
+      "celebrityName": "马斯克",
+      "title": "Spacex与Nvidia合作传闻",
+      "summary": "有报道称Nvidia祝贺SpaceX IPO，并暗示双方可能进行AI合作，但未获官方确认。",
+      "sourceUrl": "https://www.tradingkey.com/analysis/stocks/us-stocks/261965326-spacex-ipo-spcx-nvidia-nvda-elon-musk-ai1-tradingkey",
+      "sourceType": "news",
+      "publishedAt": "2026-06-13T06:04:44.000Z",
+      "fetchedAt": "2026-06-14T03:30:27.830Z",
+      "importance": "medium"
+    },
+    {
+      "id": "jensen-huang-1781407831354-0",
+      "celebrityId": "jensen-huang",
+      "celebrityName": "黄仁勋",
+      "title": "黄仁勋访韩达成多项协议",
+      "summary": "黄仁勋2026年6月访问韩国四天，与SK海力士、三星、SK电信、Naver、现代、LG、斗山等主要财阀达成协议，超过25万块英伟达GPU将进入韩国。",
+      "sourceUrl": "https://www.instagram.com/reel/DZiDEzDDOqx/",
+      "sourceType": "social",
+      "publishedAt": "2026-06-13T16:30:10.682Z",
+      "fetchedAt": "2026-06-14T03:30:31.354Z",
+      "importance": "high"
+    },
+    {
+      "id": "jensen-huang-1781407831354-1",
+      "celebrityId": "jensen-huang",
+      "celebrityName": "黄仁勋",
+      "title": "英伟达Blackwell GB300 NVL72在AgentPerf基准测试中表现优异，每兆瓦可运行AI智能体数量是Hopper的20倍，对AI发展意义重大。",
+      "summary": "",
+      "sourceUrl": "https://blockchain.news/news/nvidia-blackwell-agentperf-benchmark-2026",
+      "sourceType": "news",
+      "publishedAt": "2026-06-13T05:58:52.000Z",
+      "fetchedAt": "2026-06-14T03:30:31.354Z",
+      "importance": "medium"
+    },
+    {
+      "id": "jensen-huang-1781407831354-2",
+      "celebrityId": "jensen-huang",
+      "celebrityName": "黄仁勋",
+      "title": "黄仁勋称顶级工程师年AI代币投入可达25万美元",
+      "summary": "黄仁勋在GTC 2026上表示，顶级工程师每年应花费高达25万美元购买AI代币，将低使用率比作用纸设计芯片。",
+      "sourceUrl": "https://www.instagram.com/p/DZiHDiFDBUQ/",
+      "sourceType": "social",
+      "publishedAt": "2026-06-13T16:30:23.455Z",
+      "fetchedAt": "2026-06-14T03:30:31.354Z",
+      "importance": "low"
+    },
+    {
+      "id": "jensen-huang-1781407831354-3",
+      "celebrityId": "jensen-huang",
+      "celebrityName": "黄仁勋",
+      "title": "黄仁勋GTC台北主题演讲受关注",
+      "summary": "有社交媒体用户观看英伟达GTC台北和黄仁勋主题演讲后，称赞英伟达构建的AI工厂生态系统，认为AI已不再是单打独斗。",
+      "sourceUrl": "https://www.instagram.com/p/DZhNPm-EZ-u/",
+      "sourceType": "social",
+      "publishedAt": "2026-06-13T08:30:23.455Z",
+      "fetchedAt": "2026-06-14T03:30:31.354Z",
+      "importance": "low"
+    },
+    {
+      "id": "lisa-su-1781407827051-0",
+      "celebrityId": "lisa-su",
+      "celebrityName": "苏姿丰",
+      "title": "AMD 20亿英镑投资英国AI",
+      "summary": "AMD计划在英国投资20亿英镑，用于AI计算、研究合作、推理网络及国家超算项目，由CEO苏姿丰主导。",
+      "sourceUrl": "https://hostingjournalist.com/news/amd-commits-%C2%A32b-to-uk-ai-research-and-innovation",
+      "sourceType": "news",
+      "publishedAt": "2026-06-13T20:30:10.651Z",
+      "fetchedAt": "2026-06-14T03:30:27.051Z",
+      "importance": "high"
+    },
+    {
+      "id": "lisa-su-1781407827051-1",
+      "celebrityId": "lisa-su",
+      "celebrityName": "苏姿丰",
+      "title": "苏姿丰售出12.5万股AMD股票",
+      "summary": "苏姿丰于6月10日以均价460.69美元售出12.5万股AMD股票，总价值约5760万美元，为预先安排的10b5-1交易计划。",
+      "sourceUrl": "https://www.insidertrades.com/alerts/nasdaq-amd-insider-buying-and-selling-2026-06-13/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-13T15:30:14.165Z",
+      "fetchedAt": "2026-06-14T03:30:27.051Z",
+      "importance": "medium"
+    },
+    {
+      "id": "sam-altman-1781407858146-0",
+      "celebrityId": "sam-altman",
+      "celebrityName": "萨姆·奥特曼",
+      "title": "Altman投资机器人软件初创公司",
+      "summary": "OpenAI CEO Sam Altman投资了一家由前特斯拉和Meta员工创办的物理AI初创公司，该公司为机器人和汽车构建软件。",
+      "sourceUrl": "https://www.europesays.com/people/112490/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-13T16:03:04.000Z",
+      "fetchedAt": "2026-06-14T03:30:58.146Z",
+      "importance": "high"
+    },
+    {
+      "id": "sam-altman-1781407858146-1",
+      "celebrityId": "sam-altman",
+      "celebrityName": "萨姆·奥特曼",
+      "title": "OpenAI面临多州调查影响IPO",
+      "summary": "OpenAI收到多州传票，调查其AI产品可能对用户造成的伤害，正值公司准备IPO之际。",
+      "sourceUrl": "https://www.pbs.org/newshour/nation/openai-hit-with-multistate-probe-into-possible-user-harm-as-its-ipo-looms",
+      "sourceType": "news",
+      "publishedAt": "2026-06-13T19:30:47.812Z",
+      "fetchedAt": "2026-06-14T03:30:58.146Z",
+      "importance": "high"
+    },
+    {
+      "id": "sam-altman-1781407858146-3",
+      "celebrityId": "sam-altman",
+      "celebrityName": "萨姆·奥特曼",
+      "title": "OpenAI IPO时间线及AI升级暗示",
+      "summary": "Altman透露OpenAI可能在未来一年内上市，并暗示将推出重大AI模型升级，可能超越GPT-5。",
+      "sourceUrl": "https://stocktwits.com/news-articles/markets/equity/openai-ipo-sam-altman-says-listing-within-next-year-hints-at-ai-upgrade/cZ06HwRR7ca",
+      "sourceType": "social",
+      "publishedAt": "2026-06-13T16:30:31.197Z",
+      "fetchedAt": "2026-06-14T03:30:58.146Z",
+      "importance": "high"
+    },
+    {
+      "id": "sam-altman-1781407858146-4",
+      "celebrityId": "sam-altman",
+      "celebrityName": "萨姆·奥特曼",
+      "title": "Altman公布OpenAI第三阶段计划",
+      "summary": "Altman与首席科学家发表博文，宣布OpenAI进入第三阶段，聚焦AI充裕、可及性和安全性，并已秘密提交IPO申请。",
+      "sourceUrl": "https://www.aol.com/articles/read-sam-altmans-plan-openai-223423000.html",
+      "sourceType": "news",
+      "publishedAt": "2026-06-14T02:30:31.197Z",
+      "fetchedAt": "2026-06-14T03:30:58.146Z",
+      "importance": "high"
+    },
+    {
+      "id": "sam-altman-1781407858146-5",
+      "celebrityId": "sam-altman",
+      "celebrityName": "萨姆·奥特曼",
+      "title": "OpenAI面临纽约总检察长传票",
+      "summary": "纽约总检察长对OpenAI发出传票，加剧了公司面临的法律挑战，与多州调查叠加。",
+      "sourceUrl": "https://www.livemint.com/news/us-news/legal-challenges-mount-for-sam-altmans-openai-after-new-york-attorney-general-issues-subpoenas-heres-why-11781343994659.html",
+      "sourceType": "news",
+      "publishedAt": "2026-06-13T09:59:37.000Z",
+      "fetchedAt": "2026-06-14T03:30:58.146Z",
+      "importance": "high"
+    },
+    {
+      "id": "mark-zuckerberg-1781407852187-0",
+      "celebrityId": "mark-zuckerberg",
+      "celebrityName": "扎克伯格",
+      "title": "Meta与Reliance共建印度AI数据中心",
+      "summary": "Meta与印度信实工业（Reliance Industries）宣布合作，在古吉拉特邦Jamnagar建设一座168MW的AI数据中心。这标志着Meta在印度的首个定制数据中心投资，预计两年内完工，凸显印度在全球AI生态中的重要性。",
+      "sourceUrl": "https://www.manufacturingtodayindia.com/reliance-meta-deal",
+      "sourceType": "news",
+      "publishedAt": "2026-06-13T05:01:00.000Z",
+      "fetchedAt": "2026-06-14T03:30:52.187Z",
+      "importance": "high"
+    },
+    {
+      "id": "mark-zuckerberg-1781407852187-1",
+      "celebrityId": "mark-zuckerberg",
+      "celebrityName": "扎克伯格",
+      "title": "Zuckerberg承认AI重组失误",
+      "summary": "马克·扎克伯格在内部备忘录中承认Meta在AI劳动力转型中犯下错误，表示将为员工寻找新岗位，并增加团队建设投资。此前Meta在2026年5月进行了大规模重组，裁员8000人。",
+      "sourceUrl": "https://www.ksl.com/article/51510641/zuckerberg-says-meta-made-mistakes-in-ai-workforce-shift",
+      "sourceType": "news",
+      "publishedAt": "2026-06-14T00:30:31.830Z",
+      "fetchedAt": "2026-06-14T03:30:52.187Z",
+      "importance": "high"
+    },
+    {
+      "id": "mark-zuckerberg-1781407852187-2",
+      "celebrityId": "mark-zuckerberg",
+      "celebrityName": "扎克伯格",
+      "title": "Zuckerberg财富年内缩水310亿美元",
+      "summary": "由于Meta股价从2025年高点下跌近30%，马克·扎克伯格的净资产年内减少310亿美元至2020亿美元。分析师仍看好Meta，认为其远期市盈率较低。",
+      "sourceUrl": "https://www.benzinga.com/markets/equities/26/06/53184515/mark-zuckerbergs-net-worth-crashes-31-billion-this-year-but-analysts-still-bullish-on-meta",
+      "sourceType": "news",
+      "publishedAt": "2026-06-13T16:21:08.000Z",
+      "fetchedAt": "2026-06-14T03:30:52.187Z",
+      "importance": "high"
+    }
+  ],
+  "signals": [
+    {
+      "ticker": "NVDA",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 65,
+      "reasoning": "SpaceX xAI投资28亿美元AI算力，且与NVDA合作传闻利好GPU需求",
+      "timeHorizon": "1week",
+      "relatedEventId": "elon-musk-1781407827830-2"
+    },
+    {
+      "ticker": "NVDA",
+      "direction": "bullish",
+      "magnitude": "strong",
+      "confidence": 85,
+      "reasoning": "访韩达成大规模GPU订单协议，直接提振营收预期；Blackwell性能优势强化AI领导地位",
+      "timeHorizon": "1-3days",
+      "relatedEventId": "jensen-huang-1781407831354-0"
+    },
+    {
+      "ticker": "005930.KS",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 75,
+      "reasoning": "三星作为韩国财阀之一，可能参与GPU部署或HBM供应，受益于AI基建合作",
+      "timeHorizon": "1-3days",
+      "relatedEventId": "jensen-huang-1781407831354-0"
+    },
+    {
+      "ticker": "000660.KS",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 70,
+      "reasoning": "SK海力士作为主要HBM供应商，访韩合作强化需求预期",
+      "timeHorizon": "1week",
+      "relatedEventId": "jensen-huang-1781407831354-0"
+    },
+    {
+      "ticker": "AMD",
+      "direction": "neutral",
+      "magnitude": "moderate",
+      "confidence": 80,
+      "reasoning": "20亿英镑投资利好AI长期叙事，但CEO减持抵消短期情绪，双重信号对峙。",
+      "timeHorizon": "1-3days",
+      "relatedEventId": "lisa-su-1781407827051-0"
+    },
+    {
+      "ticker": "AMD",
+      "direction": "bearish",
+      "magnitude": "moderate",
+      "confidence": 75,
+      "reasoning": "CEO减持套现近6000万美元，市场短期解读为负面信号，但属计划内交易。",
+      "timeHorizon": "1-3days",
+      "relatedEventId": "lisa-su-1781407827051-1"
+    },
+    {
+      "ticker": "MSFT",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 85,
+      "reasoning": "OpenAI IPO传闻及重大升级暗示正面影响合作伙伴微软，但法律调查带来不确定性",
+      "timeHorizon": "1week",
+      "relatedEventId": "sam-altman-1781407858146-3"
+    },
+    {
+      "ticker": "NVDA",
+      "direction": "bullish",
+      "magnitude": "strong",
+      "confidence": 90,
+      "reasoning": "Altman投资机器人+AI升级暗示直接利好NVDA GPU需求，来源可靠且逻辑直接",
+      "timeHorizon": "1-3days",
+      "relatedEventId": "sam-altman-1781407858146-0"
+    },
+    {
+      "ticker": "GOOGL",
+      "direction": "bearish",
+      "magnitude": "moderate",
+      "confidence": 70,
+      "reasoning": "OpenAI IPO与升级加剧AI竞争,META/GOOGL受冲击,但细节有限且间接影响",
+      "timeHorizon": "1week",
+      "relatedEventId": "sam-altman-1781407858146-3"
+    },
+    {
+      "ticker": "META",
+      "direction": "bearish",
+      "magnitude": "moderate",
+      "confidence": 70,
+      "reasoning": "OpenAI IPO与升级加剧AI竞争,META/GOOGL受冲击,但细节有限且间接影响",
+      "timeHorizon": "1week",
+      "relatedEventId": "sam-altman-1781407858146-3"
+    },
+    {
+      "ticker": "META",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 75,
+      "reasoning": "印度AI数据中心合作扩张基础设施，低估利于反弹，但内部重组承认失误利空未完全消化。",
+      "timeHorizon": "1-3days",
+      "relatedEventId": "mark-zuckerberg-1781407852187-0"
+    },
+    {
+      "ticker": "NVDA",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 75,
+      "reasoning": "Meta印度AI数据中心将大量采购GPU，推动算力需求，直接利好NVDA收入。",
+      "timeHorizon": "1-3days",
+      "relatedEventId": "mark-zuckerberg-1781407852187-0"
+    }
+  ],
+  "feishuSent": true
+}

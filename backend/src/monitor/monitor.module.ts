@@ -7,6 +7,7 @@ import { MonitorScheduler } from './monitor.scheduler';
 import { CrawlerService } from './crawler.service';
 import { EventExtractorService } from './event-extractor.service';
 import { StockAnalyzerService } from './stock-analyzer.service';
+import { EventDeduplicatorService } from './event-deduplicator.service';
 import { FeishuModule } from '../feishu/feishu.module';
 
 @Module({
@@ -18,6 +19,7 @@ import { FeishuModule } from '../feishu/feishu.module';
     CrawlerService,
     EventExtractorService,
     StockAnalyzerService,
+    EventDeduplicatorService,
   ],
   exports: [MonitorService],
 })

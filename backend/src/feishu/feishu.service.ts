@@ -13,10 +13,7 @@ export class FeishuService {
   async sendReport(report: MonitorReport, webhookUrl: string): Promise<void> {
     const card = this.buildCard(report);
     try {
-      await axios.post(webhookUrl, {
-        msg_type: 'interactive',
-        card,
-      });
+      await axios.post(webhookUrl, { msg_type: 'interactive', card });
     } catch (err) {
       this.logger.error(`Feishu send failed: ${err}`);
       throw err;
@@ -32,7 +29,7 @@ export class FeishuService {
     });
 
     const highEvents = report.events.filter((e) => e.importance === 'high');
-    const medEvents = report.events.filter((e) => e.importance === 'medium');
+    // Only push high-confidence signals (medium/low removed from card per v5)
     const highSignals = report.signals.filter((s) => s.confidence >= 65);
 
     const elements: object[] = [];
@@ -42,66 +39,65 @@ export class FeishuService {
       tag: 'div',
       text: {
         tag: 'lark_md',
-        content: `📊 本次扫描：**${report.events.length}** 条事件 | **${highEvents.length}** 高影响 | **${report.signals.length}** 个股票信号`,
+        content: `📊 本次扫描：**${report.events.length}** 条新事件 | **${highEvents.length}** 高影响 | **${highSignals.length}** 个高置信信号`,
       },
     });
     elements.push({ tag: 'hr' });
 
-    // High impact events
-    if (highEvents.length > 0) {
+    if (highEvents.length === 0 && highSignals.length === 0) {
       elements.push({
         tag: 'div',
-        text: { tag: 'lark_md', content: '**🔥 高影响事件**' },
+        text: { tag: 'lark_md', content: '本次无高影响新事件。' },
       });
-      for (const event of highEvents.slice(0, 5)) {
-        const relatedSignals = report.signals.filter(
-          (s) => s.relatedEventId === event.id,
-        );
-        elements.push(this.buildEventBlock(event, relatedSignals));
+    } else {
+      // Group high events by celebrity
+      const byCelebrity = new Map<string, CelebrityEvent[]>();
+      for (const event of highEvents) {
+        const list = byCelebrity.get(event.celebrityName) ?? [];
+        list.push(event);
+        byCelebrity.set(event.celebrityName, list);
       }
-      elements.push({ tag: 'hr' });
-    }
 
-    // Medium impact events
-    if (medEvents.length > 0) {
-      elements.push({
-        tag: 'div',
-        text: { tag: 'lark_md', content: '**⚡ 中影响事件**' },
-      });
-      for (const event of medEvents.slice(0, 3)) {
-        const relatedSignals = report.signals.filter(
-          (s) => s.relatedEventId === event.id,
-        );
-        elements.push(this.buildEventBlock(event, relatedSignals));
+      for (const [celebName, events] of byCelebrity) {
+        elements.push({
+          tag: 'div',
+          text: { tag: 'lark_md', content: `**🔥 ${celebName}**` },
+        });
+        for (const event of events.slice(0, 4)) {
+          const relatedSignals = highSignals.filter(
+            (s) => s.relatedEventId === event.id,
+          );
+          elements.push(this.buildEventBlock(event, relatedSignals));
+        }
+        elements.push({ tag: 'hr' });
       }
-      elements.push({ tag: 'hr' });
-    }
 
-    // Signal summary table
-    if (highSignals.length > 0) {
-      const signalLines = highSignals
-        .slice(0, 8)
-        .map((s) => {
-          const dir =
-            s.direction === 'bullish'
-              ? '📈'
-              : s.direction === 'bearish'
-                ? '📉'
-                : '➡️';
-          const stars =
-            '★'.repeat(Math.round(s.confidence / 20)) +
-            '☆'.repeat(5 - Math.round(s.confidence / 20));
-          return `${dir} **${s.ticker}** ${s.magnitude} · 置信${s.confidence}% ${stars} · ${s.timeHorizon}`;
-        })
-        .join('\n');
-      elements.push({
-        tag: 'div',
-        text: {
-          tag: 'lark_md',
-          content: `**📊 股票信号汇总**\n${signalLines}`,
-        },
-      });
-      elements.push({ tag: 'hr' });
+      // High-confidence signal summary (only high signals, no medium/low)
+      if (highSignals.length > 0) {
+        const signalLines = highSignals
+          .slice(0, 8)
+          .map((s) => {
+            const dir =
+              s.direction === 'bullish'
+                ? '📈'
+                : s.direction === 'bearish'
+                  ? '📉'
+                  : '➡️';
+            const stars =
+              '★'.repeat(Math.round(s.confidence / 20)) +
+              '☆'.repeat(5 - Math.round(s.confidence / 20));
+            return `${dir} **${s.ticker}** ${s.magnitude} · 置信${s.confidence}% ${stars} · ${s.timeHorizon}`;
+          })
+          .join('\n');
+        elements.push({
+          tag: 'div',
+          text: {
+            tag: 'lark_md',
+            content: `**📊 股票信号汇总**\n${signalLines}`,
+          },
+        });
+        elements.push({ tag: 'hr' });
+      }
     }
 
     // Footer
@@ -161,7 +157,7 @@ export class FeishuService {
       tag: 'div',
       text: {
         tag: 'lark_md',
-        content: `**[${event.celebrityName}]** ${event.title}${timeStr ? ` · ${timeStr}` : ''}\n${event.summary}${signalText}\n[查看来源](${event.sourceUrl})`,
+        content: `${event.title}${timeStr ? ` · ${timeStr}` : ''}\n${event.summary}${signalText}\n[查看来源](${event.sourceUrl})`,
       },
     };
   }
