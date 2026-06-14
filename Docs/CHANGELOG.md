@@ -1,5 +1,38 @@
 # 开发日志
 
+## 2026-06-13 (2)
+
+### Phase C — 前端监控面板
+
+**新增文件（`frontend/src/`）：**
+
+- `types/monitor.ts`：前端类型定义——`Celebrity`、`CelebrityEvent`、`StockSignal`、`MonitorReport`、`MonitorReportSummary`、`MonitorConfig`、`MonitorStatus`、`RunProgressEvent`
+- `api/monitor.ts`：全部 Monitor REST 调用封装；`runMonitor()` 实现 SSE 异步生成器，逐事件 yield `RunProgressEvent`
+- `hooks/useMonitor.ts`：封装状态管理——`status`、`reports`、`running`、`progressLog`、`error`；`run()` 消费 SSE 并更新进度日志
+
+**新增组件（`components/monitor/`）：**
+
+- `EventCard`：事件卡片，高/中/低影响配色左边框（红/黄/灰），显示名人、时间差、来源链接
+- `StockSignalCard`：信号卡片，看涨/看跌/中性顶部色条 + 置信度进度条 + 推理摘要
+- `ConfigDrawer`：右侧抽屉，支持启用开关、监控间隔选择（1h/2h/4h/8h/24h）、名人复选、飞书 Webhook 输入，PUT `/api/monitor/config` 保存
+- `ReportHistory`：可展开历史报告列表，内嵌 `StockSignalCard` + `EventCard`，支持「重发飞书」（POST `/api/monitor/reports/:id/resend`）
+- `MonitorDashboard`：主面板——状态头（运行状态圆点 + 下次运行倒计时）、SSE 运行进度条、统计 Bar（名人数/报告数/间隔/飞书状态）、Tab 切换（最新报告 / 历史记录）
+
+**修改：**
+
+- `Sidebar`：顶部新增 💬 Chat / 📡 Monitor 导航 tab，Monitor 模式下隐藏会话列表；接收 `activeView` / `onViewChange` props
+- `App.tsx`：增加 `activeView` 状态，按视图渲染 `MonitorDashboard` 或 `ChatPanel`
+
+## 2026-06-13
+
+### Monitor pipeline bug fixes
+
+- **CrawlerService**：修复 `webSearch().execute()` 返回值解析——SDK 返回 `{ results: [...] }` 而非裸数组，导致 `Array.isArray()` 始终为 false、所有搜索结果被丢弃。新增 `ExaResult`/`ExaResponse` 类型替换 `any`，移除 `slice(0, 2)` 让全部 searchKeywords 参与查询
+- **EventExtractorService**：新增 `ExtractedEvent` 接口替换 `any` 类型
+- **FeishuService**：卡片标题和页脚 `StackClaw` → `StockClaw`；事件卡片新增发布时间显示（`MM-DD HH:MM`）
+- **配置**：`monitor-config.json` 同步全部 3 位名人；扫描间隔 4h → 6h；更新飞书群机器人 webhook
+- **工程**：删除空壳 interface 文件（`stock-signal.interface.ts`、`monitor-config.interface.ts`）；ESLint 全零错误
+
 ## 2026-06-12
 
 ### Phase A — 名人事件监控后端（celebrity monitor pipeline）

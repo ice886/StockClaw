@@ -1,7 +1,7 @@
 {
   "enabled": false,
   "intervalHours": 6,
-  "feishuWebhookUrl": "https://open.feishu.cn/open-apis/bot/v2/hook/028dcddc-4789-4266-9e67-19551413ce23",
+  "feishuWebhookUrl": "https://open.feishu.cn/open-apis/bot/v2/hook/e3b73727-9c2f-42d5-ab06-dc6a87c144ad",
   "celebrities": [
     {
       "id": "elon-musk",
@@ -50,6 +50,27 @@
       "enabled": true
     },
     {
+      "id": "lisa-su",
+      "name": "Lisa Su",
+      "nameZh": "苏姿丰",
+      "aliases": [
+        "Lisa"
+      ],
+      "primaryTicker": "AMD",
+      "relatedTickers": [
+        "INTC",
+        "NVDA",
+        "TSM"
+      ],
+      "searchKeywords": [
+        "AMD",
+        "EPYC",
+        "Instinct",
+        "Radeon"
+      ],
+      "enabled": true
+    },
+    {
       "id": "sam-altman",
       "name": "Sam Altman",
       "nameZh": "萨姆·奥特曼",
@@ -70,7 +91,30 @@
         "AGI"
       ],
       "enabled": true
+    },
+    {
+      "id": "mark-zuckerberg",
+      "name": "Mark Zuckerberg",
+      "nameZh": "扎克伯格",
+      "aliases": [
+        "Zuckerberg",
+        "Zuck"
+      ],
+      "primaryTicker": "META",
+      "relatedTickers": [
+        "NVDA",
+        "GOOGL",
+        "MSFT"
+      ],
+      "searchKeywords": [
+        "Meta",
+        "Llama",
+        "Ray-Ban",
+        "Instagram",
+        "WhatsApp"
+      ],
+      "enabled": true
     }
   ],
-  "lastRunAt": "2026-06-13T04:04:50.628Z"
+  "lastRunAt": "2026-06-13T12:07:07.844Z"
 }

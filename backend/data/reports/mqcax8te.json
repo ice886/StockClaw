@@ -1,0 +1,286 @@
+{
+  "id": "mqcax8te",
+  "generatedAt": "2026-06-13T11:58:12.194Z",
+  "intervalHours": 6,
+  "events": [
+    {
+      "id": "elon-musk-1781351839844-0",
+      "celebrityId": "elon-musk",
+      "celebrityName": "马斯克",
+      "title": "SpaceX IPO上市，马斯克成首位万亿富翁",
+      "summary": "SpaceX在纳斯达克上市，开盘价150美元，收盘价160.95美元，市值约1.77万亿美元。马斯克所持股份加上特斯拉持股，净资产约1.05万亿美元，成为全球首位万亿富翁。",
+      "sourceUrl": "https://www.cnbc.com/2026/06/12/elon-musk-trillionaire-spacex.html",
+      "sourceType": "news",
+      "publishedAt": "2026-06-12T16:02:41.000Z",
+      "fetchedAt": "2026-06-13T11:57:19.844Z",
+      "importance": "high"
+    },
+    {
+      "id": "elon-musk-1781351839844-1",
+      "celebrityId": "elon-musk",
+      "celebrityName": "马斯克",
+      "title": "马斯克重磅宣布TeraFab半导体项目",
+      "summary": "在ASML会议上，马斯克概述了特斯拉在德州的TeraFab大型半导体制造项目，该项目预计将带动EUV光刻工具订单增长，显示其AI芯片野心。",
+      "sourceUrl": "https://www.trendforce.com/news/2026/06/12/news-tesla-elon-musk-discusses-terafab-at-asml-conference-project-expected-to-spur-euv-tool-orders/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-12T16:47:09.000Z",
+      "fetchedAt": "2026-06-13T11:57:19.844Z",
+      "importance": "high"
+    },
+    {
+      "id": "elon-musk-1781351839844-2",
+      "celebrityId": "elon-musk",
+      "celebrityName": "马斯克",
+      "title": "SpaceX总裁暗示特斯拉-SpaceX合并可能",
+      "summary": "SpaceX总裁Gwynne Shotwell在CNBC上表示，两家公司合并'可能让马斯克的生活更轻松'，并称'特斯拉和SpaceX的未来存在协同效应'，合并传闻升温。",
+      "sourceUrl": "https://thenextweb.com/news/spacex-tesla-merger-ipo",
+      "sourceType": "news",
+      "publishedAt": "2026-06-12T12:12:51.000Z",
+      "fetchedAt": "2026-06-13T11:57:19.844Z",
+      "importance": "high"
+    },
+    {
+      "id": "elon-musk-1781351839844-3",
+      "celebrityId": "elon-musk",
+      "celebrityName": "马斯克",
+      "title": "特斯拉股价在SpaceX IPO日下跌",
+      "summary": "6月12日，特斯拉股价下跌约2%，收于406.43美元（后回升1.82%），投资者关注点转向SpaceX IPO，其市值已超特斯拉。",
+      "sourceUrl": "https://www.gurufocus.com/news/8914329/spacex-ipo-sparks-investor-interest-tesla-tsla-shares-decline",
+      "sourceType": "news",
+      "publishedAt": "2026-06-12T00:00:00.000Z",
+      "fetchedAt": "2026-06-13T11:57:19.844Z",
+      "importance": "medium"
+    },
+    {
+      "id": "jensen-huang-1781351862928-0",
+      "celebrityId": "jensen-huang",
+      "celebrityName": "黄仁勋",
+      "title": "黄仁勋访韩达成多项AI合作",
+      "summary": "黄仁勋访问韩国，与LG集团、SK海力士、斗山集团等企业高级别会晤，签署多项AI工厂及生态合作协议。",
+      "sourceUrl": "https://www.upi.com/amp/Voices/2026/06/12/perspective-Nvidia-LG-alliances-south-korea/2831781290068/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-12T19:11:28.000Z",
+      "fetchedAt": "2026-06-13T11:57:42.928Z",
+      "importance": "high"
+    },
+    {
+      "id": "jensen-huang-1781351862928-1",
+      "celebrityId": "jensen-huang",
+      "celebrityName": "黄仁勋",
+      "title": "Nvidia与SK海力士签署AI工厂多年协议",
+      "summary": "Nvidia与韩国SK海力士签署多年合作协议，共同建设AI工厂，深化在AI计算领域的战略合作。",
+      "sourceUrl": "https://www.youtube.com/watch?v=EjmEQQF9qf8",
+      "sourceType": "news",
+      "publishedAt": "2026-06-13T01:57:24.767Z",
+      "fetchedAt": "2026-06-13T11:57:42.928Z",
+      "importance": "high"
+    },
+    {
+      "id": "jensen-huang-1781351862928-2",
+      "celebrityId": "jensen-huang",
+      "celebrityName": "黄仁勋",
+      "title": "斗山寻求扩大在Nvidia AI生态角色",
+      "summary": "斗山集团董事长向黄仁勋赠送象征性雕塑，宣布将深化与美国芯片巨头Nvidia在物理AI领域的合作。",
+      "sourceUrl": "https://www.europesays.com/korea/51159/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-12T19:35:11.000Z",
+      "fetchedAt": "2026-06-13T11:57:42.928Z",
+      "importance": "high"
+    },
+    {
+      "id": "jensen-huang-1781351862928-3",
+      "celebrityId": "jensen-huang",
+      "celebrityName": "黄仁勋",
+      "title": "Sharon AI与Nvidia达成六年战略合作",
+      "summary": "Sharon AI与Nvidia签署六年AI基础设施合作协议，将在澳大利亚部署多达40,000块Grace Blackwell GB300 GPU。",
+      "sourceUrl": "https://sharonai.com/press-releases/sharon-ai-announces-six-year-strategic-compute-collaboration-with-nvidia/",
+      "sourceType": "official",
+      "publishedAt": "2026-06-12T12:44:28.000Z",
+      "fetchedAt": "2026-06-13T11:57:42.928Z",
+      "importance": "high"
+    },
+    {
+      "id": "jensen-huang-1781351862928-4",
+      "celebrityId": "jensen-huang",
+      "celebrityName": "黄仁勋",
+      "title": "Nvidia Blackwell引领Agentic AI基准",
+      "summary": "Nvidia Blackwell平台在首个Agentic AI基础设施基准测试中领先，GB300 NVL72每兆瓦支持6.14万并发代理。",
+      "sourceUrl": "https://blogs.nvidia.com/blog/nvidia-blackwell-agentperf-artificial-analysis/",
+      "sourceType": "official",
+      "publishedAt": "2026-06-12T21:00:08.000Z",
+      "fetchedAt": "2026-06-13T11:57:42.928Z",
+      "importance": "high"
+    },
+    {
+      "id": "sam-altman-1781351888276-0",
+      "celebrityId": "sam-altman",
+      "celebrityName": "萨姆·奥特曼",
+      "title": "Altman取消阿布扎比访问",
+      "summary": "OpenAI CEO Sam Altman取消原定本周末的阿布扎比行程，引发对‘星际之门’项目风险的担忧。Semafor独家报道，称与地区紧张局势有关。",
+      "sourceUrl": "https://www.semafor.com/article/06/12/2026/sam-altman-calls-off-abu-dhabi-visit",
+      "sourceType": "news",
+      "publishedAt": "2026-06-12T11:57:58.321Z",
+      "fetchedAt": "2026-06-13T11:58:08.276Z",
+      "importance": "high"
+    },
+    {
+      "id": "sam-altman-1781351888276-1",
+      "celebrityId": "sam-altman",
+      "celebrityName": "萨姆·奥特曼",
+      "title": "Altman推迟韩国访问",
+      "summary": "OpenAI CEO Sam Altman因个人原因推迟访问韩国，原计划与三星电子会面，并引发与Naver合作的猜测。",
+      "sourceUrl": "https://voi.id/en/technology/579808",
+      "sourceType": "news",
+      "publishedAt": "2026-06-12T12:45:00.000Z",
+      "fetchedAt": "2026-06-13T11:58:08.276Z",
+      "importance": "high"
+    },
+    {
+      "id": "sam-altman-1781351888276-2",
+      "celebrityId": "sam-altman",
+      "celebrityName": "萨姆·奥特曼",
+      "title": "OpenAI计划每股687美元收购要约",
+      "summary": "据The Information报道，Sam Altman通过Slack告知员工OpenAI计划以每股687美元进行收购要约，并预计在一年内上市。",
+      "sourceUrl": "https://www.msn.com/en-us/money/companies/openai-prepares-tender-offer-of-687-per-share-altman-expects-to-go-public-within-year-report/ar-AA25iSPB",
+      "sourceType": "unknown",
+      "publishedAt": "2026-06-12T11:57:53.204Z",
+      "fetchedAt": "2026-06-13T11:58:08.276Z",
+      "importance": "high"
+    },
+    {
+      "id": "sam-altman-1781351888276-3",
+      "celebrityId": "sam-altman",
+      "celebrityName": "萨姆·奥特曼",
+      "title": "OpenAI IPO面临州检察长阻力",
+      "summary": "多州检察长对OpenAI的IPO计划表示担忧，可能影响微软等投资者。这增加了监管风险。",
+      "sourceUrl": "https://www.ainvest.com/news/openai-ipo-meets-wall-state-attorneys-general-means-microsoft-2606/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-13T00:57:53.204Z",
+      "fetchedAt": "2026-06-13T11:58:08.276Z",
+      "importance": "medium"
+    },
+    {
+      "id": "sam-altman-1781351888276-4",
+      "celebrityId": "sam-altman",
+      "celebrityName": "萨姆·奥特曼",
+      "title": "母亲因女儿自杀起诉OpenAI",
+      "summary": "一位母亲在美国起诉OpenAI，声称其女儿在与ChatGPT交流后自杀。诉讼引发对AI伦理和责任的关注。",
+      "sourceUrl": "https://www.aljazeera.com/economy/2026/6/12/mother-sues-openai-in-us-after-daughters-death-linked-to-chatgpt-use",
+      "sourceType": "news",
+      "publishedAt": "2026-06-12T21:38:03.000Z",
+      "fetchedAt": "2026-06-13T11:58:08.276Z",
+      "importance": "medium"
+    }
+  ],
+  "signals": [
+    {
+      "ticker": "NVDA",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 65,
+      "reasoning": "Tesla TeraFab项目需大量AI芯片，可能增加对NVDA GPU需求，利好供应链。",
+      "timeHorizon": "1week",
+      "relatedEventId": "elon-musk-1781351839844-1"
+    },
+    {
+      "ticker": "TSLA",
+      "direction": "neutral",
+      "magnitude": "weak",
+      "confidence": 55,
+      "reasoning": "SpaceX IPO吸引资金，但有合并传闻和TeraFab长期利好，短期影响中性。",
+      "timeHorizon": "1week",
+      "relatedEventId": "elon-musk-1781351839844-0"
+    },
+    {
+      "ticker": "GOOGL",
+      "direction": "neutral",
+      "magnitude": "weak",
+      "confidence": 40,
+      "reasoning": "SpaceX IPO和TeraFab项目对Google核心业务无直接影响。",
+      "timeHorizon": "1week",
+      "relatedEventId": "elon-musk-1781351839844-2"
+    },
+    {
+      "ticker": "NVDA",
+      "direction": "bullish",
+      "magnitude": "strong",
+      "confidence": 90,
+      "reasoning": "多项重要AI合作及技术领先，直接推动营收增长预期",
+      "timeHorizon": "1-3days",
+      "relatedEventId": "jensen-huang-1781351862928-0"
+    },
+    {
+      "ticker": "TSM",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 75,
+      "reasoning": "SK海力士和Nvidia合作增加HBM需求，TSM受益供应链",
+      "timeHorizon": "1week",
+      "relatedEventId": "jensen-huang-1781351862928-1"
+    },
+    {
+      "ticker": "000660.KS",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 80,
+      "reasoning": "SK海力士签署多年AI工厂协议，直接提振HBM业务",
+      "timeHorizon": "1-3days",
+      "relatedEventId": "jensen-huang-1781351862928-1"
+    },
+    {
+      "ticker": "005930.KS",
+      "direction": "bullish",
+      "magnitude": "weak",
+      "confidence": 60,
+      "reasoning": "LG集团合作间接利好，但三星非直接合作方",
+      "timeHorizon": "1week",
+      "relatedEventId": "jensen-huang-1781351862928-0"
+    },
+    {
+      "ticker": "MSFT",
+      "direction": "bearish",
+      "magnitude": "moderate",
+      "confidence": 65,
+      "reasoning": "OpenAI IPO遇阻、诉讼及高管行程取消增加不确定性，影响微软战略合作价值。",
+      "timeHorizon": "1week",
+      "relatedEventId": "sam-altman-1781351888276-2"
+    },
+    {
+      "ticker": "NVDA",
+      "direction": "bearish",
+      "magnitude": "moderate",
+      "confidence": 70,
+      "reasoning": "‘星际之门’项目风险上升，中东布局受挫，短期削弱AI基建需求预期。",
+      "timeHorizon": "1week",
+      "relatedEventId": "sam-altman-1781351888276-0"
+    },
+    {
+      "ticker": "GOOGL",
+      "direction": "bullish",
+      "magnitude": "weak",
+      "confidence": 55,
+      "reasoning": "Altman的困境可能提升谷歌在AI竞赛中的相对优势，但影响有限。",
+      "timeHorizon": "1-3days",
+      "relatedEventId": "sam-altman-1781351888276-3"
+    },
+    {
+      "ticker": "META",
+      "direction": "bullish",
+      "magnitude": "weak",
+      "confidence": 50,
+      "reasoning": "OpenAI监管风险加大，Meta的Llama等模型或得喘息空间，但间接影响。",
+      "timeHorizon": "1week",
+      "relatedEventId": "sam-altman-1781351888276-3"
+    },
+    {
+      "ticker": "AMZN",
+      "direction": "neutral",
+      "magnitude": "weak",
+      "confidence": 40,
+      "reasoning": "亚马逊与OpenAI关系较弱，事件对云业务AWS影响间接且不明确。",
+      "timeHorizon": "1week",
+      "relatedEventId": "sam-altman-1781351888276-2"
+    }
+  ],
+  "feishuSent": true
+}

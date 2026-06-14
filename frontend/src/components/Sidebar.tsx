@@ -9,9 +9,11 @@ interface Props {
   onSelect: (id: string) => void;
   onNewSession: (id: string) => void;
   refreshKey: number;
+  activeView: 'chat' | 'monitor';
+  onViewChange: (view: 'chat' | 'monitor') => void;
 }
 
-export function Sidebar({ activeId, onSelect, onNewSession, refreshKey }: Props) {
+export function Sidebar({ activeId, onSelect, onNewSession, refreshKey, activeView, onViewChange }: Props) {
   const [sessions, setSessions] = useState<SessionRecord[]>([]);
   const isCreating = useRef(false);
 
@@ -35,6 +37,7 @@ export function Sidebar({ activeId, onSelect, onNewSession, refreshKey }: Props)
         ...prev,
       ]);
       onNewSession(id);
+      onViewChange('chat');
     } finally {
       isCreating.current = false;
     }
@@ -50,21 +53,39 @@ export function Sidebar({ activeId, onSelect, onNewSession, refreshKey }: Props)
 
   return (
     <div className="sidebar">
-      <button className="new-session-btn" onClick={handleCreate}>
-        + 新建对话
-      </button>
-      <div className="recents-header">Recents</div>
-      <div className="session-list">
-        {sessions.map((s) => (
-          <SessionItem
-            key={s.id}
-            session={s}
-            active={s.id === activeId}
-            onSelect={() => onSelect(s.id)}
-            onDelete={() => handleDelete(s.id)}
-          />
-        ))}
+      <div className="sidebar-nav">
+        <button
+          className={`sidebar-nav__btn ${activeView === 'chat' ? 'sidebar-nav__btn--active' : ''}`}
+          onClick={() => onViewChange('chat')}
+        >
+          💬 Chat
+        </button>
+        <button
+          className={`sidebar-nav__btn ${activeView === 'monitor' ? 'sidebar-nav__btn--active' : ''}`}
+          onClick={() => onViewChange('monitor')}
+        >
+          📡 Monitor
+        </button>
       </div>
+      {activeView === 'chat' && (
+        <>
+          <button className="new-session-btn" onClick={handleCreate}>
+            + 新建对话
+          </button>
+          <div className="recents-header">Recents</div>
+          <div className="session-list">
+            {sessions.map((s) => (
+              <SessionItem
+                key={s.id}
+                session={s}
+                active={s.id === activeId}
+                onSelect={() => { onSelect(s.id); }}
+                onDelete={() => handleDelete(s.id)}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }

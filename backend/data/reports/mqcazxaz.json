@@ -1,0 +1,127 @@
+{
+  "id": "mqcazxaz",
+  "generatedAt": "2026-06-13T12:00:17.243Z",
+  "intervalHours": 6,
+  "events": [
+    {
+      "id": "lisa-su-1781351989198-0",
+      "celebrityId": "lisa-su",
+      "celebrityName": "苏姿丰",
+      "title": "AMD CEO Su在纽交所卖出价值5760万美元股票",
+      "summary": "2026年6月10日，AMD CEO苏姿丰以均价460.69美元卖出12.5万股AMD股票，总价值约5760万美元。该交易已向SEC报备，属于高管常规股票出售。",
+      "sourceUrl": "https://ng.investing.com/news/insider-trading-news/amd-ceo-lisa-t-su-sells-576-million-in-company-stock-93CH-2556671",
+      "sourceType": "news",
+      "publishedAt": "2026-06-12T21:59:25.750Z",
+      "fetchedAt": "2026-06-13T11:59:49.198Z",
+      "importance": "high"
+    },
+    {
+      "id": "lisa-su-1781351989198-1",
+      "celebrityId": "lisa-su",
+      "celebrityName": "苏姿丰",
+      "title": "AMD与Nebius扩大英国AI算力投资",
+      "summary": "",
+      "sourceUrl": "https://datacentremagazine.com/news/inside-amd-and-nebius-compute-investments-in-the-uk",
+      "sourceType": "news",
+      "publishedAt": "2026-06-12T11:59:25.750Z",
+      "fetchedAt": "2026-06-13T11:59:49.198Z",
+      "importance": "high"
+    },
+    {
+      "id": "lisa-su-1781351989198-2",
+      "celebrityId": "lisa-su",
+      "celebrityName": "苏姿丰",
+      "title": "Citi将AMD评级上调至买入，目标价575美元",
+      "summary": "花旗分析师Atif Malik将AMD评级从\"中性\"上调至\"买入\"，12个月目标价从460美元提升至575美元，认为市场目前低估了AMD在AI市场的潜力。该消息推动AMD股价盘前上涨。",
+      "sourceUrl": "https://sherwood.news/markets/amd-shares-climb-on-double-citi-upgrade-to-buy-with-575-price-target/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-12T13:03:07.000Z",
+      "fetchedAt": "2026-06-13T11:59:49.198Z",
+      "importance": "medium"
+    },
+    {
+      "id": "mark-zuckerberg-1781352014217-0",
+      "celebrityId": "mark-zuckerberg",
+      "celebrityName": "扎克伯格",
+      "title": "Meta与Reliance共建印度AI数据中心",
+      "summary": "Meta与印度Reliance Industries合作，在古吉拉特邦Jamnagar建设168MW AI数据中心，这是Meta在印度首个定制化数据中心，预计两年内完工。",
+      "sourceUrl": "https://www.manufacturingtodayindia.com/reliance-meta-deal",
+      "sourceType": "news",
+      "publishedAt": "2026-06-13T05:01:00.000Z",
+      "fetchedAt": "2026-06-13T12:00:14.217Z",
+      "importance": "high"
+    },
+    {
+      "id": "mark-zuckerberg-1781352014217-1",
+      "celebrityId": "mark-zuckerberg",
+      "celebrityName": "扎克伯格",
+      "title": "扎克伯格向全美盲人老兵捐赠AI眼镜",
+      "summary": "扎克伯格宣布向全美超过13万名法定盲人退伍军人免费赠送Ray-Ban Meta AI眼镜，该眼镜可通过AI描述周围环境、阅读文件，并提供日常导航辅助。Meta还将与盲人退伍军人协会合作提供培训。",
+      "sourceUrl": "https://about.fb.com/news/2026/06/free-ai-glasses-for-every-blind-veteran/",
+      "sourceType": "official",
+      "publishedAt": "2026-06-12T12:33:26.000Z",
+      "fetchedAt": "2026-06-13T12:00:14.217Z",
+      "importance": "high"
+    },
+    {
+      "id": "mark-zuckerberg-1781352014217-2",
+      "celebrityId": "mark-zuckerberg",
+      "celebrityName": "扎克伯格",
+      "title": "扎克伯格承认AI劳动力重组失误",
+      "summary": "扎克伯格公开承认Meta在AI团队重组中犯下错误，导致员工不满和效率下降，公司正加倍投入AI领域以纠正问题。",
+      "sourceUrl": "https://www.channelnewsasia.com/business/zuckerberg-says-meta-made-mistakes-in-ai-workforce-shift-6180351",
+      "sourceType": "news",
+      "publishedAt": "2026-06-12T21:23:24.000Z",
+      "fetchedAt": "2026-06-13T12:00:14.217Z",
+      "importance": "medium"
+    }
+  ],
+  "signals": [
+    {
+      "ticker": "AMD",
+      "direction": "bearish",
+      "magnitude": "weak",
+      "confidence": 65,
+      "reasoning": "CEO减持股票通常被视为内部人信心不足信号，但减持量占比较小，且为常规交易，短期心理影响为主",
+      "timeHorizon": "1-3days",
+      "relatedEventId": "lisa-su-1781351989198-0"
+    },
+    {
+      "ticker": "AMD",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 70,
+      "reasoning": "Citi升级与AI投资扩张，基本面利好对冲减持负面情绪，技术面支撑反弹",
+      "timeHorizon": "1week",
+      "relatedEventId": "lisa-su-1781351989198-2"
+    },
+    {
+      "ticker": "META",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 72,
+      "reasoning": "印度AI数据中心扩张+AI眼镜公益营销提升品牌，但重组失误短期利空交织",
+      "timeHorizon": "1-3days",
+      "relatedEventId": "mark-zuckerberg-1781352014217-0"
+    },
+    {
+      "ticker": "NVDA",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 68,
+      "reasoning": "Meta AI数据中心需大量GPU，拉动NVDA需求预期，但非直接合同",
+      "timeHorizon": "1week",
+      "relatedEventId": "mark-zuckerberg-1781352014217-0"
+    },
+    {
+      "ticker": "GOOGL",
+      "direction": "neutral",
+      "magnitude": "weak",
+      "confidence": 50,
+      "reasoning": "Meta竞争压力增大，但Google也受益AI基建趋势，影响不显著",
+      "timeHorizon": "1week",
+      "relatedEventId": "mark-zuckerberg-1781352014217-0"
+    }
+  ],
+  "feishuSent": true
+}

@@ -8,6 +8,33 @@
   background: var(--bg);
 }
 
+.sidebar-nav {
+  display: flex;
+  gap: 4px;
+  padding: 10px 10px 0;
+}
+
+.sidebar-nav__btn {
+  flex: 1;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.sidebar-nav__btn:hover {
+  background: var(--code-bg);
+}
+.sidebar-nav__btn--active {
+  background: var(--accent-bg);
+  border-color: var(--accent-border);
+  color: var(--accent);
+  font-weight: 500;
+}
+
 .new-session-btn {
   margin: 12px;
   padding: 8px 16px;

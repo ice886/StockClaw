@@ -84,10 +84,18 @@ export class EventExtractorService {
         title: item.title ?? '',
         summary: item.summary ?? '',
         sourceUrl: item.sourceUrl ?? '',
-        sourceType: item.sourceType ?? 'unknown',
+        sourceType: (['news', 'social', 'official'] as const).includes(
+            item.sourceType as 'news',
+          )
+          ? (item.sourceType as 'news' | 'social' | 'official')
+          : 'unknown',
         publishedAt: item.publishedAt ?? '',
         fetchedAt: now,
-        importance: item.importance ?? 'low',
+        importance: (['high', 'medium', 'low'] as const).includes(
+            item.importance as 'high',
+          )
+          ? (item.importance as 'high' | 'medium' | 'low')
+          : 'low',
       }));
     } catch (err) {
       this.logger.error(

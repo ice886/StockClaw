@@ -1,0 +1,86 @@
+.event-card {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.event-card--high {
+  border-left: 3px solid #ef4444;
+}
+.event-card--medium {
+  border-left: 3px solid #f59e0b;
+}
+.event-card--low {
+  border-left: 3px solid var(--border);
+}
+
+.event-card__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.event-card__celebrity {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.event-card__time {
+  font-size: 11px;
+  color: var(--text);
+}
+
+.event-card__title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-h);
+  line-height: 1.4;
+}
+
+.event-card__summary {
+  font-size: 12px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.event-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2px;
+}
+
+.event-card__importance {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.event-card__importance--high {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+.event-card__importance--medium {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+}
+.event-card__importance--low {
+  background: var(--code-bg);
+  color: var(--text);
+}
+
+.event-card__source {
+  font-size: 11px;
+  color: var(--text);
+  text-decoration: none;
+}
+.event-card__source:hover {
+  color: var(--accent);
+}
