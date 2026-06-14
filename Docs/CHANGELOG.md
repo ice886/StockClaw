@@ -1,5 +1,30 @@
 # 开发日志
 
+## 2026-06-14 — v5 架构改进
+
+### P0 — 正确性 & 性能
+
+- **Zod 替换类型断言**：`EventExtractorService` 引入 `ExtractedEventSchema`，`StockAnalyzerService` 引入 `AnalysisResponseSchema`，在解析边界收窄 `sourceType` / `importance` / `direction` 类型，移除全部 `as 'high'` 补丁
+- **MonitorService 并行化**：串行 `for` 循环改为 `Promise.all` + `pLimit(3)`，5 位名人并行处理，运行时间从 ~60s 降至 ~15s
+- **删除 `celebrity.interface.ts`**：与 `celebrities.config.ts` 重复定义，统一到后者
+- **安装依赖**：`zod`（schema 校验）、`p-limit`（并发控制）
+
+### P1 — 数据质量
+
+- **EventDeduplicatorService**（新服务）：三级去重策略——① URL 精确匹配 ② Jaccard title 相似度 > 0.85 ③ 同名人 + ticker + 6h 时间窗口重叠；返回 `{ newEvents, mergedCount, filteredCount }`
+- **EventExtractor few-shot 示例**：system prompt 注入 5 条标注好的评级示例（2 条 high、1 条 medium、2 条 low），稳定 importance 评级，减少 high↔medium 漂移
+- **StockAnalyzer 置信度矩阵**：显式定义 90–100 / 70–89 / 50–69 / 30–49 / <30 五个区间的含义，消除模型自由打分导致的 85–90 虚高问题
+
+### P2 — 产品体验
+
+- **增量推送**：每次运行对比上次报告，只推送新事件（sourceUrl + title hash 去重），同一事件不重复推送
+- **`signalThreshold` 可配置**：`MonitorConfig` 新增字段（默认 65），替换原硬编码阈值，支持通过 `PUT /api/monitor/config` 调整
+- **飞书卡片改版**：按名人分组展示高影响事件，移除 medium/low 信号条目（信息密度过高），只保留高置信信号汇总
+- **Dashboard 左右分栏**：信号看板固定在左侧（280px sticky），事件流在右侧，替代原纵向列表
+- **EventCard 🆕 徽章**：最新报告的事件显示 🆕 标记
+- **ReportHistory 翻页**：每页 10 条，避免报告积累后全量加载性能下降
+- **Dashboard 自动刷新**：每 5 分钟调用 `GET /api/monitor/status`，无需手动刷新
+
 ## 2026-06-13 (2)
 
 ### Phase C — 前端监控面板
