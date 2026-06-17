@@ -1,0 +1,307 @@
+{
+  "id": "mqfz1j1e",
+  "generatedAt": "2026-06-16T01:36:41.378Z",
+  "intervalHours": 6,
+  "events": [
+    {
+      "id": "elon-musk-1781573770731-1",
+      "celebrityId": "elon-musk",
+      "celebrityName": "马斯克",
+      "title": "马斯克欲深化 SpaceX 与 NVIDIA 合作",
+      "summary": "马斯克在 SpaceX IPO 后表示，希望将 SpaceX 与 NVIDIA 的合作提升至新水平，深化在 AI 基础设施和卫星计算领域的布局。",
+      "sourceUrl": "https://onmsft.com/news/elon-musk-wants-to-take-spacex-and-nvidia-partnership-to-the-next-level-after-historic-ipo/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-15T11:13:52.000Z",
+      "fetchedAt": "2026-06-16T01:36:10.731Z",
+      "importance": "high"
+    },
+    {
+      "id": "elon-musk-1781573770731-2",
+      "celebrityId": "elon-musk",
+      "celebrityName": "马斯克",
+      "title": "澳洲富豪 Rinehart 投资 14 亿美元入股 SpaceX",
+      "summary": "澳大利亚矿业巨头 Gina Rinehart 通过 Hancock Prospecting 在 SpaceX IPO 中购入约 14 亿美元股份，押注太空采矿与地外基础设施需求。",
+      "sourceUrl": "https://www.nine.com.au/business-news/rinehart-backs-truly-exceptional-musk-with-1-4-billion-bet-on-spacex-20260615-p6070r.html",
+      "sourceType": "news",
+      "publishedAt": "2026-06-15T08:07:04.000Z",
+      "fetchedAt": "2026-06-16T01:36:10.731Z",
+      "importance": "high"
+    },
+    {
+      "id": "jensen-huang-1781573767325-2",
+      "celebrityId": "jensen-huang",
+      "celebrityName": "黄仁勋",
+      "title": "黄仁勋发布专为AI代理设计的Vera CPU",
+      "summary": "英伟达发布88核Arm架构Vera CPU，专为AI代理设计，标志英伟达向CPU领域扩张。",
+      "sourceUrl": "https://cryptobriefing.com/nvidia-vera-cpu-ai-agents-2/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-15T19:35:57.673Z",
+      "fetchedAt": "2026-06-16T01:36:07.325Z",
+      "importance": "high"
+    },
+    {
+      "id": "jensen-huang-1781573767325-3",
+      "celebrityId": "jensen-huang",
+      "celebrityName": "黄仁勋",
+      "title": "英伟达上调数据中心积压订单预测至2027年",
+      "summary": "英伟达上调季度营收预测，Blackwell Ultra订单超1800亿美元，数据中心积压订单延伸至2027年，缓解市场对超大规模支出放缓的担忧。",
+      "sourceUrl": "https://credencewire.com/article/nvidia-guidance-data-center-backlog-june-2026",
+      "sourceType": "news",
+      "publishedAt": "2026-06-16T00:53:24.000Z",
+      "fetchedAt": "2026-06-16T01:36:07.325Z",
+      "importance": "high"
+    },
+    {
+      "id": "lisa-su-1781573763036-0",
+      "celebrityId": "lisa-su",
+      "celebrityName": "苏姿丰",
+      "title": "苏姿丰出售AMD股票5758万美元",
+      "summary": "AMD CEO苏姿丰于6月10日卖出12.5万股AMD股票，均价460.69美元，总价值约5758万美元。",
+      "sourceUrl": "https://www.dailypolitical.com/2026/06/15/advanced-micro-devices-nasdaqamd-ceo-sells-57586250-00-in-stock.html",
+      "sourceType": "news",
+      "publishedAt": "2026-06-15T05:38:46.000Z",
+      "fetchedAt": "2026-06-16T01:36:03.036Z",
+      "importance": "high"
+    },
+    {
+      "id": "lisa-su-1781573763036-1",
+      "celebrityId": "lisa-su",
+      "celebrityName": "苏姿丰",
+      "title": "苏姿丰出席COMPUTEX 2026",
+      "summary": "苏姿丰与黄仁勋同赴台北参加COMPUTEX 2026，市场关注台湾AI供应链及AMD概念股受益情况。",
+      "sourceUrl": "https://www.europesays.com/people/114046/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-15T02:47:08.000Z",
+      "fetchedAt": "2026-06-16T01:36:03.036Z",
+      "importance": "medium"
+    },
+    {
+      "id": "lisa-su-1781573763036-3",
+      "celebrityId": "lisa-su",
+      "celebrityName": "苏姿丰",
+      "title": "苏姿丰预测2030年服务器CPU市场1200亿美元",
+      "summary": "苏姿丰预测AMD每股收益超20美元，2030年服务器CPU市场达1200亿美元，AMD将提前两年实现目标。",
+      "sourceUrl": "https://www.aol.com/articles/amd-next-1-trillion-chip-132702000.html",
+      "sourceType": "news",
+      "publishedAt": "2026-06-15T13:35:44.308Z",
+      "fetchedAt": "2026-06-16T01:36:03.036Z",
+      "importance": "high"
+    },
+    {
+      "id": "lisa-su-1781573763036-4",
+      "celebrityId": "lisa-su",
+      "celebrityName": "苏姿丰",
+      "title": "AMD发布Ryzen AI Halo迷你PC",
+      "summary": "AMD推出Ryzen AI Halo开发者迷你PC，售价3999美元，支持运行200B参数大语言模型，直接竞争英伟达。",
+      "sourceUrl": "https://www.eteknix.com/amd-launches-ryzen-ai-halo-mini-pc-for-3999/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-15T03:19:00.000Z",
+      "fetchedAt": "2026-06-16T01:36:03.036Z",
+      "importance": "high"
+    },
+    {
+      "id": "sam-altman-1781573790356-1",
+      "celebrityId": "sam-altman",
+      "celebrityName": "萨姆·奥特曼",
+      "title": "OpenAI遭多州检察长调查",
+      "summary": "美国多州检察长联盟对OpenAI展开广泛调查，已发出传票要求提供与广告、用户参与度及消费者健康数据处理相关的文件。",
+      "sourceUrl": "https://www.insurancejournal.com/news/national/2026/06/15/873665.htm",
+      "sourceType": "news",
+      "publishedAt": "2026-06-15T05:02:00.000Z",
+      "fetchedAt": "2026-06-16T01:36:30.356Z",
+      "importance": "high"
+    },
+    {
+      "id": "sam-altman-1781573790356-3",
+      "celebrityId": "sam-altman",
+      "celebrityName": "萨姆·奥特曼",
+      "title": "Altman公布OpenAI第三阶段计划",
+      "summary": "Sam Altman与首席科学家发布博文称OpenAI进入第三阶段，聚焦AI丰富性、可及性与安全性，同日公司秘密提交IPO申请。",
+      "sourceUrl": "https://www.aol.com/articles/read-sam-altmans-plan-openai-223423000.html",
+      "sourceType": "news",
+      "publishedAt": "2026-06-15T14:36:06.915Z",
+      "fetchedAt": "2026-06-16T01:36:30.356Z",
+      "importance": "high"
+    },
+    {
+      "id": "sam-altman-1781573790356-4",
+      "celebrityId": "sam-altman",
+      "celebrityName": "萨姆·奥特曼",
+      "title": "OpenAI准备每股687美元收购要约",
+      "summary": "据The Information报道，Sam Altman在Slack中告知员工OpenAI准备以每股687美元进行收购要约，预计一年内上市。",
+      "sourceUrl": "https://www.msn.com/en-us/money/companies/openai-prepares-tender-offer-of-687-per-share-altman-expects-to-go-public-within-year-report/ar-AA25iSPB",
+      "sourceType": "news",
+      "publishedAt": "2026-06-15T09:36:13.592Z",
+      "fetchedAt": "2026-06-16T01:36:30.356Z",
+      "importance": "high"
+    },
+    {
+      "id": "mark-zuckerberg-1781573798230-3",
+      "celebrityId": "mark-zuckerberg",
+      "celebrityName": "扎克伯格",
+      "title": "Meta推出Facebook AI模式",
+      "summary": "Meta宣布在Facebook上推出新的AI模式，该模式从旗下各平台的公共信息中提取数据，旨在改变用户发现信息、创建内容和互动的方式，以提升AI参与度。",
+      "sourceUrl": "https://techcrunch.com/2026/06/15/metas-new-ai-mode-on-facebook-pulls-from-public-info-across-its-platforms/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-15T18:30:58.000Z",
+      "fetchedAt": "2026-06-16T01:36:38.230Z",
+      "importance": "high"
+    },
+    {
+      "id": "mark-zuckerberg-1781573798230-4",
+      "celebrityId": "mark-zuckerberg",
+      "celebrityName": "扎克伯格",
+      "title": "Meta股价因AI预算计划上涨4.77%",
+      "summary": "Meta股价上涨4.77%至593.48美元，投资者对扎克伯格最新的AI支出计划反应积极，尽管此前市场对巨额AI开支表示担忧。",
+      "sourceUrl": "https://rollingout.com/2026/06/15/meta-stock-jumps-4-5-percent-ai-reset/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-15T01:36:10.000Z",
+      "fetchedAt": "2026-06-16T01:36:38.230Z",
+      "importance": "medium"
+    },
+    {
+      "id": "mark-zuckerberg-1781573798230-5",
+      "celebrityId": "mark-zuckerberg",
+      "celebrityName": "扎克伯格",
+      "title": "扎克伯格斥资140亿美元收购AI技术",
+      "summary": "扎克伯格以140亿美元收购Alexandr Wang的AI公司，但Meta内部工程师仍偏好使用Claude。",
+      "sourceUrl": "https://www.livemint.com/companies/news/mark-zuckerberg-paid-14billion-for-alexandr-wangs-ai-metas-own-engineers-still-reach-for-claude-11781523274377.html",
+      "sourceType": "news",
+      "publishedAt": "2026-06-15T12:53:07.000Z",
+      "fetchedAt": "2026-06-16T01:36:38.230Z",
+      "importance": "medium"
+    },
+    {
+      "id": "sanjay-mehrotra-1781573798811-1",
+      "celebrityId": "sanjay-mehrotra",
+      "celebrityName": "桑杰·梅赫罗特拉",
+      "title": "美光宣布在弗吉尼亚扩产DRAM",
+      "summary": "美光庆祝在弗吉尼亚州马纳萨斯的工厂开始生产1α（1-alpha）DRAM，投资20亿美元，服务于汽车、国防、工业等多个关键行业。",
+      "sourceUrl": "https://www.manufacturing.net/operations/news/22967654/microns-2b-project-to-expand-memory-manufacturing-in-virginia",
+      "sourceType": "news",
+      "publishedAt": "2026-05-27T00:00:00.000Z",
+      "fetchedAt": "2026-06-16T01:36:38.811Z",
+      "importance": "high"
+    }
+  ],
+  "signals": [
+    {
+      "ticker": "NVDA",
+      "direction": "bullish",
+      "magnitude": "strong",
+      "confidence": 85,
+      "reasoning": "马斯克明确深化与NVIDIA合作，AI基础设施和卫星计算需求将显著提升GPU采购预期。",
+      "timeHorizon": "1-3days",
+      "relatedEventId": "elon-musk-1781573770731-1"
+    },
+    {
+      "ticker": "NVDA",
+      "direction": "bullish",
+      "magnitude": "strong",
+      "confidence": 85,
+      "reasoning": "黄仁勋释放多重利好，包括上调预测、新CPU、AI需求强劲，市场信心增强",
+      "timeHorizon": "1week",
+      "relatedEventId": "jensen-huang-1781573767325-3"
+    },
+    {
+      "ticker": "TSM",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 80,
+      "reasoning": "英伟达订单延伸至2027年，台积电作为主要代工厂受益于AI芯片需求",
+      "timeHorizon": "1week",
+      "relatedEventId": "jensen-huang-1781573767325-3"
+    },
+    {
+      "ticker": "MRVL",
+      "direction": "bullish",
+      "magnitude": "weak",
+      "confidence": 65,
+      "reasoning": "数据中心网络芯片供应商，受益于英伟达订单大增但非直接关联",
+      "timeHorizon": "1week",
+      "relatedEventId": "jensen-huang-1781573767325-3"
+    },
+    {
+      "ticker": "AVGO",
+      "direction": "bullish",
+      "magnitude": "weak",
+      "confidence": 65,
+      "reasoning": "数据中心交换机芯片供应商，受益于AI基础设施建设",
+      "timeHorizon": "1week",
+      "relatedEventId": "jensen-huang-1781573767325-3"
+    },
+    {
+      "ticker": "AMD",
+      "direction": "bearish",
+      "magnitude": "weak",
+      "confidence": 70,
+      "reasoning": "英伟达强势表现压制AMD在AI芯片市场份额预期",
+      "timeHorizon": "1-3days",
+      "relatedEventId": "jensen-huang-1781573767325-2"
+    },
+    {
+      "ticker": "AMD",
+      "direction": "bearish",
+      "magnitude": "moderate",
+      "confidence": 70,
+      "reasoning": "CEO减持5758万美元，削弱市场信心，短期承压",
+      "timeHorizon": "1-3days",
+      "relatedEventId": "lisa-su-1781573763036-0"
+    },
+    {
+      "ticker": "MSFT",
+      "direction": "bearish",
+      "magnitude": "moderate",
+      "confidence": 70,
+      "reasoning": "OpenAI面临多州调查和诉讼，增加监管风险，微软作为主要投资者和合作伙伴可能受负面情绪拖累",
+      "timeHorizon": "1week",
+      "relatedEventId": "sam-altman-1781573790356-1"
+    },
+    {
+      "ticker": "NVDA",
+      "direction": "bullish",
+      "magnitude": "weak",
+      "confidence": 65,
+      "reasoning": "OpenAI上市预期提振AI行业信心，英伟达作为算力龙头间接受益，但诉讼风险有限",
+      "timeHorizon": "1week",
+      "relatedEventId": "sam-altman-1781573790356-3"
+    },
+    {
+      "ticker": "GOOGL",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 70,
+      "reasoning": "OpenAI负面新闻（诉讼/调查）利好谷歌AI竞争地位，潜在市场份额转移",
+      "timeHorizon": "1week",
+      "relatedEventId": "sam-altman-1781573790356-1"
+    },
+    {
+      "ticker": "AMZN",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 65,
+      "reasoning": "OpenAI监管风险促使企业寻求替代方案，亚马逊AWS和AI平台可能受益",
+      "timeHorizon": "1-3days",
+      "relatedEventId": "sam-altman-1781573790356-1"
+    },
+    {
+      "ticker": "META",
+      "direction": "bullish",
+      "magnitude": "strong",
+      "confidence": 80,
+      "reasoning": "AI基础设施扩展与收购推动股价上涨4.77%，内部重组问题影响有限。",
+      "timeHorizon": "1week",
+      "relatedEventId": "mark-zuckerberg-1781573798230-4"
+    },
+    {
+      "ticker": "MU",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 70,
+      "reasoning": "CEO宣布20亿美元扩产1α DRAM，利好产能和技术领先，对应汽车和国防需求。",
+      "timeHorizon": "1week",
+      "relatedEventId": "sanjay-mehrotra-1781573798811-1"
+    }
+  ],
+  "feishuSent": true
+}

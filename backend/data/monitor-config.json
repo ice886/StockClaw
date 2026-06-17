@@ -114,7 +114,61 @@
         "WhatsApp"
       ],
       "enabled": true
+    },
+    {
+      "id": "kwak-noh-jung",
+      "name": "Kwak Noh-Jung",
+      "nameZh": "郭鲁正",
+      "aliases": [
+        "Noh-Jung Kwak",
+        "Kwak",
+        "SK Hynix CEO"
+      ],
+      "primaryTicker": "000660.KS",
+      "relatedTickers": [
+        "005930.KS",
+        "NVDA",
+        "TSM",
+        "MU"
+      ],
+      "searchKeywords": [
+        "SK Hynix",
+        "SK海力士",
+        "HBM",
+        "HBM3E",
+        "HBM4",
+        "高带宽内存",
+        "存储芯片"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "sanjay-mehrotra",
+      "name": "Sanjay Mehrotra",
+      "nameZh": "桑杰·梅赫罗特拉",
+      "aliases": [
+        "Mehrotra",
+        "Micron CEO"
+      ],
+      "primaryTicker": "MU",
+      "relatedTickers": [
+        "000660.KS",
+        "005930.KS",
+        "NVDA",
+        "AMD"
+      ],
+      "searchKeywords": [
+        "Micron",
+        "美光",
+        "HBM",
+        "HBM3E",
+        "HBM4",
+        "DRAM",
+        "NAND",
+        "存储芯片"
+      ],
+      "enabled": true
     }
   ],
-  "lastRunAt": "2026-06-14T05:31:40.348Z"
+  "lastRunAt": "2026-06-16T01:36:41.378Z"
 }

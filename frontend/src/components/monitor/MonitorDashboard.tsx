@@ -28,7 +28,7 @@ export function MonitorDashboard() {
   const autoRefreshRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
-    fetchConfig().then(setConfig).catch(() => {});
+    fetchConfig().then(setConfig).catch(() => { });
   }, []);
 
   // Auto-refresh status every 5 minutes
@@ -38,7 +38,7 @@ export function MonitorDashboard() {
         // trigger a lightweight status update without full refresh
         void s;
         refresh();
-      }).catch(() => {});
+      }).catch(() => { });
     }, AUTO_REFRESH_MS);
     return () => {
       if (autoRefreshRef.current) clearInterval(autoRefreshRef.current);
@@ -153,7 +153,7 @@ function LatestReport({ reportId }: { reportId: string | null }) {
 
   useEffect(() => {
     if (!reportId) return;
-    fetchReport(reportId).then(setReport).catch(() => {});
+    fetchReport(reportId).then(setReport).catch(() => { });
   }, [reportId]);
 
   if (!reportId) {
