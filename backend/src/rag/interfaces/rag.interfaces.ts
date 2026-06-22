@@ -1,0 +1,29 @@
+export interface RagDocument {
+  id: string;
+  sessionId: string;
+  filename: string;
+  mimeType: string;
+  uploadedAt: number;
+  chunkCount: number;
+}
+
+export interface Chunk {
+  id: string; // `${docId}-${index}`
+  docId: string;
+  sessionId: string;
+  text: string;
+  index: number;
+  vector?: number[]; // 存储时写入
+}
+
+export interface RetrievedChunk {
+  text: string;
+  docId: string;
+  filename: string;
+  score: number; // 余弦相似度 0–1
+}
+
+export interface VectorFile {
+  doc: RagDocument;
+  chunks: Chunk[]; // chunk.vector 已填充
+}

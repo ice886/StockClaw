@@ -1,0 +1,418 @@
+{
+  "id": "mqhd6ig3",
+  "generatedAt": "2026-06-17T01:00:14.691Z",
+  "intervalHours": 6,
+  "events": [
+    {
+      "id": "elon-musk-1781657975710-0",
+      "celebrityId": "elon-musk",
+      "celebrityName": "马斯克",
+      "title": "SpaceX 收购 AI 编程公司 Cursor",
+      "summary": "SpaceX 宣布以 600 亿美元全股票交易收购 AI 编程初创公司 Cursor，以增强其在 AI 领域对 Anthropic 和 OpenAI 的竞争力，交易预计在 2026 年第三季度完成。",
+      "sourceUrl": "https://www.cnbc.com/2026/06/16/spacex-spcx-cursor-acquisition-ipo.html",
+      "sourceType": "news",
+      "publishedAt": "2026-06-16T13:06:23.000Z",
+      "fetchedAt": "2026-06-17T00:59:35.710Z",
+      "importance": "high"
+    },
+    {
+      "id": "elon-musk-1781657975710-1",
+      "celebrityId": "elon-musk",
+      "celebrityName": "马斯克",
+      "title": "xAI 因污染诉讼获特朗普政府支持",
+      "summary": "特朗普政府介入帮助马斯克的 xAI 对抗 NAACP 提起的污染诉讼，声称其聊天机器人 Grok 对军事行动至关重要，并援引国家安全辩护。",
+      "sourceUrl": "https://arstechnica.com/tech-policy/2026/06/trump-admin-helps-xai-fight-pollution-lawsuit-says-military-needs-grok-for-war/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-16T22:22:44.000Z",
+      "fetchedAt": "2026-06-17T00:59:35.710Z",
+      "importance": "high"
+    },
+    {
+      "id": "elon-musk-1781657975710-2",
+      "celebrityId": "elon-musk",
+      "celebrityName": "马斯克",
+      "title": "SpaceX 超越亚马逊成全球第五大公司",
+      "summary": "SpaceX 市值超越亚马逊，成为全球第五大最有价值公司，反映出其 IPO 后的强劲市场表现。",
+      "sourceUrl": "https://www.bbc.com/news/articles/cvgd5g7d7gyo",
+      "sourceType": "news",
+      "publishedAt": "2026-06-16T16:59:25.984Z",
+      "fetchedAt": "2026-06-17T00:59:35.710Z",
+      "importance": "high"
+    },
+    {
+      "id": "elon-musk-1781657975710-3",
+      "celebrityId": "elon-musk",
+      "celebrityName": "马斯克",
+      "title": "特斯拉股价因合并担忧下跌",
+      "summary": "特斯拉股价下跌约 1.58% 至 404.66 美元，受投资者 Ross Gerber 评论影响，其表示若不与 SpaceX 合并，特斯拉将“一文不值”。",
+      "sourceUrl": "https://stocktwits.com/news-articles/markets/equity/tsla-ross-gerber-worthless-spacex-merger-retail-bets-rise/cZKWXZiR7EJ",
+      "sourceType": "social",
+      "publishedAt": "2026-06-16T04:47:31.000Z",
+      "fetchedAt": "2026-06-17T00:59:35.710Z",
+      "importance": "medium"
+    },
+    {
+      "id": "jensen-huang-1781657983578-0",
+      "celebrityId": "jensen-huang",
+      "celebrityName": "黄仁勋",
+      "title": "Coherent 德州工厂扩产，黄仁勋出席",
+      "summary": "Coherent 在德克萨斯州谢尔曼市举行扩产奠基仪式，黄仁勋出席。该工厂将生产连接 AI 系统的激光器和光学元件，并获美国商务部 5000 万美元资助。",
+      "sourceUrl": "https://blogs.nvidia.com/blog/coherent-texas-ai-optical/",
+      "sourceType": "official",
+      "publishedAt": "2026-06-16T22:10:56.000Z",
+      "fetchedAt": "2026-06-17T00:59:43.578Z",
+      "importance": "high"
+    },
+    {
+      "id": "jensen-huang-1781657983578-1",
+      "celebrityId": "jensen-huang",
+      "celebrityName": "黄仁勋",
+      "title": "哈萨克斯坦与 NVIDIA 签署 100 亿美元 AI 协议",
+      "summary": "哈萨克斯坦与 NVIDIA 及 Firebird 签署价值 100 亿美元的 AI 基础设施协议，计划在欧亚建设最大 AI 计算集群之一。",
+      "sourceUrl": "https://asiaplus.news/en/2026/06/16/nvidia-and-firebird-to-invest-10-billion-in-ai-infrastructure-development-in-kazakhstan/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-16T10:51:31.000Z",
+      "fetchedAt": "2026-06-17T00:59:43.578Z",
+      "importance": "high"
+    },
+    {
+      "id": "jensen-huang-1781657983578-2",
+      "celebrityId": "jensen-huang",
+      "celebrityName": "黄仁勋",
+      "title": "黄仁勋承诺 AI 将增加制造业岗位",
+      "summary": "黄仁勋在德州谢尔曼发表讲话，表示 AI 建设将重振美国制造业，创造更多就业机会。此承诺将在 Coherent 的德州工厂扩建中得到检验。",
+      "sourceUrl": "https://abcnews.com/Technology/wireStory/nvidias-huang-pledges-ai-boost-manufacturing-jobs-test-133921258",
+      "sourceType": "news",
+      "publishedAt": "2026-06-16T13:03:55.000Z",
+      "fetchedAt": "2026-06-17T00:59:43.578Z",
+      "importance": "medium"
+    },
+    {
+      "id": "jensen-huang-1781657983578-3",
+      "celebrityId": "jensen-huang",
+      "celebrityName": "黄仁勋",
+      "title": "NVIDIA Blackwell 在 MLPerf 6.0 中夺冠",
+      "summary": "NVIDIA 的 Blackwell 平台在 MLPerf Training v6.0 基准测试中赢得所有项目，展现了行业领先的规模和性能。",
+      "sourceUrl": "https://blogs.nvidia.com/blog/blackwell-mlperf-training-6-0/",
+      "sourceType": "official",
+      "publishedAt": "2026-06-16T15:00:36.000Z",
+      "fetchedAt": "2026-06-17T00:59:43.578Z",
+      "importance": "high"
+    },
+    {
+      "id": "lisa-su-1781657972050-0",
+      "celebrityId": "lisa-su",
+      "celebrityName": "苏姿丰",
+      "title": "AMD与Rackspace签署30MW AI计算协议",
+      "summary": "AMD与Rackspace Technology签署最终协议，分阶段部署30MW的AMD AI计算基础设施，专为受监管和主权环境打造企业级AI基础设施。",
+      "sourceUrl": "https://www.globenewswire.com/news-release/2026/06/16/3312408/0/en/AMD-and-Rackspace-Technology-Sign-Definitive-Agreement-for-Phased-Deployment-of-30-MW-of-AMD-AI-Compute.html",
+      "sourceType": "official",
+      "publishedAt": "2026-06-16T07:00:00.000Z",
+      "fetchedAt": "2026-06-17T00:59:32.050Z",
+      "importance": "high"
+    },
+    {
+      "id": "lisa-su-1781657972050-1",
+      "celebrityId": "lisa-su",
+      "celebrityName": "苏姿丰",
+      "title": "苏姿丰展示迷你PC运行大模型",
+      "summary": "苏姿丰在舞台上展示了一款午餐盒大小的迷你PC，搭载Ryzen AI Max+ 395和128GB统一内存，可在本地运行Qwen3-235B大模型，无需云端或独立GPU。",
+      "sourceUrl": "https://www.capitoltrades.com/buzz/amd-s-lisa-su-reveals-mini-pc-2026-06-16",
+      "sourceType": "social",
+      "publishedAt": "2026-06-16T15:59:13.391Z",
+      "fetchedAt": "2026-06-17T00:59:32.050Z",
+      "importance": "medium"
+    },
+    {
+      "id": "sam-altman-1781658000381-0",
+      "celebrityId": "sam-altman",
+      "celebrityName": "萨姆·奥特曼",
+      "title": "Altman推迟访韩，原定与三星会面",
+      "summary": "OpenAI CEO Sam Altman推迟了原定访问韩国的行程，该行程原包含与三星电子的重要会议。",
+      "sourceUrl": "https://voi.id/en/technology/579808",
+      "sourceType": "news",
+      "publishedAt": "2026-06-16T09:38:03.000Z",
+      "fetchedAt": "2026-06-17T01:00:00.381Z",
+      "importance": "high"
+    },
+    {
+      "id": "sam-altman-1781658000381-2",
+      "celebrityId": "sam-altman",
+      "celebrityName": "萨姆·奥特曼",
+      "title": "Altman的Orb公司虚假宣传与Bruno Mars合作",
+      "summary": "Sam Altman投资的Orb公司宣传与Bruno Mars的虚假合作，后者发言人否认曾有任何接洽或讨论。",
+      "sourceUrl": "https://www.futures.rs/en/puls/sam-altman-s-orb-company-promoted-a-bruno-mars-partnership-that-doesn-t-exist/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-16T21:27:53.000Z",
+      "fetchedAt": "2026-06-17T01:00:00.381Z",
+      "importance": "medium"
+    },
+    {
+      "id": "sam-altman-1781658000381-4",
+      "celebrityId": "sam-altman",
+      "celebrityName": "萨姆·奥特曼",
+      "title": "OpenAI旗舰模型GPT-5.6拟于6月底发布",
+      "summary": "首席科学家称GPT-5.6为有意义飞跃，发布日期接近6月底，这将是OpenAI的下一个重要产品。",
+      "sourceUrl": "https://www.techtimes.com/articles/318492/20260616/gpt-56-openai-chief-scientist-calls-it-meaningful-leap-june-launch-nears.htm",
+      "sourceType": "news",
+      "publishedAt": "2026-06-16T15:19:05.000Z",
+      "fetchedAt": "2026-06-17T01:00:00.381Z",
+      "importance": "high"
+    },
+    {
+      "id": "mark-zuckerberg-1781658005072-0",
+      "celebrityId": "mark-zuckerberg",
+      "celebrityName": "扎克伯格",
+      "title": "Reliance Meta AI数据中心合作",
+      "summary": "Reliance Industries与Meta合作在印度古吉拉特邦贾姆讷格尔开发168兆瓦人工智能数据中心，扩展印度AI基础设施。",
+      "sourceUrl": "https://www.telecomreviewasia.com/news/industry-news/29486-reliance-meta-partner-on-168-mw-ai-enabled-data-center-project-in-gujarat/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-16T06:34:29.000Z",
+      "fetchedAt": "2026-06-17T01:00:05.072Z",
+      "importance": "high"
+    },
+    {
+      "id": "mark-zuckerberg-1781658005072-1",
+      "celebrityId": "mark-zuckerberg",
+      "celebrityName": "扎克伯格",
+      "title": "Meta与CMU合作开发应急AI工具",
+      "summary": "卡内基梅隆大学与Meta合作开发AI工具，帮助应急响应人员在灾难期间可视化人口流动并做出更快决策。",
+      "sourceUrl": "https://www.cmu.edu/news/stories/archives/2026/june/carnegie-mellon-and-meta-partner-to-develop-ai-tools-for-emergency-response",
+      "sourceType": "news",
+      "publishedAt": "2026-06-16T14:00:00.000Z",
+      "fetchedAt": "2026-06-17T01:00:05.072Z",
+      "importance": "medium"
+    },
+    {
+      "id": "mark-zuckerberg-1781658005072-2",
+      "celebrityId": "mark-zuckerberg",
+      "celebrityName": "扎克伯格",
+      "title": "MQ正式推出Muse SparkAI模型",
+      "summary": "Meta发布首个自研前沿AI模型Muse Spark，整合至Facebook、Instagram和WhatsApp。此前斥资140亿美元收购Scale AI团队，但开发者仍偏好Claude、Gemini等竞争对手模型。",
+      "sourceUrl": "https://news.abplive.com/technology/meta-ai-muse-spark-developers-prefer-claude-chatgpt-gemini-over-zuckerberg-model-1850575",
+      "sourceType": "news",
+      "publishedAt": "2026-06-16T07:54:23.000Z",
+      "fetchedAt": "2026-06-17T01:00:05.072Z",
+      "importance": "high"
+    },
+    {
+      "id": "mark-zuckerberg-1781658005072-3",
+      "celebrityId": "mark-zuckerberg",
+      "celebrityName": "扎克伯格",
+      "title": "Meta与RWE签德州太阳能购电协议",
+      "summary": "Meta与RWE签署长期购电协议，购买德克萨斯州Rabbits Foot太阳能项目（298兆瓦）的电力，巩固能源联盟。",
+      "sourceUrl": "https://now.solar/2026/06/16/meta-and-rwe-consolidate-their-energy-alliance-with-the-rabbits-foot-solar-project-in-texas-inspenet/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-16T08:04:03.000Z",
+      "fetchedAt": "2026-06-17T01:00:05.072Z",
+      "importance": "medium"
+    },
+    {
+      "id": "mark-zuckerberg-1781658005072-4",
+      "celebrityId": "mark-zuckerberg",
+      "celebrityName": "扎克伯格",
+      "title": "扎克伯格承认AI投资中犯错",
+      "summary": "Meta CEO扎克伯格承认在AI驱动的劳动力重组和训练数据方面犯下错误，但表示将继续加速AI投资。Meta股价因数十亿AI支出计划下滑。",
+      "sourceUrl": "https://www.techtimes.com/articles/318464/20260616/metas-143b-ai-bet-hits-training-data-wall-zuckerberg-admits-mistakes.htm",
+      "sourceType": "news",
+      "publishedAt": "2026-06-16T13:14:56.000Z",
+      "fetchedAt": "2026-06-17T01:00:05.072Z",
+      "importance": "high"
+    },
+    {
+      "id": "mark-zuckerberg-1781658005072-5",
+      "celebrityId": "mark-zuckerberg",
+      "celebrityName": "扎克伯格",
+      "title": "扎克伯格向退伍军人捐赠13万副AI眼镜",
+      "summary": "马克·扎克伯格向美国视障退伍军人捐赠13万副Ray-Ban Meta AI眼镜，属于慈善捐赠行为。",
+      "sourceUrl": "https://www.rswebsols.com/news/mark-zuckerberg-contributes-130000-meta-ai-glasses-to-visually-impaired-veterans-in-the-us/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-16T01:00:00.000Z",
+      "fetchedAt": "2026-06-17T01:00:05.072Z",
+      "importance": "low"
+    },
+    {
+      "id": "kwak-noh-jung-1781657995363-0",
+      "celebrityId": "kwak-noh-jung",
+      "celebrityName": "郭鲁正",
+      "title": "郭鲁正追加买入8亿韩元自家股票",
+      "summary": "Hanmi Semiconductor董事长郭鲁正于6月16日以个人资金买入价值80亿韩元的公司股票（2.3657万股），持股比例升至33.6%，凸显对公司增长信心。",
+      "sourceUrl": "https://www.asiae.co.kr/en/article/2026061615584972389",
+      "sourceType": "news",
+      "publishedAt": "2026-06-16T06:58:50.000Z",
+      "fetchedAt": "2026-06-17T00:59:55.363Z",
+      "importance": "high"
+    },
+    {
+      "id": "sanjay-mehrotra-1781658011044-0",
+      "celebrityId": "sanjay-mehrotra",
+      "celebrityName": "桑杰·梅赫罗特拉",
+      "title": "Mehrotra执行大量股票出售",
+      "summary": "Wolfe Research报告显示，美光CEO桑杰·梅赫罗特拉在5月下旬执行了31次股票处置，公司股价年涨幅223%，目标价上调至1250美元。",
+      "sourceUrl": "https://www.aol.com/articles/micron-already-223-wolfe-research-174020000.html",
+      "sourceType": "news",
+      "publishedAt": "2026-06-16T17:59:57.823Z",
+      "fetchedAt": "2026-06-17T01:00:11.044Z",
+      "importance": "medium"
+    },
+    {
+      "id": "sanjay-mehrotra-1781658011044-1",
+      "celebrityId": "sanjay-mehrotra",
+      "celebrityName": "桑杰·梅赫罗特拉",
+      "title": "美光Q3财报前股价下跌",
+      "summary": "美光科技股价因AI需求担忧下跌4%，市场预期财报收入335亿美元，CEO桑杰·梅赫罗特拉面临业绩验证。",
+      "sourceUrl": "https://cryptobriefing.com/micron-shares-fall-ahead-q3-earnings-ai/",
+      "sourceType": "news",
+      "publishedAt": "2026-06-16T20:59:57.823Z",
+      "fetchedAt": "2026-06-17T01:00:11.044Z",
+      "importance": "medium"
+    }
+  ],
+  "signals": [
+    {
+      "ticker": "NVDA",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 75,
+      "reasoning": "SpaceX收购AI编程公司Cursor将增加对GPU的需求，利好NVDA作为AI芯片供应商",
+      "timeHorizon": "1-3days",
+      "relatedEventId": "elon-musk-1781657975710-0"
+    },
+    {
+      "ticker": "GOOGL",
+      "direction": "bearish",
+      "magnitude": "moderate",
+      "confidence": 65,
+      "reasoning": "SpaceX收购Cursor增强AI竞争力，威胁谷歌在AI领域的地位，间接利空",
+      "timeHorizon": "1week",
+      "relatedEventId": "elon-musk-1781657975710-0"
+    },
+    {
+      "ticker": "NVDA",
+      "direction": "bullish",
+      "magnitude": "strong",
+      "confidence": 85,
+      "reasoning": "Blackwell MLPerf夺冠巩固AI领导地位；100亿美元协议直接利好收入预期",
+      "timeHorizon": "1week",
+      "relatedEventId": "jensen-huang-1781657983578-3"
+    },
+    {
+      "ticker": "TSM",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 75,
+      "reasoning": "Coherent扩产需代工支持，AI需求间接利好TSM先进封装产能",
+      "timeHorizon": "1week",
+      "relatedEventId": "jensen-huang-1781657983578-0"
+    },
+    {
+      "ticker": "MRVL",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 70,
+      "reasoning": "Coherent光学元件加AI集群扩容，利好网络芯片需求",
+      "timeHorizon": "1week",
+      "relatedEventId": "jensen-huang-1781657983578-0"
+    },
+    {
+      "ticker": "AVGO",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 70,
+      "reasoning": "AI计算集群带动数据中心连接芯片订单增长",
+      "timeHorizon": "1week",
+      "relatedEventId": "jensen-huang-1781657983578-1"
+    },
+    {
+      "ticker": "000660.KS",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 70,
+      "reasoning": "AI集群和Coherent扩产推高HBM和高带宽内存需求",
+      "timeHorizon": "1week",
+      "relatedEventId": "jensen-huang-1781657983578-1"
+    },
+    {
+      "ticker": "005930.KS",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 70,
+      "reasoning": "数据中心集群建设增加存储芯片订单，利好三星内存业务",
+      "timeHorizon": "1week",
+      "relatedEventId": "jensen-huang-1781657983578-1"
+    },
+    {
+      "ticker": "AMD",
+      "direction": "bullish",
+      "magnitude": "strong",
+      "confidence": 90,
+      "reasoning": "直接签署30MW AI计算协议，由官方新闻稿发布，重大合同将直接增厚营收",
+      "timeHorizon": "1week",
+      "relatedEventId": "lisa-su-1781657972050-0"
+    },
+    {
+      "ticker": "NVDA",
+      "direction": "bearish",
+      "magnitude": "moderate",
+      "confidence": 65,
+      "reasoning": "AMD抢占AI计算订单，竞争对手份额可能流失，但市场庞大，影响有限",
+      "timeHorizon": "1week",
+      "relatedEventId": "lisa-su-1781657972050-0"
+    },
+    {
+      "ticker": "NVDA",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 85,
+      "reasoning": "GPT-5.6发布将显著拉升AI计算需求，直接增厚GPU订单预期。",
+      "timeHorizon": "1week",
+      "relatedEventId": "sam-altman-1781658000381-4"
+    },
+    {
+      "ticker": "META",
+      "direction": "bearish",
+      "magnitude": "moderate",
+      "confidence": 75,
+      "reasoning": "扎克伯格承认AI投资错误且新模型不受偏好，可能短期打压市场信心，股价承压。",
+      "timeHorizon": "1-3days",
+      "relatedEventId": "mark-zuckerberg-1781658005072-2"
+    },
+    {
+      "ticker": "META",
+      "direction": "bearish",
+      "magnitude": "moderate",
+      "confidence": 70,
+      "reasoning": "数十亿AI支出计划导致股价下滑，投资者担忧成本失控。",
+      "timeHorizon": "1week",
+      "relatedEventId": "mark-zuckerberg-1781658005072-4"
+    },
+    {
+      "ticker": "NVDA",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 72,
+      "reasoning": "Meta与Reliance扩建AI数据中心将增加GPU需求，利好NVDA。",
+      "timeHorizon": "1week",
+      "relatedEventId": "mark-zuckerberg-1781658005072-0"
+    },
+    {
+      "ticker": "000660.KS",
+      "direction": "bullish",
+      "magnitude": "moderate",
+      "confidence": 75,
+      "reasoning": "董事长增持8亿韩元，个人信心强烈，历史上增持后股价短期上涨概率高。",
+      "timeHorizon": "1-3days",
+      "relatedEventId": "kwak-noh-jung-1781657995363-0"
+    },
+    {
+      "ticker": "MU",
+      "direction": "bearish",
+      "magnitude": "moderate",
+      "confidence": 75,
+      "reasoning": "CEO大量股票出售引发内部人减持担忧，叠加财报前股价下跌，短期情绪承压。",
+      "timeHorizon": "1-3days",
+      "relatedEventId": "sanjay-mehrotra-1781658011044-0"
+    }
+  ],
+  "feishuSent": true
+}

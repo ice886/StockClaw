@@ -160,6 +160,21 @@ async parse(buffer: Buffer, mimeType: string): Promise<string> {
 
 ```typescript
 // embedding.service.ts
+pip install zai-sdk
+
+调用示例
+from zai import ZhipuAiClient
+
+client = ZhipuAiClient(api_key="your api key")
+response = client.embeddings.create(
+    model="embedding-3", #填写需要调用的模型编码
+    input=[
+        "美食非常美味，服务员也很友好。",
+        "这部电影既刺激又令人兴奋。",
+        "阅读书籍是扩展知识的好方法。"
+    ],
+)
+print(response)
 
 async embed(texts: string[]): Promise<number[][]> {
   const response = await fetch('https://api.deepseek.com/v1/embeddings', {
@@ -169,7 +184,7 @@ async embed(texts: string[]): Promise<number[][]> {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'deepseek-embedding',
+      model: 'embedding-3',
       input: texts,
     }),
   });
@@ -180,7 +195,6 @@ async embed(texts: string[]): Promise<number[][]> {
 
 批量上限：每次最多 100 条，超出分批请求。
 
-> **备选**：若 DeepSeek Embedding 不可用，可切换到 `text-embedding-3-small`（OpenAI 兼容接口）或本地 `nomic-embed-text`（通过 Ollama）。切换只改 `EmbeddingService`，其他不变。
 
 ### 3.6 VectorStoreService
 
