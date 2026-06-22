@@ -41,6 +41,28 @@
 | 注入位置 | system prompt 末尾 | 不改变 `AgentContext` 接口，对 `AgentService` 完全透明 |
 | 未上传时行为 | 跳过检索，skill prompt 不变 | 对无文档用户零影响 |
 
+### Phase C — 前端上传 UI
+
+**新增文件（`frontend/src/`）：**
+
+- `types/rag.ts`：`RagDocument` 类型，对齐后端接口
+- `api/rag.ts`：`uploadDocument()`（FormData multipart）、`listDocuments()`、`deleteDocument()` 三个调用
+- `components/FileChip.tsx` + `.css`：文件标签 `[📄 report.pdf ×]`，支持 `uploading` 态（spinner 替代 × 按钮）
+
+**修改：**
+
+- `ChatInput.tsx`：新增可选 props（`docs` / `uploadingNames` / `onUpload` / `onRemoveDoc`）；输入框左侧加 `+` 按钮 + 隐藏 `<input type="file" accept=".pdf,.docx,.txt" multiple>`；输入框上方渲染 chips 行；props 全可选，未传时退化为原始输入框
+- `ChatInput.css`：新增 `.chat-input-wrap` / `.chat-input-chips` / `.upload-btn`，`border-top` 上移到 wrap
+- `ChatPanel.tsx`：维护 `docs` + `uploadingNames` 状态；session 切换时 `listDocuments()` 加载；`handleUpload`（逐文件上传、失败隔离）+ `handleRemoveDoc`（DELETE + 移除）；透传给 ChatInput
+
+### Phase C 设计决策
+
+| 决策 | 选择 | 理由 |
+|------|------|------|
+| 上传进度展示 | chip 上 spinner | `fetch` 无原生上传进度事件，spinner 比文字进度条更轻量 |
+| 多文件上传 | `multiple` + 逐个上传 | 单个文件失败不阻断其余 |
+| 发送时传参 | 不额外传参 | 上传即向量化入库，后端 `resolveSystem` 自动检索注入 |
+
 ## 2026-06-13 (2)
 
 ### P0 — 正确性 & 性能

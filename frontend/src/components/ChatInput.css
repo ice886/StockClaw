@@ -1,10 +1,36 @@
+.chat-input-wrap {
+  flex-shrink: 0;
+  border-top: 1px solid var(--border, #e5e7eb);
+  background: var(--bg, #fff);
+}
+
+.chat-input-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 16px 0;
+}
+
 .chat-input {
   display: flex;
   gap: 8px;
   padding: 12px 16px;
-  border-top: 1px solid var(--border, #e5e7eb);
   background: var(--bg, #fff);
+}
+
+.chat-input .upload-btn {
   flex-shrink: 0;
+  width: 40px;
+  padding: 0;
+  font-size: 22px;
+  line-height: 1;
+  background: var(--bg, #fff);
+  color: #2563eb;
+  border: 1px solid var(--border, #e5e7eb);
+}
+
+.chat-input .upload-btn:not(:disabled):hover {
+  background: #eff6ff;
 }
 
 .chat-input input {

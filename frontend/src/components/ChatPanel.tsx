@@ -1,7 +1,9 @@
 import { sendMessageStream } from '../api/agent';
 import { fetchSession, updateSession, generateTitle } from '../api/session';
 import { fetchSkills, type SkillInfo } from '../api/skill';
+import { uploadDocument, listDocuments, deleteDocument } from '../api/rag';
 import type { Message } from '../types/chat';
+import type { RagDocument } from '../types/rag';
 import { useState, useEffect, useRef } from 'react';
 import { ChatInput } from './ChatInput';
 import { MessageList } from './MessageList';
@@ -20,6 +22,8 @@ export function ChatPanel({ sessionId, onSessionUpdate }: Props) {
   const [title, setTitle] = useState('新对话');
   const [skills, setSkills] = useState<SkillInfo[]>([]);
   const [activeSkill, setActiveSkill] = useState('general-chat');
+  const [docs, setDocs] = useState<RagDocument[]>([]);
+  const [uploadingNames, setUploadingNames] = useState<string[]>([]);
   const titled = useRef(false);
   const abortRef = useRef<AbortController | null>(null);
 
@@ -32,11 +36,41 @@ export function ChatPanel({ sessionId, onSessionUpdate }: Props) {
         titled.current = r.title !== '新对话';
       })
       .catch(() => setMessages([]));
+    listDocuments(sessionId)
+      .then(setDocs)
+      .catch(() => setDocs([]));
   }, [sessionId]);
 
   useEffect(() => {
     fetchSkills().then(setSkills).catch(() => {});
   }, []);
+
+  const handleUpload = async (files: FileList) => {
+    if (!sessionId) return;
+    const list = Array.from(files);
+    setUploadingNames((prev) => [...prev, ...list.map((f) => f.name)]);
+
+    for (const file of list) {
+      try {
+        const doc = await uploadDocument(file, sessionId);
+        setDocs((prev) => [doc, ...prev]);
+      } catch {
+        // 单个文件失败不影响其他文件
+      } finally {
+        setUploadingNames((prev) => prev.filter((n) => n !== file.name));
+      }
+    }
+  };
+
+  const handleRemoveDoc = async (docId: string) => {
+    if (!sessionId) return;
+    try {
+      await deleteDocument(sessionId, docId);
+      setDocs((prev) => prev.filter((d) => d.id !== docId));
+    } catch {
+      // 删除失败保留原列表
+    }
+  };
 
   const handleCancel = () => {
     abortRef.current?.abort();
@@ -172,6 +206,10 @@ export function ChatPanel({ sessionId, onSessionUpdate }: Props) {
             onCancel={handleCancel}
             disabled={loading}
             userMessages={messages.filter(m => m.role === 'user').map(m => m.content)}
+            docs={docs}
+            uploadingNames={uploadingNames}
+            onUpload={handleUpload}
+            onRemoveDoc={handleRemoveDoc}
           />
         </>
       ) : (

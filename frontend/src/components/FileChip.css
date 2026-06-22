@@ -1,0 +1,65 @@
+.file-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 220px;
+  padding: 4px 8px 4px 10px;
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 16px;
+  background: var(--bg, #fff);
+  font-size: 13px;
+  color: var(--text-h, #08060d);
+}
+
+.file-chip.uploading {
+  opacity: 0.7;
+}
+
+.file-chip-icon {
+  flex-shrink: 0;
+  font-size: 13px;
+}
+
+.file-chip-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-chip-remove {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #6b7280;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.file-chip-remove:hover {
+  background: #ef4444;
+  color: #fff;
+}
+
+.file-chip-spinner {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--border, #e5e7eb);
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: file-chip-spin 0.7s linear infinite;
+}
+
+@keyframes file-chip-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
