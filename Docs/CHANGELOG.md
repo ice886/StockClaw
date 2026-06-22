@@ -1,6 +1,47 @@
 # 开发日志
 
-## 2026-06-14 — v5 架构改进
+## 2026-06-22 — v6 RAG 文档问答（Phase A + B）
+
+### Phase A — 后端 RAG 基础设施
+
+**新增模块：`rag/`**
+
+- **DocumentParserService**：PDF（`pdf-parse`）/ Word（`mammoth`）/ TXT 三格式 → 纯文本，非法类型抛 `BadRequestException`
+- **ChunkingService**：段落优先 + 固定窗口（750 字/150 重叠）分块；超长段落强制切割保证单块不超限
+- **EmbeddingService**：接入智谱 `embedding-3` 模型（`open.bigmodel.cn`），64 条/批自动分批，响应按 index 排序保证输入输出对齐
+- **VectorStoreService**：JSON 文件持久化（`data/vectors/<sessionId>/<docId>.json`），检索时扫描全部 chunk 做余弦相似度排序，取 Top-5，过滤 score < 0.3
+- **RagService**：上传编排（parse → chunk → embed → save）+ 检索编排（embed query → cosine topK），文件名 latin1→utf-8 解码
+- **RagController**：`POST /api/rag/upload`（20 MB 上限）、`GET /api/rag/docs/:sessionId`、`DELETE /api/rag/docs/:sessionId/:docId`
+- **RagModule**：独立模块，导入 `ConfigModule`，导出 `RagService`
+
+**安装依赖：** `pdf-parse`、`mammoth`、`@types/multer`
+
+### Phase B — Agent 集成（检索接入对话）
+
+**Backend：**
+
+- **AgentModule** 导入 `RagModule`，使 `RagService` 可注入 `AgentController`
+- **AgentController** 改造：
+  - `ChatRequestDto` 新增可选 `sessionId` 字段
+  - 新增 `resolveSystem()` 方法：提取最后一条 user message → `RagService.retrieve()` → 检索片段拼入 system prompt 末尾
+  - `chat()` / `chatStream()` 均调用 `resolveSystem()` 组装 system prompt
+  - 无 session / 无匹配文档时退化为原始 skill prompt，对无上传场景完全透明
+
+**Frontend：**
+
+- `api/agent.ts`：`sendMessage()` / `sendMessageStream()` 新增可选 `sessionId` 参数，透传到 JSON body
+- `ChatPanel.tsx`：两处发送调用（`handleSend` / `handleEdit`）传入 `sessionId ?? undefined`
+
+### 设计决策
+
+| 决策 | 选择 | 理由 |
+|------|------|------|
+| Embedding 提供商 | 智谱 `embedding-3` | DeepSeek 无 Embedding API；`.env` 已有 `ZHIPUAI_API_KEY` |
+| ID 生成 | `Math.random().toString(36)` | 复用 `SessionService` 风格，避免引入 ESM-only 的 nanoid v5 |
+| 注入位置 | system prompt 末尾 | 不改变 `AgentContext` 接口，对 `AgentService` 完全透明 |
+| 未上传时行为 | 跳过检索，skill prompt 不变 | 对无文档用户零影响 |
+
+## 2026-06-13 (2)
 
 ### P0 — 正确性 & 性能
 
@@ -25,7 +66,6 @@
 - **ReportHistory 翻页**：每页 10 条，避免报告积累后全量加载性能下降
 - **Dashboard 自动刷新**：每 5 分钟调用 `GET /api/monitor/status`，无需手动刷新
 
-## 2026-06-13 (2)
 
 ### Phase C — 前端监控面板
 

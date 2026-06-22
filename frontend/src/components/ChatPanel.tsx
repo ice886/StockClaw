@@ -58,7 +58,7 @@ export function ChatPanel({ sessionId, onSessionUpdate }: Props) {
       setMessages([...newMessages, { role: 'assistant' as const, content: '' }]);
 
       let fullContent = '';
-      for await (const event of sendMessageStream(newMessages, controller.signal, activeSkill)) {
+      for await (const event of sendMessageStream(newMessages, controller.signal, activeSkill, sessionId ?? undefined)) {
         if (event.type === 'text-delta') {
           fullContent += event.content!;
           setLoading(false);
@@ -122,7 +122,7 @@ export function ChatPanel({ sessionId, onSessionUpdate }: Props) {
       setMessages([...newMessages, { role: 'assistant' as const, content: '' }]);
 
       let fullContent = '';
-      for await (const event of sendMessageStream(newMessages, controller.signal, activeSkill)) {
+      for await (const event of sendMessageStream(newMessages, controller.signal, activeSkill, sessionId ?? undefined)) {
         if (event.type === 'text-delta') {
           fullContent += event.content!;
           setLoading(false);

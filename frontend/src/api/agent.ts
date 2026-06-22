@@ -4,11 +4,12 @@ export async function sendMessage(
   messages: ChatRequest['messages'],
   signal?: AbortSignal,
   skillName?: string,
+  sessionId?: string,
 ): Promise<ChatResponse> {
   const res = await fetch('/api/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ messages, skillName }),
+    body: JSON.stringify({ messages, skillName, sessionId }),
     signal,
   });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -26,11 +27,12 @@ export async function* sendMessageStream(
   messages: ChatRequest['messages'],
   signal?: AbortSignal,
   skillName?: string,
+  sessionId?: string,
 ): AsyncGenerator<StreamEvent> {
   const res = await fetch('/api/chat/stream', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ messages, skillName }),
+    body: JSON.stringify({ messages, skillName, sessionId }),
     signal,
   });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
