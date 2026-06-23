@@ -450,16 +450,16 @@ Phase C — RagService 元数据替换
   ├── VectorStoreService 向量文件路径逻辑不变
   └── 回归测试：上传文档 → 列表 → 删除 → 检索
 
-Phase D — MonitorService 替换
-  ├── 报告写入改用 prisma.report.create()
-  ├── 配置读写改用 prisma.monitorConfig.upsert()
-  ├── 迁移历史报告
-  └── 回归测试：手动触发 Monitor → 报告入库 → 查询
+Phase D — MonitorService 替换 ✅ 已完成（2026-06-23）
+  ├── 报告写入改用 prisma.report.upsert()（celebrity 列存去重名单，data 列存完整 JSON）
+  ├── 配置读写改用 prisma.monitorConfig.upsert()（单行 id=1）
+  ├── 迁移历史报告 + monitor-config
+  └── 回归测试：status/config/reports/reports/:id 端点 + config 写入 roundtrip ✓
 
-Phase E — 清理（可选）
-  ├── 归档旧 JSON 文件
-  ├── 删除 SessionService 中的 fs 操作代码
-  └── 更新 CLAUDE.md 存储说明
+Phase E — 清理 ✅ 已完成（2026-06-23）
+  ├── 旧 JSON 文件保留磁盘作回滚备份，git 停止跟踪（data/sessions、data/reports、monitor-config.json、vectors 加入 .gitignore）
+  ├── SessionService 的 fs 代码已在 Phase B 移除；向量存储 fs 按架构决策保留
+  └── 更新 CLAUDE.md 存储说明（新增 Data storage 段 + 修正 session/monitor 引用）
 ```
 
 ---

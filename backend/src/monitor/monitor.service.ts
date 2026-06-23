@@ -1,9 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import * as fs from 'fs';
-import * as path from 'path';
 import pLimit from 'p-limit';
 import { DEFAULT_CELEBRITIES } from '../config/celebrities.config';
+import { PrismaService } from '../database/prisma.service';
 import { CrawlerService } from './crawler.service';
 import { EventExtractorService } from './event-extractor.service';
 import { StockAnalyzerService } from './stock-analyzer.service';
@@ -15,51 +14,45 @@ import {
   StockSignal,
 } from './interfaces/monitor.interfaces';
 
+// 单行配置约定：MonitorConfig 只有一条记录，固定 id=1。
+const CONFIG_ID = 1;
+
 @Injectable()
 export class MonitorService {
   private readonly logger = new Logger(MonitorService.name);
-  private readonly configPath: string;
-  private readonly reportsDir: string;
 
   constructor(
     private configService: ConfigService,
+    private prisma: PrismaService,
     private crawler: CrawlerService,
     private extractor: EventExtractorService,
     private analyzer: StockAnalyzerService,
     private deduplicator: EventDeduplicatorService,
-  ) {
-    this.configPath = path.resolve(
-      process.cwd(),
-      'data',
-      'monitor-config.json',
-    );
-    this.reportsDir = path.resolve(process.cwd(), 'data', 'reports');
-    this.ensureDirs();
-  }
+  ) {}
 
   // ─── Config ───────────────────────────────────────────────────────────
 
-  getConfig(): MonitorConfig {
-    if (!fs.existsSync(this.configPath)) {
-      return this.defaultConfig();
-    }
+  async getConfig(): Promise<MonitorConfig> {
+    const row = await this.prisma.monitorConfig.findUnique({
+      where: { id: CONFIG_ID },
+    });
+    if (!row) return this.defaultConfig();
     try {
-      return JSON.parse(
-        fs.readFileSync(this.configPath, 'utf-8'),
-      ) as MonitorConfig;
+      return JSON.parse(row.data) as MonitorConfig;
     } catch {
       return this.defaultConfig();
     }
   }
 
-  saveConfig(partial: Partial<MonitorConfig>): MonitorConfig {
-    const current = this.getConfig();
+  async saveConfig(partial: Partial<MonitorConfig>): Promise<MonitorConfig> {
+    const current = await this.getConfig();
     const updated = { ...current, ...partial };
-    fs.writeFileSync(
-      this.configPath,
-      JSON.stringify(updated, null, 2),
-      'utf-8',
-    );
+    const data = JSON.stringify(updated);
+    await this.prisma.monitorConfig.upsert({
+      where: { id: CONFIG_ID },
+      create: { id: CONFIG_ID, data },
+      update: { data },
+    });
     return updated;
   }
 
@@ -68,7 +61,7 @@ export class MonitorService {
   async runFullCycle(
     onProgress?: (msg: string) => void,
   ): Promise<MonitorReport> {
-    const config = this.getConfig();
+    const config = await this.getConfig();
     const enabledCelebrities = config.celebrities.filter((c) => c.enabled);
     const intervalHours = config.intervalHours;
     const signalThreshold = config.signalThreshold ?? 65;
@@ -79,7 +72,7 @@ export class MonitorService {
     onProgress?.(`开始扫描 ${enabledCelebrities.length} 位名人...`);
 
     // Fetch previous report events for incremental dedup
-    const previousEvents = this.getLatestReportEvents();
+    const previousEvents = await this.getLatestReportEvents();
 
     const limit = pLimit(3);
 
@@ -143,8 +136,8 @@ export class MonitorService {
       feishuSent: false,
     };
 
-    this.saveReport(report);
-    this.saveConfig({ lastRunAt: report.generatedAt });
+    await this.saveReport(report);
+    await this.saveConfig({ lastRunAt: report.generatedAt });
 
     onProgress?.(
       `扫描完成：${newEvents.length} 条新事件，${filteredSignals.length} 个股票信号`,
@@ -158,22 +151,17 @@ export class MonitorService {
 
   // ─── Reports ──────────────────────────────────────────────────────────
 
-  listReports(): Pick<
-    MonitorReport,
-    'id' | 'generatedAt' | 'feishuSent' | 'intervalHours'
-  >[] {
-    const files = fs
-      .readdirSync(this.reportsDir)
-      .filter((f) => f.endsWith('.json'))
-      .sort()
-      .reverse()
-      .slice(0, 50);
+  async listReports(): Promise<
+    Pick<MonitorReport, 'id' | 'generatedAt' | 'feishuSent' | 'intervalHours'>[]
+  > {
+    const rows = await this.prisma.report.findMany({
+      orderBy: { createdAt: 'desc' },
+      take: 50,
+    });
 
-    return files.map((f) => {
+    return rows.map((row) => {
       try {
-        const data = JSON.parse(
-          fs.readFileSync(path.join(this.reportsDir, f), 'utf-8'),
-        ) as MonitorReport;
+        const data = JSON.parse(row.data) as MonitorReport;
         return {
           id: data.id,
           generatedAt: data.generatedAt,
@@ -182,7 +170,7 @@ export class MonitorService {
         };
       } catch {
         return {
-          id: f.replace('.json', ''),
+          id: row.id,
           generatedAt: '',
           feishuSent: false,
           intervalHours: 0,
@@ -191,45 +179,48 @@ export class MonitorService {
     });
   }
 
-  getReport(id: string): MonitorReport | null {
-    const filePath = path.join(this.reportsDir, `${id}.json`);
-    if (!fs.existsSync(filePath)) return null;
+  async getReport(id: string): Promise<MonitorReport | null> {
+    const row = await this.prisma.report.findUnique({ where: { id } });
+    if (!row) return null;
     try {
-      return JSON.parse(fs.readFileSync(filePath, 'utf-8')) as MonitorReport;
+      return JSON.parse(row.data) as MonitorReport;
     } catch {
       return null;
     }
   }
 
-  markFeishuSent(id: string): void {
-    const report = this.getReport(id);
+  async markFeishuSent(id: string): Promise<void> {
+    const report = await this.getReport(id);
     if (!report) return;
     report.feishuSent = true;
-    this.saveReport(report);
+    await this.saveReport(report);
   }
 
   // ─── Private ──────────────────────────────────────────────────────────
 
-  private getLatestReportEvents(): CelebrityEvent[] {
-    const files = fs
-      .readdirSync(this.reportsDir)
-      .filter((f) => f.endsWith('.json'))
-      .sort()
-      .reverse();
-    if (files.length === 0) return [];
+  private async getLatestReportEvents(): Promise<CelebrityEvent[]> {
+    const row = await this.prisma.report.findFirst({
+      orderBy: { createdAt: 'desc' },
+    });
+    if (!row) return [];
     try {
-      const data = JSON.parse(
-        fs.readFileSync(path.join(this.reportsDir, files[0]), 'utf-8'),
-      ) as MonitorReport;
+      const data = JSON.parse(row.data) as MonitorReport;
       return data.events ?? [];
     } catch {
       return [];
     }
   }
 
-  private saveReport(report: MonitorReport): void {
-    const filePath = path.join(this.reportsDir, `${report.id}.json`);
-    fs.writeFileSync(filePath, JSON.stringify(report, null, 2), 'utf-8');
+  private async saveReport(report: MonitorReport): Promise<void> {
+    const data = JSON.stringify(report);
+    // 去重后报告可能跨多位名人，celebrity 列存其去重姓名列表，仅作检索辅助。
+    const celebrity =
+      [...new Set(report.events.map((e) => e.celebrityName))].join(', ') || '-';
+    await this.prisma.report.upsert({
+      where: { id: report.id },
+      create: { id: report.id, celebrity, data },
+      update: { celebrity, data },
+    });
   }
 
   private defaultConfig(): MonitorConfig {
@@ -242,12 +233,5 @@ export class MonitorService {
       celebrities: DEFAULT_CELEBRITIES,
       signalThreshold: 65,
     };
-  }
-
-  private ensureDirs(): void {
-    const dataDir = path.resolve(process.cwd(), 'data');
-    for (const dir of [dataDir, this.reportsDir]) {
-      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-    }
   }
 }

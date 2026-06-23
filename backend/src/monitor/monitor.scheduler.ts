@@ -16,7 +16,7 @@ export class MonitorScheduler {
   // The actual interval is controlled by config; cron is the trigger mechanism
   @Cron('0 */4 * * *')
   async runScheduled(): Promise<void> {
-    const config = this.monitor.getConfig();
+    const config = await this.monitor.getConfig();
     if (!config.enabled) {
       this.logger.debug('Monitor disabled, skipping scheduled run');
       return;
@@ -32,10 +32,10 @@ export class MonitorScheduler {
     try {
       const report = await this.monitor.runFullCycle();
 
-      const config = this.monitor.getConfig();
+      const config = await this.monitor.getConfig();
       if (config.feishuWebhookUrl) {
         await this.feishu.sendReport(report, config.feishuWebhookUrl);
-        this.monitor.markFeishuSent(report.id);
+        await this.monitor.markFeishuSent(report.id);
         this.logger.log(`Feishu report sent for ${report.id}`);
       } else {
         this.logger.warn('FEISHU_WEBHOOK_URL not configured, skipping push');

@@ -23,8 +23,8 @@ export class MonitorController {
   ) {}
 
   @Get('status')
-  getStatus() {
-    const config = this.monitor.getConfig();
+  async getStatus() {
+    const config = await this.monitor.getConfig();
     return {
       enabled: config.enabled,
       intervalHours: config.intervalHours,
@@ -42,8 +42,8 @@ export class MonitorController {
   }
 
   @Get('config')
-  getConfig() {
-    const config = this.monitor.getConfig();
+  async getConfig() {
+    const config = await this.monitor.getConfig();
     // Don't expose the full webhook URL
     return {
       ...config,
@@ -74,11 +74,11 @@ export class MonitorController {
         send('progress', { message: msg });
       });
 
-      const config = this.monitor.getConfig();
+      const config = await this.monitor.getConfig();
       let feishuSent = false;
       if (config.feishuWebhookUrl) {
         await this.feishu.sendReport(report, config.feishuWebhookUrl);
-        this.monitor.markFeishuSent(report.id);
+        await this.monitor.markFeishuSent(report.id);
         feishuSent = true;
       }
 
@@ -108,16 +108,16 @@ export class MonitorController {
   @Post('reports/:id/resend')
   @HttpCode(200)
   async resendReport(@Param('id') id: string) {
-    const report = this.monitor.getReport(id);
+    const report = await this.monitor.getReport(id);
     if (!report) return { success: false, message: 'Report not found' };
 
-    const config = this.monitor.getConfig();
+    const config = await this.monitor.getConfig();
     if (!config.feishuWebhookUrl) {
       return { success: false, message: 'Feishu webhook not configured' };
     }
 
     await this.feishu.sendReport(report, config.feishuWebhookUrl);
-    this.monitor.markFeishuSent(report.id);
+    await this.monitor.markFeishuSent(report.id);
     return { success: true };
   }
 }

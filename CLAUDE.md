@@ -49,7 +49,7 @@ Session (history) + Skill (config) + User message
 |--------|---------------|
 | `agent/` | AI execution core — zero external module deps; `run(context: AgentContext)` |
 | `chat/` | Assembly layer — reads session history + skill config, builds `AgentContext` |
-| `session/` | Pure CRUD over JSON files in `data/sessions/` |
+| `session/` | Pure CRUD over the `Session`/`Message` tables (Prisma) |
 | `skills/` | Skill registry + built-in skill definitions (general-chat, file-ops, web-research, celebrity-monitor, stock-analysis) |
 | `tools/` | Tool registry + built-in tools (filesystem ops, web search) |
 | `monitor/` | Celebrity event monitoring pipeline: CrawlerService → EventExtractorService → StockAnalyzerService → MonitorService; MonitorScheduler runs cron |
@@ -85,11 +85,11 @@ MonitorScheduler (@Cron every 4h, or POST /api/monitor/run)
       → CrawlerService.fetchRawEvents(celebrity, hoursBack)   ← Exa webSearch x3 queries
       → EventExtractorService.extract(celebrity, rawResults)  ← DeepSeek JSON extraction
       → StockAnalyzerService.analyze(celebrity, events)       ← DeepSeek JSON signals
-  → save report to data/reports/<id>.json
+  → save report to SQLite (`Report` table, via Prisma)
   → FeishuService.sendReport(report, webhookUrl)              ← interactive card
 ```
 
-Monitor config is persisted at `data/monitor-config.json`. Set `FEISHU_WEBHOOK_URL` in `.env` and call `PUT /api/monitor/config` with `{ "enabled": true }` to activate scheduling.
+Monitor config is persisted in the `MonitorConfig` table (single row). Set `FEISHU_WEBHOOK_URL` in `.env` and call `PUT /api/monitor/config` with `{ "enabled": true }` to activate scheduling.
 
 ### Monitor API endpoints
 
@@ -107,9 +107,20 @@ Monitor config is persisted at `data/monitor-config.json`. Set `FEISHU_WEBHOOK_U
 - Backend: `POST /api/chat/stream` — SSE via `streamText`, writes `data: {...}\n\n`
 - Frontend: `ChatPanel` uses `fetch` + `ReadableStream` to append text chunks to the last assistant message
 
-### Session storage
+### Data storage
 
-Sessions are JSON files at `data/sessions/<id>.json`. `SessionService` handles all file I/O — no database.
+As of v7, structured data lives in **SQLite via Prisma** (`backend/data/app.db`). The Prisma schema is at the repo root `prisma/schema.prisma`; the generated client lands in `backend/src/generated/prisma/` (gitignored). `DatabaseModule` is `@Global`, so any service can inject `PrismaService`.
+
+| Data | Model | Owner |
+|------|-------|-------|
+| Sessions + messages | `Session` / `Message` (cascade delete) | `SessionService` |
+| RAG document metadata | `RagDocument` | `RagService` |
+| Monitor reports | `Report` (full report JSON in `data` column; `celebrity` column is a denormalized comma-joined name list for lookup) | `MonitorService` |
+| Monitor config | `MonitorConfig` (single row, fixed `id=1`; config JSON in `data` column) | `MonitorService` |
+
+RAG **vector files** remain on disk under `data/vectors/` (`VectorStoreService`) — only their metadata is in SQLite.
+
+Migration: `npm run db:migrate-data` (in `backend/`) imports legacy JSON from `data/sessions/`, `data/reports/`, and `data/monitor-config.json` into SQLite. It's idempotent. The legacy JSON files are kept on disk as rollback backup but are no longer git-tracked.
 
 ### Key types
 

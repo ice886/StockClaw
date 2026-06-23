@@ -14,6 +14,14 @@ data/*.db-journal
 data/*.db-wal
 data/*.db-shm
 
+# 运行时数据（v7 起以 SQLite 为准；JSON 仅为迁移前的历史备份）
+data/sessions/
+data/reports/
+data/monitor-config.json
+
+# RAG 向量文件（运行时生成，体积大，不入库）
+data/vectors/
+
 # 环境变量
 .env
 .env.local

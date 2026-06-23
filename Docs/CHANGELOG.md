@@ -1,5 +1,53 @@
 # 开发日志
 
+## 2026-06-23 — v7 数据库集成（Phase E 清理）
+
+### Phase E — 收尾清理
+
+**运行时数据脱离 git 跟踪（以 SQLite 为单一数据源）：**
+
+- `.gitignore` 新增 `data/sessions/`、`data/reports/`、`data/monitor-config.json`、`data/vectors/`（与已有的 `data/*.db` 规则一致）
+- `git rm -r --cached` 停止跟踪上述运行时文件；磁盘文件保留作回滚备份，不删除
+- 此后所有结构化数据以 `data/app.db` 为权威来源，旧 JSON 仅为迁移前历史快照
+
+**代码清理：**
+
+- `SessionService` 的 fs 操作已在 Phase B 移除，无残留
+- `MonitorService` 的 fs/path 操作已在 Phase D 移除
+- 唯一保留 fs 的业务服务是 `vector-store.service.ts`——按 v7 §十二 决策，向量文件存储不变（非清理目标）
+
+**文档同步：**
+
+- `CLAUDE.md`：新增 "Data storage" 段（Prisma/SQLite 模型归属表 + 迁移说明），修正模块表 `session/` 行与 Monitor pipeline 中的 JSON 文件引用
+- `Docs/StockClaw_Architecture_v7.md`：Phase D / E 标记完成
+
+## 2026-06-23 — v7 数据库集成（Phase D MonitorService 替换）
+
+### Phase D — MonitorService 切换到 Prisma
+
+**实现替换（接口签名 / 前端契约不变）：**
+
+- `monitor.service.ts`：移除全部 `fs`/`path` 文件 I/O，注入 `PrismaService`
+  - `getConfig` / `saveConfig`：改用 `monitorConfig.upsert`（单行约定 `id=1`，配置 JSON 序列化进 `data` 列）
+  - `saveReport`：`report.upsert`——完整报告 JSON 存 `data` 列；`celebrity` 列存去重后的名人姓名列表（逗号连接），仅作检索辅助（报告去重后可能跨多位名人）
+  - `getReport` / `listReports` / `getLatestReportEvents`：`findUnique` / `findMany`（`createdAt desc` 取最近 50）/ `findFirst`
+  - 上述方法全部转为 `async`
+- `monitor.controller.ts` / `monitor.scheduler.ts`：调用方对 `getConfig` / `markFeishuSent` / `getReport` 加 `await`；`getStatus` / `getConfig` 路由处理器改 async；路由与签名不变（`listReports` / `getReport` 返回 Promise，由 Nest 自动解析）
+
+**数据迁移：**
+
+- `scripts/migrate-to-db.ts`：拆为 `migrateSessions` / `migrateReports` / `migrateConfig` 三段，幂等可重跑
+  - reports：读取 `data/reports/*.json` → `report.create`（同 id 跳过），`createdAt` 取自 `generatedAt`，`celebrity` 列同服务端逻辑去重生成
+  - config：读取 `data/monitor-config.json` → `monitorConfig.upsert(id=1)`，入库前校验合法 JSON
+- 迁移结果：**1 份历史报告 + monitor-config** 入库（sessions 目录已在 Phase B 归档）
+
+**回归测试（真实 DB + 运行中后端）：**
+
+- `npm run build` 通过；`npm run db:migrate-data` 迁移成功
+- 端点验证：`GET status / config / reports / reports/:id` 均从 DB 正确返回（报告 14 事件 / 11 信号，feishuSent=true）
+- 写入 roundtrip：`PUT config {signalThreshold:70}` → API 回读 70 → 直连 DB 确认 `data` 列已持久化 70（证明 upsert 写路径生效）
+- 注：原 `monitor-config.json` 无 `signalThreshold` 字段，迁移忠实保留为 `undefined`，运行时由 `?? 65` 兜底
+
 ## 2026-06-23 — v7 数据库集成（Phase C RagService 元数据替换）
 
 ### Phase C — RagService 文档元数据切换到 Prisma
