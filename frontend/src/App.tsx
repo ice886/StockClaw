@@ -7,10 +7,15 @@ import './App.css';
 export default function App() {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [refreshKey, setRefreshKey] = useState(0);
+  const [monitorRefreshKey, setMonitorRefreshKey] = useState(0);
   const [activeView, setActiveView] = useState<'chat' | 'monitor'>('chat');
 
   const handleSessionUpdate = useCallback(() => {
     setRefreshKey((k) => k + 1);
+  }, []);
+
+  const bumpMonitorRefresh = useCallback(() => {
+    setMonitorRefreshKey((k) => k + 1);
   }, []);
 
   return (
@@ -22,9 +27,10 @@ export default function App() {
         refreshKey={refreshKey}
         activeView={activeView}
         onViewChange={setActiveView}
+        monitorRefreshKey={monitorRefreshKey}
       />
       {activeView === 'monitor' ? (
-        <MonitorDashboard />
+        <MonitorDashboard onScanComplete={bumpMonitorRefresh} />
       ) : (
         <ChatPanel
           key={activeId ?? 'empty'}

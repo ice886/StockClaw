@@ -1,0 +1,87 @@
+.signal-overview {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 8px;
+  gap: 6px;
+}
+
+.signal-overview__title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #888;
+  padding: 4px 4px 8px;
+}
+
+.signal-overview__empty {
+  font-size: 13px;
+  color: #999;
+  padding: 12px 8px;
+  text-align: center;
+}
+
+.signal-overview__list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.signal-row {
+  border-radius: 6px;
+  border-left: 3px solid transparent;
+  background: rgba(255, 255, 255, 0.03);
+}
+.signal-row--bullish { border-left-color: #2ecc71; }
+.signal-row--bearish { border-left-color: #e74c3c; }
+.signal-row--neutral { border-left-color: #95a5a6; }
+
+.signal-row__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  text-align: left;
+}
+
+.signal-row__ticker {
+  font-weight: 600;
+  font-size: 14px;
+  flex: 1;
+}
+
+.signal-row__arrow--bullish { color: #2ecc71; }
+.signal-row__arrow--bearish { color: #e74c3c; }
+.signal-row__arrow--neutral { color: #95a5a6; }
+
+.signal-row__conf {
+  font-size: 13px;
+  color: #aaa;
+  font-variant-numeric: tabular-nums;
+}
+
+.signal-row__detail {
+  padding: 0 10px 10px;
+  font-size: 12px;
+}
+
+.signal-row__tags {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.signal-row__tags span {
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #bbb;
+}
+
+.signal-row__reasoning {
+  color: #ccc;
+  line-height: 1.5;
+}

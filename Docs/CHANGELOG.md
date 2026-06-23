@@ -1,5 +1,15 @@
 # 开发日志
 
+## 2026-06-23 — Monitor sidebar 股票信号速览
+
+### 股票信号从主面板移至 sidebar
+
+- 新增 `useLatestSignals` hook：拉取最新报告信号，按置信度降序
+- 新增 `SignalOverview` 组件：sidebar 信号速览，每行 ticker + 方向箭头 + 置信度，点击就地展开 reasoning/程度/时间窗
+- `App.tsx` 新增 `monitorRefreshKey`：扫描完成后通知 sidebar 刷新信号
+- `MonitorDashboard` 移除左侧信号栏，主面板改为单栏事件流（全宽）
+- 方向/程度/时间窗标签抽到共享 `signalLabels.ts`，`StockSignalCard` 与 `SignalOverview` 共用
+
 ## 2026-06-23 — RAG 混合检索（BM25 + 向量 + RRF）
 
 ### 新增 BM25 词法检索路，与向量检索 RRF 融合

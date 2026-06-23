@@ -3,7 +3,6 @@ import { useMonitor } from '../../hooks/useMonitor';
 import { fetchConfig, fetchReport, fetchStatus } from '../../api/monitor';
 import type { MonitorConfig, MonitorReport } from '../../types/monitor';
 import { EventCard } from './EventCard';
-import { StockSignalCard } from './StockSignalCard';
 import { ConfigDrawer } from './ConfigDrawer';
 import { ReportHistory } from './ReportHistory';
 import './MonitorDashboard.css';
@@ -20,7 +19,7 @@ function timeUntilNext(lastRunAt: string | null, intervalHours: number): string 
   return h > 0 ? `${h}h ${m}m 后` : `${m}m 后`;
 }
 
-export function MonitorDashboard() {
+export function MonitorDashboard({ onScanComplete }: { onScanComplete?: () => void }) {
   const { status, reports, running, progressLog, error, refresh, run } = useMonitor();
   const [config, setConfig] = useState<MonitorConfig | null>(null);
   const [showConfig, setShowConfig] = useState(false);
@@ -46,6 +45,10 @@ export function MonitorDashboard() {
   }, [refresh]);
 
   const latestReportRef = reports[0];
+
+  useEffect(() => {
+    if (latestReportRef?.id) onScanComplete?.();
+  }, [latestReportRef?.id, onScanComplete]);
 
   return (
     <div className="monitor-dashboard">
@@ -166,7 +169,6 @@ function LatestReport({ reportId }: { reportId: string | null }) {
 
   if (!report) return <div className="monitor-empty">加载中...</div>;
 
-  const highSignals = report.signals.filter((s) => s.confidence >= 60);
   const highEvents = report.events.filter((e) => e.importance === 'high');
   const otherEvents = report.events.filter((e) => e.importance !== 'high');
 
@@ -175,36 +177,23 @@ function LatestReport({ reportId }: { reportId: string | null }) {
   }
 
   return (
-    <div className="latest-report latest-report--split">
-      {/* Left: signal board */}
-      <div className="latest-report__signals">
-        <div className="monitor-section-title">📊 股票信号</div>
-        {highSignals.length > 0 ? (
-          highSignals.map((s, i) => <StockSignalCard key={i} signal={s} />)
-        ) : (
-          <div className="monitor-empty monitor-empty--sm">暂无高置信信号</div>
-        )}
-      </div>
-
-      {/* Right: event stream */}
-      <div className="latest-report__events">
-        {highEvents.length > 0 && (
-          <section className="latest-report__section">
-            <div className="monitor-section-title">🔥 高影响事件</div>
-            {highEvents.map((e) => (
-              <EventCard key={e.id} event={e} isNew />
-            ))}
-          </section>
-        )}
-        {otherEvents.length > 0 && (
-          <section className="latest-report__section">
-            <div className="monitor-section-title">其他事件 ({otherEvents.length})</div>
-            {otherEvents.map((e) => (
-              <EventCard key={e.id} event={e} />
-            ))}
-          </section>
-        )}
-      </div>
+    <div className="latest-report">
+      {highEvents.length > 0 && (
+        <section className="latest-report__section">
+          <div className="monitor-section-title">🔥 高影响事件</div>
+          {highEvents.map((e) => (
+            <EventCard key={e.id} event={e} isNew />
+          ))}
+        </section>
+      )}
+      {otherEvents.length > 0 && (
+        <section className="latest-report__section">
+          <div className="monitor-section-title">其他事件 ({otherEvents.length})</div>
+          {otherEvents.map((e) => (
+            <EventCard key={e.id} event={e} />
+          ))}
+        </section>
+      )}
     </div>
   );
 }

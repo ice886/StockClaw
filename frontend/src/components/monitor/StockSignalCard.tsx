@@ -1,33 +1,10 @@
 import type { StockSignal } from '../../types/monitor';
+import { directionIcon, directionLabel, magnitudeLabel, horizonLabel } from './signalLabels';
 import './StockSignalCard.css';
 
 interface Props {
   signal: StockSignal;
 }
-
-const directionIcon: Record<StockSignal['direction'], string> = {
-  bullish: '📈',
-  bearish: '📉',
-  neutral: '➡️',
-};
-
-const directionLabel: Record<StockSignal['direction'], string> = {
-  bullish: '看涨',
-  bearish: '看跌',
-  neutral: '中性',
-};
-
-const magnitudeLabel: Record<StockSignal['magnitude'], string> = {
-  strong: '强',
-  moderate: '中等',
-  weak: '弱',
-};
-
-const horizonLabel: Record<StockSignal['timeHorizon'], string> = {
-  intraday: '盘内',
-  '1-3days': '1-3天',
-  '1week': '1周',
-};
 
 export function StockSignalCard({ signal }: Props) {
   return (

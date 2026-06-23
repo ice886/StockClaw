@@ -3,6 +3,8 @@ import type { SessionRecord } from '../types/session';
 import { fetchSessions, createSession, deleteSession } from '../api/session';
 import { SessionItem } from './SessionItem';
 import './Sidebar.css';
+import { useLatestSignals } from '../hooks/useLatestSignals';
+import { SignalOverview } from './monitor/SignalOverview';
 
 interface Props {
   activeId: string | null;
@@ -11,11 +13,13 @@ interface Props {
   refreshKey: number;
   activeView: 'chat' | 'monitor';
   onViewChange: (view: 'chat' | 'monitor') => void;
+  monitorRefreshKey: number;
 }
 
-export function Sidebar({ activeId, onSelect, onNewSession, refreshKey, activeView, onViewChange }: Props) {
+export function Sidebar({ activeId, onSelect, onNewSession, refreshKey, activeView, onViewChange, monitorRefreshKey }: Props) {
   const [sessions, setSessions] = useState<SessionRecord[]>([]);
   const isCreating = useRef(false);
+  const { signals, loading: signalsLoading } = useLatestSignals(monitorRefreshKey);
 
   useEffect(() => {
     fetchSessions().then(setSessions);
@@ -85,6 +89,9 @@ export function Sidebar({ activeId, onSelect, onNewSession, refreshKey, activeVi
             ))}
           </div>
         </>
+      )}
+      {activeView === 'monitor' && (
+        <SignalOverview signals={signals} loading={signalsLoading} />
       )}
     </div>
   );
