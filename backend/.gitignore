@@ -4,6 +4,15 @@ node_modules/
 # 构建产物
 dist/
 
+# Prisma 生成的 client（由 prisma generate 重建）
+src/generated/
+
+# SQLite 数据库文件（本地数据，不入库）
+data/*.db
+data/*.db-journal
+data/*.db-wal
+data/*.db-shm
+
 # 环境变量
 .env
 .env.local

@@ -1,0 +1,56 @@
+// prisma/schema.prisma
+
+generator client {
+  provider     = "prisma-client"
+  output       = "../backend/src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Session {
+  id        String   @id
+  title     String
+  skillName String   @default("general-chat")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  messages Message[]
+  ragDocs  RagDocument[]
+}
+
+model Message {
+  id        String   @id
+  sessionId String
+  role      String // 'user' | 'assistant'
+  content   String
+  createdAt DateTime @default(now())
+
+  session Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model RagDocument {
+  id         String   @id
+  sessionId  String
+  filename   String
+  mimeType   String
+  chunkCount Int
+  uploadedAt DateTime @default(now())
+
+  session Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model Report {
+  id        String   @id
+  celebrity String
+  data      String // JSON 序列化的报告对象
+  createdAt DateTime @default(now())
+}
+
+model MonitorConfig {
+  id        Int      @id @default(autoincrement())
+  data      String // JSON 序列化的配置对象
+  updatedAt DateTime @updatedAt
+}

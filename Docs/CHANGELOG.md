@@ -1,5 +1,36 @@
 # 开发日志
 
+## 2026-06-23 — v7 数据库集成（Phase A 基础设施）
+
+### Phase A — Prisma + SQLite 基础设施
+
+**新增依赖（`backend/`）：** `prisma`、`@prisma/client`、`better-sqlite3`、`@prisma/adapter-better-sqlite3`
+
+**Prisma Schema（`prisma/schema.prisma`）：** 5 个 model——`Session` / `Message` / `RagDocument` / `Report` / `MonitorConfig`；`Message`、`RagDocument` 对 `Session` 设 `onDelete: Cascade`
+
+**迁移：** `prisma migrate dev --name init` → `prisma/migrations/20260623030612_init`，数据库落在 `backend/data/app.db`
+
+**新增模块 `database/`：**
+
+- `prisma.service.ts`：`extends PrismaClient`，构造时注入 `PrismaBetterSqlite3` adapter，`onModuleInit/Destroy` 管理 `$connect/$disconnect`
+- `database.module.ts`：`@Global()`，导出 `PrismaService`，各模块无需重复 import
+- `app.module.ts`：注册 `DatabaseModule`
+
+**验证：** `npm run build` 通过；启动日志 `DatabaseModule dependencies initialized` + `Nest application successfully started`，adapter 连接无错，CRUD + 级联删除冒烟通过
+
+### 与 v7 架构文档的偏离（实装 Prisma 7.8，文档按 Prisma 6 写）
+
+| 项 | 文档（Prisma 6） | 实装（Prisma 7） |
+|------|------|------|
+| datasource url | 写在 `schema.prisma` | Prisma 7 禁止，移到 `backend/prisma.config.ts`，仅供 CLI |
+| SQLite 连接 | 内置连接器，"不需要 better-sqlite3" | 必须经 driver adapter，`PrismaService` 注入 `PrismaBetterSqlite3` |
+| client 生成 | `node_modules/.prisma/client`，provider `prisma-client-js` | provider `prisma-client` + `output` 到 `backend/src/generated/prisma`，加 `moduleFormat = "cjs"` 匹配项目 CommonJS |
+| 数据库位置 | 仓库根 `data/app.db` | 后端以 `backend/` 为 cwd，与现有 sessions/reports 同目录 → `backend/data/app.db` |
+
+**工程：** `backend/package.json` 加 `postinstall: prisma generate`（生成物 gitignore，安装时自动重建）+ `db:generate` / `db:migrate` 脚本；`eslint.config.mjs` 与 `.gitignore` 忽略 `src/generated/`；`tsconfig.build.json` 排除 `prisma.config.ts`（避免 rootDir 上抬导致 `dist/main.js` 路径错位）
+
+**遗留（与 Phase A 无关）：** `app.module.ts` 的 `SkillModule` 为未使用导入（lint 报错），改动前已存在，未处理
+
 ## 2026-06-22 — v6 RAG 文档问答（Phase A + B）
 
 ### Phase A — 后端 RAG 基础设施
