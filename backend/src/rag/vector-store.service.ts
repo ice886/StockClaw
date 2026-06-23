@@ -2,12 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { readdir, readFile, writeFile, mkdir, unlink } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join, resolve } from 'path';
-import {
-  Chunk,
-  RagDocument,
-  RetrievedChunk,
-  VectorFile,
-} from './interfaces/rag.interfaces';
+import { Chunk, RetrievedChunk, VectorFile } from './interfaces/rag.interfaces';
 
 const VECTORS_DIR = resolve('data/vectors');
 const SCORE_THRESHOLD = 0.3;
@@ -24,25 +19,18 @@ export class VectorStoreService {
     return join(this.sessionDir(sessionId), `${docId}.json`);
   }
 
-  /** 持久化文档元数据 + 带向量的 chunks */
-  async save(doc: RagDocument, chunks: Chunk[]): Promise<RagDocument> {
-    const dir = this.sessionDir(doc.sessionId);
+  /** 持久化带向量的 chunks（文档元数据由 RagService 写入 DB） */
+  async save(sessionId: string, docId: string, chunks: Chunk[]): Promise<void> {
+    const dir = this.sessionDir(sessionId);
     if (!existsSync(dir)) {
       await mkdir(dir, { recursive: true });
     }
-    const file: VectorFile = { doc, chunks };
+    const file: VectorFile = { chunks };
     await writeFile(
-      this.docPath(doc.sessionId, doc.id),
+      this.docPath(sessionId, docId),
       JSON.stringify(file),
       'utf-8',
     );
-    return doc;
-  }
-
-  /** 列出某 session 下所有文档元数据 */
-  async listDocs(sessionId: string): Promise<RagDocument[]> {
-    const files = await this.readSessionFiles(sessionId);
-    return files.map((f) => f.doc).sort((a, b) => b.uploadedAt - a.uploadedAt);
   }
 
   /** 删除指定文档的向量文件 */
@@ -55,10 +43,15 @@ export class VectorStoreService {
     }
   }
 
-  /** 在该 session 所有 chunk 上做余弦相似度检索，返回 TopK */
+  /**
+   * 在该 session 所有 chunk 上做余弦相似度检索，返回 TopK。
+   * filenames：docId → filename 映射，由 RagService 从 DB 查出后传入，
+   * 使本服务保持无 DB 依赖。
+   */
   async retrieve(
     sessionId: string,
     queryVector: number[],
+    filenames: Record<string, string>,
     topK = 5,
   ): Promise<RetrievedChunk[]> {
     const files = await this.readSessionFiles(sessionId);
@@ -71,7 +64,7 @@ export class VectorStoreService {
         scored.push({
           text: chunk.text,
           docId: chunk.docId,
-          filename: file.doc.filename,
+          filename: filenames[chunk.docId] ?? '未知文档',
           score,
         });
       }

@@ -24,6 +24,5 @@ export interface RetrievedChunk {
 }
 
 export interface VectorFile {
-  doc: RagDocument;
-  chunks: Chunk[]; // chunk.vector 已填充
+  chunks: Chunk[]; // chunk.vector 已填充；doc 元数据现存于 DB
 }

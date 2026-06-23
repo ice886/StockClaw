@@ -1,5 +1,28 @@
 # 开发日志
 
+## 2026-06-23 — v7 数据库集成（Phase C RagService 元数据替换）
+
+### Phase C — RagService 文档元数据切换到 Prisma
+
+**职责切分（元数据进 DB，向量留文件）：**
+
+- 文档元数据（filename / mimeType / chunkCount / uploadedAt）→ Prisma `RagDocument` 表（结构化，需查询 + 级联删除）
+- chunks + 向量 → 保留 JSON 文件 `data/vectors/<sessionId>/<docId>.json`（非结构化、体积大，SQLite BLOB 无优势——符合 v7 §十二 决策）
+
+**实现替换（接口签名 / 前端契约不变）：**
+
+- `interfaces/rag.interfaces.ts`：`VectorFile` 去掉 `doc` 字段，只剩 `chunks`
+- `vector-store.service.ts`：改为纯向量存储——`save(sessionId, docId, chunks)`；删除 `listDocs`；`retrieve()` 新增 `filenames: Record<docId, filename>` 入参，由 RagService 从 DB 查出后传入，保持本服务无 DB 依赖
+- `rag.service.ts`：注入 `PrismaService`
+  - `upload`：先写向量文件 → 再 `prisma.ragDocument.create`（先文件后 DB，DB 为文档存在性权威来源，避免幽灵文档）
+  - `listDocuments`：`findMany`（按 `uploadedAt desc`）
+  - `retrieve`：先查 DB 拿 docId→filename 映射 → 传给 VectorStore 做余弦检索
+  - `deleteDocument`：`prisma.ragDocument.delete`（**权威**）+ 向量文件 `unlink`（尽力而为，失败不影响结果）
+  - `toDoc()` 转换层：Prisma `Date` → epoch ms，`RagDocument` 接口与前端契约不变
+- `rag.controller.ts` / `rag.module.ts`：无需改（PrismaService 来自 `@Global()` DatabaseModule，API 签名不变）
+
+**回归测试（真实 DB + 智谱 embedding）：** upload → DB 有元数据（filename/chunkCount 正确）→ listDocuments → retrieve（命中 score 0.419）→ deleteDocument → DB 与 list 均清空、无残留
+
 ## 2026-06-23 — v7 数据库集成（Phase B SessionService 替换）
 
 ### Phase B — SessionService 切换到 Prisma
