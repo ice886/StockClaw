@@ -6,6 +6,7 @@ import { DocumentParserService } from './document-parser.service';
 import { ChunkingService } from './chunking.service';
 import { EmbeddingService } from './embedding.service';
 import { VectorStoreService } from './vector-store.service';
+import { Bm25Service } from './bm25.service';
 
 @Module({
   imports: [ConfigModule],
@@ -16,6 +17,7 @@ import { VectorStoreService } from './vector-store.service';
     ChunkingService,
     EmbeddingService,
     VectorStoreService,
+    Bm25Service,
   ],
   exports: [RagService],
 })

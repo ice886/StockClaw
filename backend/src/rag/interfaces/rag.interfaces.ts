@@ -26,3 +26,9 @@ export interface RetrievedChunk {
 export interface VectorFile {
   chunks: Chunk[]; // chunk.vector 已填充；doc 元数据现存于 DB
 }
+
+/** 单路检索的排名结果（内部用，融合前） */
+export interface RankedChunk {
+  chunkId: string; // chunk.id，即 `${docId}-${index}`
+  score: number; // 该路的原始分（cosine 或 BM25）
+}

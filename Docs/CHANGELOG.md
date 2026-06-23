@@ -1,5 +1,15 @@
 # 开发日志
 
+## 2026-06-23 — RAG 混合检索（BM25 + 向量 + RRF）
+
+### 新增 BM25 词法检索路，与向量检索 RRF 融合
+
+- 新增 `Bm25Service`：bigram 中文分词 + 标准 BM25 打分（k1=1.5, b=0.75），纯计算无 IO，查询时实时统计 idf/avgdl，不持久化索引
+- `VectorStoreService` 新增 `loadChunks()` 暴露原始 chunk 供两路复用
+- `RagService.retrieve()` 改为混合检索：向量路（cosine）+ 词法路（BM25），RRF 融合（k=60）后取 TopK；移除余弦绝对阈值，改由 TopK 截断；向量路失败可降级为仅 BM25
+- 接口 `RetrievedChunk` 不变，`score` 语义改为融合分；前端契约不变
+- 测试：`bm25.service.spec.ts`（分词 + 打分 8 例）、`rag.service.spec.ts`（RRF 融合 3 例）；为兼容 Prisma v7 生成 client 的 `.js` 导入，jest 配置新增 `moduleNameMapper`
+
 ## 2026-06-23 — v7 数据库集成（Phase E 清理）
 
 ### Phase E — 收尾清理

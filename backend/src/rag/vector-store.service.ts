@@ -76,6 +76,12 @@ export class VectorStoreService {
       .slice(0, topK);
   }
 
+  /** 读取 session 内全部 chunk（含 vector），供混合检索复用 */
+  async loadChunks(sessionId: string): Promise<Chunk[]> {
+    const files = await this.readSessionFiles(sessionId);
+    return files.flatMap((f) => f.chunks);
+  }
+
   /** 读取 session 目录下所有 VectorFile，损坏文件跳过 */
   private async readSessionFiles(sessionId: string): Promise<VectorFile[]> {
     const dir = this.sessionDir(sessionId);

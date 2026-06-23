@@ -4,7 +4,13 @@ import { DocumentParserService } from './document-parser.service';
 import { ChunkingService } from './chunking.service';
 import { EmbeddingService } from './embedding.service';
 import { VectorStoreService } from './vector-store.service';
-import { RagDocument, RetrievedChunk } from './interfaces/rag.interfaces';
+import { Bm25Service } from './bm25.service';
+import {
+  RagDocument,
+  RetrievedChunk,
+  RankedChunk,
+  Chunk,
+} from './interfaces/rag.interfaces';
 
 type RagDocRow = {
   id: string;
@@ -25,6 +31,7 @@ export class RagService {
     private chunking: ChunkingService,
     private embedding: EmbeddingService,
     private vectorStore: VectorStoreService,
+    private bm25: Bm25Service,
   ) {}
 
   /** Prisma 行 → RagDocument（Date→epoch ms，保持前端契约不变） */
@@ -77,8 +84,12 @@ export class RagService {
     return this.toDoc(row);
   }
 
-  /** 检索流程（供 AgentController 调用） */
-  async retrieve(sessionId: string, query: string): Promise<RetrievedChunk[]> {
+  /** 混合检索：向量路 + BM25 词法路，RRF 融合后取 TopK */
+  async retrieve(
+    sessionId: string,
+    query: string,
+    topK = 5,
+  ): Promise<RetrievedChunk[]> {
     if (!query.trim()) return [];
     try {
       const docs = await this.prisma.ragDocument.findMany({
@@ -90,12 +101,69 @@ export class RagService {
       const filenames: Record<string, string> = {};
       for (const d of docs) filenames[d.id] = d.filename;
 
-      const [queryVector] = await this.embedding.embed([query]);
-      return await this.vectorStore.retrieve(sessionId, queryVector, filenames);
+      const chunks = await this.vectorStore.loadChunks(sessionId);
+      if (chunks.length === 0) return [];
+
+      const bmRanked = this.bm25.rank(query, chunks);
+
+      let vecRanked: RankedChunk[] = [];
+      try {
+        const [queryVector] = await this.embedding.embed([query]);
+        vecRanked = chunks
+          .filter((c) => c.vector)
+          .map((c) => ({
+            chunkId: c.id,
+            score: cosineSim(queryVector, c.vector as number[]),
+          }))
+          .sort((a, b) => b.score - a.score);
+      } catch (err) {
+        this.logger.warn(`向量检索失败，降级为仅 BM25: ${err}`);
+      }
+
+      return this.fuse(vecRanked, bmRanked, chunks, filenames, topK);
     } catch (err) {
       this.logger.warn(`RAG 检索失败，跳过注入: ${err}`);
       return [];
     }
+  }
+
+  /**
+   * RRF 融合两路排名。
+   * fusedScore(chunk) = Σ 1/(k + rank_i)，k=60，rank 为 1-based。
+   * 只在一路出现的 chunk，另一路不贡献。
+   */
+  private fuse(
+    vecRanked: RankedChunk[],
+    bmRanked: RankedChunk[],
+    chunks: Chunk[],
+    filenames: Record<string, string>,
+    topK: number,
+  ): RetrievedChunk[] {
+    const K = 60;
+    const fused = new Map<string, number>();
+    const addRanks = (ranked: RankedChunk[]) => {
+      ranked.forEach((r: RankedChunk, i: number) => {
+        const rank = i + 1;
+        fused.set(r.chunkId, (fused.get(r.chunkId) ?? 0) + 1 / (K + rank));
+      });
+    };
+    addRanks(vecRanked);
+    addRanks(bmRanked);
+
+    const byId = new Map(chunks.map((c) => [c.id, c]));
+    return [...fused.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, topK)
+      .map(([chunkId, score]) => {
+        const c = byId.get(chunkId);
+        const docId = c?.docId ?? '';
+        return {
+          text: c?.text ?? '',
+          docId,
+          filename: filenames[docId] ?? '未知文档',
+          score,
+        };
+      });
   }
 
   async listDocuments(sessionId: string): Promise<RagDocument[]> {
@@ -123,4 +191,18 @@ export class RagService {
   private decodeFilename(name: string): string {
     return Buffer.from(name, 'latin1').toString('utf-8');
   }
+}
+
+/** 余弦相似度（纯 JS） */
+function cosineSim(a: number[], b: number[]): number {
+  let dot = 0;
+  let normA = 0;
+  let normB = 0;
+  for (let i = 0; i < a.length; i++) {
+    dot += a[i] * b[i];
+    normA += a[i] * a[i];
+    normB += b[i] * b[i];
+  }
+  if (normA === 0 || normB === 0) return 0;
+  return dot / (Math.sqrt(normA) * Math.sqrt(normB));
 }
