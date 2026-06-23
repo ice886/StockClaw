@@ -1,87 +1,98 @@
 import { Injectable } from '@nestjs/common';
-import { readdir, readFile, writeFile, unlink, mkdir } from 'fs/promises';
-import { existsSync } from 'fs';
-import { join, resolve } from 'path';
+import { PrismaService } from '../database/prisma.service';
 import { SessionRecord } from './session.interface';
 import { deepseek } from '@ai-sdk/deepseek';
 import { generateText } from 'ai';
 
-const DATA_DIR = resolve('data/sessions');
+type SessionWithMessages = {
+  id: string;
+  title: string;
+  createdAt: Date;
+  updatedAt: Date;
+  messages: { role: string; content: string }[];
+};
 
 @Injectable()
 export class SessionService {
-  /** 确保 data/sessions 目录存在 */
-  private async ensureDir(): Promise<void> {
-    if (!existsSync(DATA_DIR)) {
-      await mkdir(DATA_DIR, { recursive: true });
-    }
+  constructor(private readonly prisma: PrismaService) {}
+
+  /** Prisma 行 → SessionRecord（Date→epoch ms，保持前端契约不变） */
+  private toRecord(s: SessionWithMessages): SessionRecord {
+    return {
+      id: s.id,
+      title: s.title,
+      messages: s.messages.map((m) => ({
+        role: m.role as 'user' | 'assistant',
+        content: m.content,
+      })),
+      createdAt: s.createdAt.getTime(),
+      updatedAt: s.updatedAt.getTime(),
+    };
   }
 
-  private filePath(id: string): string {
-    return join(DATA_DIR, `${id}.json`);
+  private genId(): string {
+    return Math.random().toString(36).substring(2);
   }
 
   async createSession(title: string): Promise<string> {
-    await this.ensureDir();
-    const id = Math.random().toString(36).substring(2);
-    const record: SessionRecord = {
-      id,
-      title,
-      messages: [],
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
-    };
-    await writeFile(
-      this.filePath(id),
-      JSON.stringify(record, null, 2),
-      'utf-8',
-    );
+    const id = this.genId();
+    await this.prisma.session.create({ data: { id, title } });
     return id;
   }
 
   async getSessions(): Promise<SessionRecord[]> {
-    await this.ensureDir();
-    const files = await readdir(DATA_DIR);
-    const records: SessionRecord[] = [];
-    for (const file of files) {
-      if (!file.endsWith('.json')) continue;
-      const content = await readFile(join(DATA_DIR, file), 'utf-8');
-      records.push(JSON.parse(content) as SessionRecord);
-    }
-    return records.sort((a, b) => b.updatedAt - a.updatedAt);
+    const sessions = await this.prisma.session.findMany({
+      orderBy: { updatedAt: 'desc' },
+      include: { messages: { orderBy: { createdAt: 'asc' } } },
+    });
+    return sessions.map((s) => this.toRecord(s));
   }
 
   async getSession(id: string): Promise<SessionRecord | undefined> {
-    try {
-      const content = await readFile(this.filePath(id), 'utf-8');
-      return JSON.parse(content) as SessionRecord;
-    } catch {
-      return undefined;
-    }
+    const session = await this.prisma.session.findUnique({
+      where: { id },
+      include: { messages: { orderBy: { createdAt: 'asc' } } },
+    });
+    return session ? this.toRecord(session) : undefined;
   }
 
+  /** 全量覆盖语义：事务内清空旧消息后重建，并更新标题 */
   async updateSession(
     id: string,
     title: string,
     messages: { role: 'user' | 'assistant'; content: string }[],
   ): Promise<boolean> {
-    const record = await this.getSession(id);
-    if (!record) return false;
+    const exists = await this.prisma.session.findUnique({
+      where: { id },
+      select: { id: true },
+    });
+    if (!exists) return false;
 
-    record.title = title;
-    record.messages = messages;
-    record.updatedAt = Date.now();
-    await writeFile(
-      this.filePath(id),
-      JSON.stringify(record, null, 2),
-      'utf-8',
-    );
+    const now = Date.now();
+    await this.prisma.$transaction([
+      this.prisma.message.deleteMany({ where: { sessionId: id } }),
+      this.prisma.message.createMany({
+        data: messages.map((m, i) => ({
+          id: this.genId(),
+          sessionId: id,
+          role: m.role,
+          content: m.content,
+          // 递增时间戳保证读取时按 createdAt 升序还原原始顺序
+          createdAt: new Date(now + i),
+        })),
+      }),
+      this.prisma.session.update({
+        where: { id },
+        data: { title },
+      }),
+    ]);
     return true;
   }
 
   async deleteSession(id: string): Promise<boolean> {
     try {
-      await unlink(this.filePath(id));
+      // 级联删除消息与 RagDocument 元数据（schema onDelete: Cascade）
+      await this.prisma.session.delete({ where: { id } });
       return true;
     } catch {
       return false;

@@ -1,5 +1,34 @@
 # 开发日志
 
+## 2026-06-23 — v7 数据库集成（Phase B SessionService 替换）
+
+### Phase B — SessionService 切换到 Prisma
+
+**实现替换（接口签名不变，前端无感）：**
+
+- `session.service.ts`：注入 `PrismaService`，5 个方法全部改用 Prisma
+  - `createSession`：`prisma.session.create`
+  - `getSessions`：`findMany` + `include messages`（按 `updatedAt desc` / 消息 `createdAt asc`）
+  - `getSession`：`findUnique`，未命中返回 `undefined`（保持原行为）
+  - `updateSession`：全量覆盖语义——`$transaction` 内 `deleteMany` 旧消息 → `createMany` 重建 → 更新标题
+  - `deleteSession`：`prisma.session.delete`，靠 schema `onDelete: Cascade` 级联删消息
+- `toRecord()` 转换层：Prisma `Date` → epoch ms，`SessionRecord` 接口与前端契约不变
+- 消息无原始 id/时间戳，按数组顺序赋递增 `createdAt`（`now + i`）保证读取时顺序还原
+
+**数据迁移：**
+
+- `scripts/migrate-to-db.ts`：读取 `data/sessions/*.json` → 写入 Session + Message 表；幂等（同 id 跳过），原 JSON 保留可回滚
+- 迁移结果：**5 个 session / 49 条消息**全部入库，二次运行全部跳过、零重复
+- 运行方式：`npm run db:migrate-data`（`tsc -p tsconfig.scripts.json` 编译脚本 + generated client → `dist-scripts/` → node 运行）。直接 ts-node 因 generated client 的 `.js` 显式导入无法解析，故走编译产物
+
+**工程：**
+
+- `tsconfig.build.json` 额外排除 `scripts`（否则 rootDir 上抬导致 `dist/main.js` 路径错位）
+- 新增 `tsconfig.scripts.json`（CommonJS，emit 到 `dist-scripts/`）；`.gitignore` 忽略 `dist-scripts/`
+- `package.json` 新增 `db:migrate-data` 脚本
+
+**回归测试（真实 API）：** 迁移数据读取正常（5 session）→ CREATE → UPDATE（写 2 条消息）→ GET（标题/消息顺序/内容正确）→ DELETE → 再 GET 返回空；级联删除验证：删带 3 条消息的 session 后，Message 表对应行清零、总数 52→49 无孤儿
+
 ## 2026-06-23 — v7 数据库集成（Phase A 基础设施）
 
 ### Phase A — Prisma + SQLite 基础设施

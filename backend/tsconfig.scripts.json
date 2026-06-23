@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": "./dist-scripts",
+    "incremental": false,
+    "tsBuildInfoFile": null
+  },
+  "include": ["scripts/**/*.ts", "src/generated/**/*.ts"]
+}
